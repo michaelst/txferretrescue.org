@@ -1,5 +1,3 @@
-addons:
-  postgresql: "11"
 jobs:
   include:
   - stage: Build
@@ -15,10 +13,9 @@ jobs:
       - _build
     env:
     - MIX_ENV=test
-    script: mix deps.compile
-    #before_script: mix do ecto.create, ecto.migrate
-    #script: mix do compile --warnings-as-errors, coveralls.json
-    #after_success: bash <(curl -s https://codecov.io/bash)
+    before_script: mix do ecto.create, ecto.migrate
+    script: mix do compile --warnings-as-errors, coveralls.json
+    after_success: bash <(curl -s https://codecov.io/bash)
   - name: Credo
     language: elixir
     elixir: 1.10.2
