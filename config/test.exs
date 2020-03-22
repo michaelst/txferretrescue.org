@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :ferret_rescue, FerretRescue.Repo,
   username: "postgres",
-  password: "postgres",
+  password: nil,
   database: "ferret_rescue_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

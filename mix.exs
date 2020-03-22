@@ -3,14 +3,15 @@ defmodule FerretRescue.MixProject do
 
   def project do
     [
+      aliases: aliases(),
       app: :ferret_rescue,
-      version: "0.1.0",
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      deps: deps(),
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      aliases: aliases(),
-      deps: deps()
+      test_coverage: [tool: ExCoveralls],
+      version: "0.1.0"
     ]
   end
 
