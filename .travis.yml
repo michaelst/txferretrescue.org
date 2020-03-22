@@ -1,0 +1,28 @@
+jobs:
+  include:
+  - stage: Build
+    name: Tests
+    language: elixir
+    elixir: 1.10
+    otp_release: 22.3
+    services:
+    - postgresql
+    cache:
+      directories:
+      - deps
+      - _build
+    env:
+    - MIX_ENV=test
+    before_script: mix ecto.reset
+    script: mix do compile --warnings-as-errors, coveralls.json
+    after_success: bash <(curl -s https://codecov.io/bash)
+  - name: Credo
+    language: elixir
+    elixir: 1.10
+    otp_release: 22.3
+    cache:
+      directories:
+      - deps
+      - _build
+    before_script: mix compile
+    script: mix credo --strict
