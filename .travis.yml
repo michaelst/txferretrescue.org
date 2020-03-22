@@ -1,3 +1,5 @@
+addons:
+  postgresql: "11"
 jobs:
   include:
   - stage: Build
