@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.scss';
 import Navbar from './Navbar/Navbar'
-import Container from 'react-bootstrap/container'
+import Container from 'react-bootstrap/Container'
 
 function App() {
   return (

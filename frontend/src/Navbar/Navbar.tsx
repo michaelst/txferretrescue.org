@@ -1,9 +1,9 @@
 import React from 'react';
 import './Navbar.scss';
-import Container from 'react-bootstrap/container'
-import Navbar from 'react-bootstrap/navbar'
-import Nav from 'react-bootstrap/nav'
-import NavDropdown from 'react-bootstrap/navdropdown'
+import Container from 'react-bootstrap/Container'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer'
 
 function App() {
