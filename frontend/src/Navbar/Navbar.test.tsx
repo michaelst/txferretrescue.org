@@ -1,9 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
+import { HashRouter } from "react-router-dom";
+import Navbar from './Navbar';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
+test('renders navbar', () => {
+  const { getByText } = render(
+    <HashRouter>
+      <Navbar />
+    </HashRouter>
+  );
+  const linkElement = getByText(/home/i);
   expect(linkElement).toBeInTheDocument();
 });
