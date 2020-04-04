@@ -1,7 +1,7 @@
 jobs:
   include:
   - stage: Build
-    name: Tests
+    name: Backend Tests
     language: elixir
     elixir: 1.10.2
     otp_release: 22.3
@@ -17,6 +17,26 @@ jobs:
     before_script: mix do ecto.create, ecto.migrate
     script: mix do compile --warnings-as-errors, coveralls.json
     after_success: bash <(curl -s https://codecov.io/bash)
+  - name: Frontend Tests
+    language: node_js
+    node_js: "stable"
+    cache:
+      directories:
+      - frontend/node_modules
+    env:
+    - CI=true
+    before_install: cd frontend
+    script: yarn test
+  - name: Admin Frontend Tests
+    language: node_js
+    node_js: "stable"
+    cache:
+      directories:
+      - admin-frontend/node_modules
+    env:
+    - CI=true
+    before_install: cd admin-frontend
+    script: yarn test
   - name: Credo
     language: elixir
     elixir: 1.10.2
