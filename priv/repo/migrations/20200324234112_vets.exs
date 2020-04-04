@@ -12,6 +12,8 @@ defmodule FerretRescue.Repo.Migrations.Vets do
       add :zip, :text
       add :phone, :text
       add :notes, :text
+
+      timestamps()
     end
   end
 end

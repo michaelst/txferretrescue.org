@@ -3,8 +3,10 @@ defmodule FerretRescue.Repo.Migrations.FaqTopics do
 
   def change do
     create table(:faq_topics) do
-      add :topic_name, :text, null: false
+      add :name, :text, null: false
       add :rank, :integer, null: false
+
+      timestamps()
     end
   end
 end

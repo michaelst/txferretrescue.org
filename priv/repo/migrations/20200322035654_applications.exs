@@ -9,11 +9,11 @@ defmodule FerretRescue.Repo.Migrations.Applications do
       add :city, :text, null: false
       add :state, :text, null: false
       add :zip_code, :integer, null: false
-      add :time_at_adr, :text
-      add :phone_1, :text, null: false
-      add :phone_2, :text
+      add :time_at_address, :text
+      add :phone_primary, :text, null: false
+      add :phone_secondary, :text
       add :email, :text, null: false
-      add :people_at_adr, :text, null: false
+      add :people_at_address, :text, null: false
       add :home_type, :text, null: false
       add :own_home, :boolean, null: false
       add :landlord_info, :text
@@ -41,10 +41,11 @@ defmodule FerretRescue.Repo.Migrations.Applications do
       add :forever_home, :text, null: false
       add :notes, :text
       add :fostering, :boolean, null: false
-      add :agree, :boolean, null: false
       add :reviewd, :boolean, null: false, default: false
       add :approved, :boolean, null: false, defualt: false
       add :final, :boolean, null: false, defualt: false
+
+      timestamps()
     end
   end
 end

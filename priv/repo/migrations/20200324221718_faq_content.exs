@@ -3,10 +3,14 @@ defmodule FerretRescue.Repo.Migrations.FaqContent do
 
   def change do
     create table(:faq_content) do
-      add :topic_id, references(:faq_topics)
-      add :content_title, :text, null: false
+      add :topic_id, references(:faq_topics), null: false
+      add :title, :text, null: false
       add :content, :text, null: false
-      add :rank, integer, null: false
+      add :rank, :integer, null: false
+
+      timestamps()
     end
+
+    create index(:faq_content, [:topic_id])
   end
 end

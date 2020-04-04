@@ -3,10 +3,13 @@ defmodule FerretRescue.Repo.Migrations.Messages do
 
   def change do
     create table(:messages) do
-      add :application_id, :integer, null: false
-      add :timestamp, :naivedatetime, null: false
+      add :application_id, references(:applications), null: false
       add :message, :text, null: false
       add :to_email, :text, null: false
+
+      timestamps()
     end
+
+    create index(:messages, [:application_id])
   end
 end

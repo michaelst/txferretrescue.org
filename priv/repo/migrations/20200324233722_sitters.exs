@@ -7,6 +7,8 @@ defmodule FerretRescue.Repo.Migrations.Sitters do
       add :phone, :text
       add :email, :text
       add :notes, :text
+
+      timestamps()
     end
   end
 end
