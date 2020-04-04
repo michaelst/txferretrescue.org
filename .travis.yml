@@ -63,5 +63,5 @@ deploy:
   skip_cleanup: true
   local_dir: build
   on:
-    branch: build
+    branch: master
     condition: $DEPLOY_PROVIDER = gcs
