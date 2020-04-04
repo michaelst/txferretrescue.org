@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :ferret_rescue, FerretRescue.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("DB_USERNAME", "postgres"),
+  password: System.get_env("DB_PASSWORD", "postgres"),
   database: "ferret_rescue_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
