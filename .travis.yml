@@ -17,6 +17,18 @@ jobs:
     before_script: mix do ecto.create, ecto.migrate
     script: mix do compile --warnings-as-errors, coveralls.json
     after_success: bash <(curl -s https://codecov.io/bash)
+  - name: Credo
+    language: elixir
+    elixir: 1.10.2
+    otp_release: 22.3
+    cache:
+      directories:
+      - backend/deps
+      - backend/_build
+    before_install: cd backend
+    before_script: mix compile
+    script: mix credo --strict
+    if: NOT branch = master
   - name: Frontend
     language: node_js
     node_js: stable
@@ -43,18 +55,6 @@ jobs:
     before_install: cd admin-frontend
     script: yarn test
     before_deploy: yarn build
-  - name: Credo
-    language: elixir
-    elixir: 1.10.2
-    otp_release: 22.3
-    cache:
-      directories:
-      - backend/deps
-      - backend/_build
-    before_install: cd backend
-    before_script: mix compile
-    script: mix credo --strict
-    if: NOT branch = master
 deploy:
   provider: gcs
   access_key_id: GOOG1EB4WMATGX2474UPQZJKZ5FS3GYH45MXPIDM5D4M3DXKC7XSPSP3JDQNY
