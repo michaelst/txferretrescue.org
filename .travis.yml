@@ -54,6 +54,7 @@ jobs:
     before_install: cd backend
     before_script: mix compile
     script: mix credo --strict
+    if: NOT branch = master
 deploy:
   provider: gcs
   access_key_id: GOOG1EB4WMATGX2474UPQZJKZ5FS3GYH45MXPIDM5D4M3DXKC7XSPSP3JDQNY
