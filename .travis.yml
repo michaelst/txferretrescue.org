@@ -13,9 +13,8 @@ jobs:
       - backend/_build
     env:
     - MIX_ENV=test
-    before_script: 
-    - cd backend
-    - mix do ecto.create, ecto.migrate
+    before_install: cd backend
+    before_script: mix do ecto.create, ecto.migrate
     script: mix do compile --warnings-as-errors, coveralls.json
     after_success: bash <(curl -s https://codecov.io/bash)
   - name: Credo
@@ -26,7 +25,6 @@ jobs:
       directories:
       - backend/deps
       - backend/_build
-    before_script: 
-    - cd backend
-    - mix compile
+    before_install: cd backend
+    before_script: mix compile
     script: mix credo --strict
