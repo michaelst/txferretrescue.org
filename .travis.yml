@@ -16,7 +16,8 @@ jobs:
     before_install: cd backend
     before_script: mix do ecto.create, ecto.migrate
     script: mix do compile --warnings-as-errors, coveralls.json
-    after_success: bash <(curl -s https://codecov.io/bash)
+    after_success:
+    - codecov
   - name: Credo
     language: elixir
     elixir: 1.10.2
@@ -40,7 +41,9 @@ jobs:
     - DEPLOY_BUCKET=txferretrescue.org
     - DEPLOY_PROVIDER=gcs
     before_install: cd frontend
-    script: yarn test
+    script: yarn test --coverage
+    after_success:
+    - codecov
     before_deploy: yarn build
   - name: Admin Frontend
     language: node_js
