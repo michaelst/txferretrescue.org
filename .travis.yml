@@ -9,10 +9,11 @@ jobs:
     - postgresql
     cache:
       directories:
-      - deps
-      - _build
+      - backend/deps
+      - backend/_build
     env:
     - MIX_ENV=test
+    before_install: cd backend
     before_script: mix do ecto.create, ecto.migrate
     script: mix do compile --warnings-as-errors, coveralls.json
     after_success: bash <(curl -s https://codecov.io/bash)
@@ -22,7 +23,8 @@ jobs:
     otp_release: 22.3
     cache:
       directories:
-      - deps
-      - _build
+      - backend/deps
+      - backend/_build
+    before_install: cd backend
     before_script: mix compile
     script: mix credo --strict
