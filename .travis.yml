@@ -61,4 +61,3 @@ deploy:
   local_dir: build
   on:
     branch: build
-    condition: NOT "${DEPLOY_BUCKET}" = ""
