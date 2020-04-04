@@ -11,11 +11,11 @@ function App() {
     <div className="App">
       <Navbar bg="white" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Texas Ferret Lover's Rescue</Navbar.Brand>
+          <Navbar.Brand href="/">Texas Ferret Lover's Rescue</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to="/home">
+              <LinkContainer to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/adopt">
