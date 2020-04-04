@@ -26,6 +26,7 @@ jobs:
     env:
     - CI=true
     - DEPLOY_BUCKET=txferretrescue.org
+    - DEPLOY_PROVIDER=gcs
     before_install: cd frontend
     script: yarn test
     before_deploy: yarn build
@@ -38,6 +39,7 @@ jobs:
     env:
     - CI=true
     - DEPLOY_BUCKET=admin.txferretrescue.org
+    - DEPLOY_PROVIDER=gcs
     before_install: cd admin-frontend
     script: yarn test
     before_deploy: yarn build
@@ -58,6 +60,8 @@ deploy:
   secret_access_key:
     secure: Wr7hstyosWSi1PjKlugDh7WThZd7j+rpo3LH+IoiVTTfyTIpnpkmEFkW+9eOvY/E2FuC5f28gcTiYDSeFElBGJ7zj3ZT0/QkY22irA/5hUeib6rRunGDhmDKjG+naa4be1Wt7qLwaUXFRqE6FSB4uiDgi/mk+7YrrzurejiRE8RXfjkcYHc4sw8rvFhsXH8/t08B+QaI9Or8kcT3LFkt3HNW3uqS8eBk8vX97IGq0RY7OPQ0vJiTT/4XItv5TbJLMc3+34uoSAL1dUesgmzJcYy+5QDzeRD/p6G3iSn8yvjaWpKfy5F67MHxJltShKnUgHHk2CVet302S7HiTYnL7/+X1XN1tlIzjkn1Zo+MRmWNmop88AulRD0500PE3RilwFLq/AaiA+6ebwjJWszqTTSzjSi/T1CRcUZXvS0UIzr6eddAmzxq57RMdzJYRRYQenm0x0D6vfrlxb95Gf2icklZUv9wvIMc3DvHh5iJ+aUhGqb6RyPejk6cg/aWH8QMU08mvTXADhkoCtYACynvA0ESopwONCXyvW2SrJzCuWgQVHN+tCOQ7I/X8cjqoh/B1tPqzH/C88T81b/VB3LBJkjCqUWHWzX78qGnXwzxdF4DjzQHoxPPZyY6ZLkyQk2EG59ay5fIwCaLHwqSw3dN+ekQ8jMAxjHzGgVWf3w5/HQ=
   bucket: $DEPLOY_BUCKET
+  skip_cleanup: true
   local_dir: build
   on:
     branch: build
+    condition: $DEPLOY_PROVIDER = gcs
