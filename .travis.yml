@@ -62,4 +62,4 @@ deploy:
   local_dir: build
   on:
     branch: build
-    condition: ! -z "${DEPLOY_BUCKET}"
+    condition: NOT -z "${DEPLOY_BUCKET}"
