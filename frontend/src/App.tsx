@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <HashRouter>
         <Navbar />
-        <Container className="mt-5">
+        <Container className="mt-4">
           <Switch>
             <Route path="/adopt">
               adopt
