@@ -1,5 +1,5 @@
 import React from 'react';
-import './Navbar.scss';
+import './index.scss';
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -11,11 +11,13 @@ function App() {
     <div className="App">
       <Navbar bg="white" expand="lg">
         <Container>
-          <Navbar.Brand href="/">Texas Ferret Lover's Rescue</Navbar.Brand>
+          <LinkContainer exact={true} to="/">
+            <Navbar.Brand>Texas Ferret Lover's Rescue</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to="/">
+              <LinkContainer exact={true} to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/adopt">
