@@ -3,6 +3,7 @@ import { Switch, Route, HashRouter } from 'react-router-dom';
 import './App.scss';
 import Navbar from './Navbar'
 import Container from 'react-bootstrap/Container'
+import HomePage from './pages/HomePage'
 import ContactPage from './pages/ContactPage'
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
               <ContactPage />
             </Route>
             <Route path="/">
-              home
+              <HomePage />
             </Route>
           </Switch>
         </Container>
