@@ -5,7 +5,7 @@ defmodule FerretRescueWeb.Router do
     plug :accepts, ["json"]
   end
 
-  forward "/_health", HealthCheck
+  forward "/_health", FerretRescue.HealthCheck
 
   scope "/" do
     pipe_through :api

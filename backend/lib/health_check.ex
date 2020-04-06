@@ -1,4 +1,4 @@
-defmodule HealthCheck do
+defmodule FerretRescue.HealthCheck do
   @moduledoc """
   Generic health check endpoint for Phoenix/Plug web apps.
   You can provide an optional `resp_body` argument when mounting the plug that will override the default response body.
