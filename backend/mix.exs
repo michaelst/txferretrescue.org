@@ -34,8 +34,8 @@ defmodule FerretRescue.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
-      {:ecto_sql, "~> 3.1"},
+      {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
+      {:ecto_sql, "~> 3.4"},
       {:excoveralls, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
