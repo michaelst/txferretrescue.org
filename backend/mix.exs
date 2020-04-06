@@ -11,6 +11,7 @@ defmodule FerretRescue.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
+      test_paths: ["lib"],
       version: "0.1.0"
     ]
   end
@@ -34,8 +35,11 @@ defmodule FerretRescue.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:absinthe_plug, "~> 1.5.0-rc.2"},
+      {:absinthe, "~> 1.5.0-rc.4"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
       {:ecto_sql, "~> 3.4"},
+      {:ex_machina, "~> 2.4"},
       {:excoveralls, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},

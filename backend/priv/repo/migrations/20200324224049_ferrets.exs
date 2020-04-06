@@ -6,11 +6,11 @@ defmodule FerretRescue.Repo.Migrations.Ferrets do
       add :name, :text, null: false
       add :bio, :text
       add :gender, :text, null: false
-      add :age_years, :integer, null: false, defualt: 0
-      add :age_months, :integer, null: false, defualt: 0
-      add :available, :boolean, null: false, default: false
-      add :foster, :boolean, null: false, default: false
-      add :fee, :decimal, precision: 5, scale: 2, default: 0
+      add :age_years, :integer, null: false
+      add :age_months, :integer, null: false
+      add :available, :boolean, null: false
+      add :foster, :boolean, null: false
+      add :fee, :decimal, precision: 5, scale: 2, null: false
 
       timestamps()
     end
