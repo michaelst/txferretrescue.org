@@ -6,57 +6,20 @@
 #
 %{
   #
-  # You can have as many configs as you like in the `configs:` field.
   configs: [
     %{
-      #
-      # Run any config using `mix credo -C <name>`. If no config name is given
-      # "default" is used.
-      #
       name: "default",
-      #
-      # These are the files included in the analysis:
       files: %{
-        #
-        # You can give explicit globs or simply directories.
-        # In the latter case `**/*.{ex,exs}` will be used.
-        #
         included: [
           "lib/",
           "test/"
         ]
       },
-      #
-      # Load and configure plugins here:
-      #
       plugins: [],
-      #
-      # If you create your own checks, you must specify the source files for
-      # them here, so they can be loaded by Credo before running the analysis.
-      #
       requires: [],
-      #
-      # If you want to enforce a style guide and need a more traditional linting
-      # experience, you can change `strict` to `true` below:
-      #
       strict: true,
-      #
-      # To modify the timeout for parsing files, change this value:
-      #
       parse_timeout: 5000,
-      #
-      # If you want to use uncolored output by default, you can change `color`
-      # to `false` below:
-      #
       color: true,
-      #
-      # You can customize the parameters of any check by adding a second element
-      # to the tuple.
-      #
-      # To disable a check put `false` as second element:
-      #
-      #     {Credo.Check.Design.DuplicatedCode, false}
-      #
       checks: [
         #
         ## Consistency Checks
@@ -72,9 +35,6 @@
         #
         ## Design Checks
         #
-        # You can customize the priority of any check
-        # Priority values are: `low, normal, high, higher`
-        #
         {Credo.Check.Design.AliasUsage,
          [priority: :low, if_nested_deeper_than: 2, if_called_more_often_than: 0]},
         {Credo.Check.Design.DuplicatedCode, []},
@@ -89,7 +49,7 @@
         {Credo.Check.Readability.LargeNumbers, [only_greater_than: 99_999]},
         {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 120]},
         {Credo.Check.Readability.ModuleAttributeNames, []},
-        {Credo.Check.Readability.ModuleDoc, false},
+        {Credo.Check.Readability.ModuleDoc, []},
         {Credo.Check.Readability.ModuleNames, []},
         {Credo.Check.Readability.MultiAlias, []},
         {Credo.Check.Readability.ParenthesesInCondition, []},
