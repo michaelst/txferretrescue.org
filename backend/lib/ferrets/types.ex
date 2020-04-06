@@ -7,19 +7,19 @@ defmodule FerretRescue.Ferret.Types do
   alias FerretRescue.Ferret.Resolver
 
   object :ferret do
-    field :id, :id
-    field :age_months, :integer
-    field :age_years, :integer
-    field :available, :boolean
+    field :id, non_null(:id)
+    field :age_months, non_null(:integer)
+    field :age_years, non_null(:integer)
+    field :available, non_null(:boolean)
     field :bio, :string
-    field :fee, :string
-    field :foster, :boolean
-    field :gender, :string
-    field :name, :string
+    field :fee, non_null(:string)
+    field :foster, non_null(:boolean)
+    field :gender, non_null(:string)
+    field :name, non_null(:string)
   end
 
   object :ferret_queries do
-    field :ferrets, list_of(:ferret) do
+    field :ferrets, :ferret |> non_null |> list_of |> non_null do
       arg(:foster, :boolean)
       resolve(&Resolver.list/2)
     end

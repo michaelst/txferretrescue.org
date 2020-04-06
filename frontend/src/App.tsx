@@ -5,6 +5,8 @@ import Navbar from './Navbar'
 import Container from 'react-bootstrap/Container'
 import HomePage from './pages/HomePage'
 import ContactPage from './pages/ContactPage'
+import FerretsPage from './pages/FerretsPage'
+import FostersPage from './pages/FostersPage'
 
 function App() {
   return (
@@ -17,10 +19,10 @@ function App() {
               adopt
           </Route>
             <Route path="/ferrets">
-              ferrets
+              <FerretsPage />
           </Route>
             <Route path="/fosters">
-              fosters
+              <FostersPage />
           </Route>
             <Route path="/faq">
               faq
