@@ -15,6 +15,7 @@ defmodule FerretRescue.Ferret.Types do
     field :fee, non_null(:string)
     field :foster, non_null(:boolean)
     field :gender, non_null(:string)
+    field :image_url, :string
     field :name, non_null(:string)
   end
 

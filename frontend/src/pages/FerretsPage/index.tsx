@@ -1,37 +1,41 @@
-import React from 'react';
-import ContentBox from './../../ContentBox'
-import { gql, useQuery } from '@apollo/client';
+import React from 'react'
+import { gql, useQuery } from '@apollo/client'
 import { ListFerrets } from './graphql/ListFerrets'
+import FerretRow from './components/FerretRow'
+import FerretsInfo from './components/FerretsInfo'
+import FostersInfo from './components/FostersInfo'
 
 const LIST_FERRETS = gql`
-query ListFerrets {
-  ferrets(foster: false) {
+query ListFerrets($foster : Boolean!) {
+  ferrets(foster: $foster) {
     id
+    ageMonths
+    ageYears
+    bio
+    fee
+    gender
+    imageUrl
     name
   }
 }
-`;
+`
 
-function FerretsPage() {
-  const { loading, error, data } = useQuery<ListFerrets>(LIST_FERRETS);
+type FerretsPageProps = {
+  foster: boolean
+}
 
-  //if (loading) return 'Loading...';
-  //if (error) return `Error! ${error.message}`;
+function FerretsPage({ foster }: FerretsPageProps) {
+  const { data } = useQuery<ListFerrets>(LIST_FERRETS, {
+    variables: { foster }
+  })
 
   return (
     <div className="FerretsPage">
-      <ContentBox>
-        ALL ferrets have their rabies and distemper vaccination, are microchipped,
-        and have had a health exam to check for teeth, heart, or tumor problems.
-        Ferrets are guaranteed for 30 days against illness and 3 months against
-        adrenal tumors.
-      </ContentBox>
+      {foster ? <FostersInfo /> : <FerretsInfo />}
 
-      {data?.ferrets.map(ferret => (
-        <div key={ferret.id.toString()}>{ferret.name}</div>
-      ))}
+      {data?.ferrets.map(ferret => <FerretRow ferret={ferret} />)}
     </div>
-  );
+  )
 }
 
-export default FerretsPage;
+export default FerretsPage
