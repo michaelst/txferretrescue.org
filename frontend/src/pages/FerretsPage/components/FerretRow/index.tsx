@@ -10,7 +10,7 @@ type FerretRowProps = {
 
 function FerretRow({ ferret }: FerretRowProps) {
   return (
-    <div key={ferret.id} className="FerretRow mb-4">
+    <div className="FerretRow mb-4" data-testid="FerretRow">
       <ContentBox>
         <div className="row">
           <div className="col-sm-4 col-md-3 col-lg-2 text-center">

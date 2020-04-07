@@ -5,7 +5,7 @@ import FerretRow from './components/FerretRow'
 import FerretsInfo from './components/FerretsInfo'
 import FostersInfo from './components/FostersInfo'
 
-const LIST_FERRETS = gql`
+export const LIST_FERRETS = gql`
 query ListFerrets($foster : Boolean!) {
   ferrets(foster: $foster) {
     id
@@ -33,7 +33,7 @@ function FerretsPage({ foster }: FerretsPageProps) {
     <div className="FerretsPage">
       {foster ? <FostersInfo /> : <FerretsInfo />}
 
-      {data?.ferrets.map(ferret => <FerretRow ferret={ferret} />)}
+      {data?.ferrets.map(ferret => <FerretRow key={ferret.id} ferret={ferret} />)}
     </div>
   )
 }
