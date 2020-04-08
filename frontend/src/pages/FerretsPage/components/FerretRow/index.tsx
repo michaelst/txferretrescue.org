@@ -25,8 +25,8 @@ function FerretRow({ ferret }: FerretRowProps) {
             <h4>{ferret.name}</h4>
             <p>
               <b>Age: </b>
-              {ferret.ageYears} {ferret.ageYears == 1 ? 'year ' : 'years '}
-              {ferret.ageMonths} {ferret.ageMonths == 1 ? 'month' : 'months'}
+              {ferret.ageYears} {ferret.ageYears === 1 ? 'year ' : 'years '}
+              {ferret.ageMonths} {ferret.ageMonths === 1 ? 'month' : 'months'}
               <br />
               <b>Gender:</b> {ferret.gender}
               <br />

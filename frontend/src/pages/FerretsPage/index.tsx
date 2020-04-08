@@ -24,7 +24,7 @@ type FerretsPageProps = {
   foster: boolean
 }
 
-function FerretsPage({ foster }: FerretsPageProps) {
+export function FerretsPage({ foster }: FerretsPageProps) {
   const { data } = useQuery<ListFerrets>(LIST_FERRETS, {
     variables: { foster }
   })
@@ -37,5 +37,3 @@ function FerretsPage({ foster }: FerretsPageProps) {
     </div>
   )
 }
-
-export default FerretsPage

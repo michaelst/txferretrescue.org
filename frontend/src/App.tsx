@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 import Container from 'react-bootstrap/Container'
 import HomePage from './pages/HomePage'
 import ContactPage from './pages/ContactPage'
-import FerretsPage from './pages/FerretsPage'
+import { FerretsPage } from './pages/FerretsPage'
 
 function App() {
   return (
