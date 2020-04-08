@@ -9,7 +9,4 @@ defmodule FerretRescue.Schema do
   query do
     import_fields(:ferret_queries)
   end
-
-  mutation do
-  end
 end

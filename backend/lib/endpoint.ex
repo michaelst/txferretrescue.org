@@ -1,6 +1,8 @@
 defmodule FerretRescueWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ferret_rescue
 
+  plug CORSPlug, orgin: ["http://localhost:3000"]
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

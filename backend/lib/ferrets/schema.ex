@@ -13,6 +13,7 @@ defmodule FerretRescue.Ferret do
     field :fee, :decimal
     field :foster, :boolean
     field :gender, :string
+    field :image_url, :string
     field :name, :string
 
     timestamps()

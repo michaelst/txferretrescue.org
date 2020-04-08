@@ -51,4 +51,21 @@ defmodule FerretRescue.Ferret.Resolver.ListTest do
               }
             }} == Absinthe.run(doc, FerretRescue.Schema)
   end
+
+  test "empty" do
+    doc = """
+    query {
+      ferrets(foster: true) {
+        id
+      }
+    }
+    """
+
+    assert {:ok,
+            %{
+              data: %{
+                "ferrets" => []
+              }
+            }} == Absinthe.run(doc, FerretRescue.Schema)
+  end
 end
