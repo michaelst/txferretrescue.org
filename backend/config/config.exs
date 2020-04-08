@@ -16,4 +16,6 @@ config :logger, :console,
 
 config :phoenix, :json_library, Jason
 
+config :stripity_stripe, api_key: System.get_env("STRIPE_SECRET")
+
 import_config "#{Mix.env()}.exs"
