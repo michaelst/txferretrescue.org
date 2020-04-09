@@ -36,9 +36,10 @@ defmodule FerretRescue.MixProject do
   defp deps do
     [
       {:absinthe_plug, "~> 1.5.0-rc.2"},
-      {:absinthe, "~> 1.5.0-rc.4"},
+      {:absinthe, "~> 1.5.0-rc.5"},
       {:cors_plug, "~> 2.0"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
+      {:dataloader, "~> 1.0.0"},
       {:ecto_sql, "~> 3.4"},
       {:ex_machina, "~> 2.4"},
       {:excoveralls, "~> 0.12.0"},
