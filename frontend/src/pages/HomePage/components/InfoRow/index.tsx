@@ -7,7 +7,7 @@ function InfoRow() {
   return (
     <div className="InfoRow">
       <div className="row">
-        <div className="col-sm-4">
+        <div className="col-lg-4">
           <ContentBox>
             <h3>About Us</h3>
 
@@ -16,7 +16,7 @@ function InfoRow() {
                 We are not a business, but a volunteer organization.</p>
           </ContentBox>
         </div>
-        <div className="col-sm-4">
+        <div className="col-lg-4">
           <ContentBox>
             <h3>Foster Program</h3>
 
@@ -27,7 +27,7 @@ function InfoRow() {
                 these ferrets please click the button below.</p>
           </ContentBox>
         </div>
-        <div className="col-sm-4">
+        <div className="col-lg-4">
           <ContentBox>
             <h3>Surrender</h3>
 

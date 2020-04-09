@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 
 function Header() {
   return (
-    <div className="Header">
+    <div className="Header text-center">
       <ContentBox>
           <div className="row">
             <div className="col-sm-2">

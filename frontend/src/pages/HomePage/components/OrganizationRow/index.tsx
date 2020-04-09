@@ -8,10 +8,10 @@ function OrganizationRow() {
   return (
     <div className="OrganizationRow">
       <div className="row text-center">
-        <div className="col-xs-12 col-md-6">
+        <div className="col-xs-12 col-lg-6">
           <Organizations />
         </div>
-        <div className="col-xs-12 col-md-6">
+        <div className="col-xs-12 col-lg-6">
           <div className="row">
             <div className="mb-4">
               <a href="http://smile.amazon.com/ch/68-0619842" target={"_blank"} rel="noopener noreferrer">

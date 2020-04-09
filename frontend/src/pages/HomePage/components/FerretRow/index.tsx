@@ -9,24 +9,24 @@ import FerretSix from './images/ferret-6.jpg';
 
 function FerretRow() {
   return (
-    <div className="FerretRow">
+    <div className="FerretRow d-none d-sm-block">
       <div className="row">
-        <div className="col-sm-2 col-xs-3 mb-4">
+        <div className="col-sm-2 mb-4">
           <img src={FerretOne} alt="Ferret" />
         </div>
-        <div className="col-sm-2 col-xs-3 mb-4">
+        <div className="col-sm-2 mb-4">
           <img src={FerretTwo} alt="Ferret" />
         </div>
-        <div className="col-sm-2 col-xs-3 mb-4">
+        <div className="col-sm-2 mb-4">
           <img src={FerretThree} alt="Ferret" />
         </div>
-        <div className="col-sm-2 col-xs-3 mb-4">
+        <div className="col-sm-2 mb-4">
           <img src={FerretFour} alt="Ferret" />
         </div>
-        <div className="col-sm-2 d-none d-sm-block mb-4">
+        <div className="col-sm-2">
           <img src={FerretFive} alt="Ferret" />
         </div>
-        <div className="col-sm-2 d-none d-sm-block mb-4">
+        <div className="col-sm-2">
           <img src={FerretSix} alt="Ferret" />
         </div>
       </div>
