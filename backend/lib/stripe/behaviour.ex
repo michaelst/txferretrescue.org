@@ -1,4 +1,8 @@
 defmodule Stripe.SessionBehaviour do
+  @moduledoc """
+  This defines a behaviour for `Stripe.Session` to enable testing with Hammox.
+  """
+
   @type display_item_custom :: %{
     :name => String.t(),
     optional(:description) => String.t() | nil,
