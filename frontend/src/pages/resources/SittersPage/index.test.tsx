@@ -18,7 +18,7 @@ function mocks(foster: boolean) {
               "id": "15",
               "name": "Courtney Sanders",
               "notes": "Located in South Austin, will cover basically all the metro area.",
-              "phone": null
+              "phone": "(111) 111-1111"
             },
             {
               "__typename": "Sitter",
