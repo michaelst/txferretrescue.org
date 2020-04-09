@@ -3,7 +3,6 @@ defmodule FerretRescue.Ferret do
   Schema for ferrets table.
   """
   use Ecto.Schema
-  import Ecto.Changeset
 
   schema "ferrets" do
     field :age_months, :integer
@@ -17,11 +16,5 @@ defmodule FerretRescue.Ferret do
     field :name, :string
 
     timestamps()
-  end
-
-  def changeset(model, attrs) do
-    model
-    |> cast(attrs, __schema__(:fields) -- [:id])
-    |> validate_required(__schema__(:fields) -- [:bio])
   end
 end

@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container'
 import HomePage from './pages/HomePage'
 import ContactPage from './pages/ContactPage'
 import { FerretsPage } from './pages/FerretsPage'
+import { VetsPage } from './pages/resources/VetsPage'
+import { SittersPage } from './pages/resources/SittersPage'
 
 function App() {
   return (
@@ -27,10 +29,10 @@ function App() {
               faq
           </Route>
             <Route path="/vets">
-              vets
+              <VetsPage />
           </Route>
             <Route path="/sitters">
-              sitters
+              <SittersPage />
           </Route>
             <Route path="/contact">
               <ContactPage />

@@ -14,7 +14,7 @@ function LinkRow() {
         <div className="col-lg-4">
           <DonateForm />
         </div>
-        <div className="col-lg-4">
+        <div className="col-lg-4"> 
           <LinkBox to="/contact">
             <h3>Contact Us</h3>
           </LinkBox>

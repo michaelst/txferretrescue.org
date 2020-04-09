@@ -6,4 +6,6 @@ defmodule FerretRescue.Factory do
   """
   use ExMachina.Ecto, repo: FerretRescue.Repo
   use FerretRescue.Ferret.Factory
+  use FerretRescue.Resources.Sitter.Factory
+  use FerretRescue.Resources.Vet.Factory
 end

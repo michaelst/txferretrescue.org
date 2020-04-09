@@ -19,7 +19,7 @@ function mocks(foster: boolean) {
             {
               "__typename": "Ferret",
               "ageMonths": 2,
-              "ageYears": 1,
+              "ageYears": 2,
               "bio": "Some description",
               "fee": "100.00",
               "gender": "Male",
@@ -29,7 +29,7 @@ function mocks(foster: boolean) {
             },
             {
               "__typename": "Ferret",
-              "ageMonths": 2,
+              "ageMonths": 1,
               "ageYears": 1,
               "bio": "Some description",
               "fee": "100.00",
