@@ -6,8 +6,8 @@ defmodule FerretRescue.FAQ.Content.Types do
 
   object :faq_content do
     field :id, non_null(:id)
-    field :title, :string
     field :content, :string
     field :rank, :integer
+    field :title, :string
   end
 end
