@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, waitFor, act } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { LIST_FERRETS, FerretsPage } from './'
 import { MockedProvider } from '@apollo/client/testing'
 import { HashRouter } from 'react-router-dom'

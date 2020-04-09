@@ -1,4 +1,4 @@
-defmodule FerretRescue.Ferret.Resolver.ListTest do
+defmodule FerretRescue.Ferret.Types.FerretsTest do
   use FerretRescue.DataCase, async: true
   import FerretRescue.Factory
 

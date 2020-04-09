@@ -1,18 +1,18 @@
-import React from 'react';
-import ContentBox from './../../../../ContentBox';
-import LinkBox from '../LinkBox';
+import React from 'react'
+import LinkBox from '../LinkBox'
+import { DonateForm } from '../DonateForm'
 
 function LinkRow() {
   return (
     <div className="LinkRow">
-      <div className="row">
+      <div className="row d-flex align-items-center">
         <div className="col-sm-4">
           <LinkBox to="/adopt">
             <h3>Apply to Adopt</h3>
           </LinkBox>
         </div>
         <div className="col-sm-4">
-          <ContentBox>Donate form</ContentBox>
+          <DonateForm />
         </div>
         <div className="col-sm-4">
           <LinkBox to="/contact">
@@ -21,7 +21,7 @@ function LinkRow() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default LinkRow;
+export default LinkRow

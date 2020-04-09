@@ -43,6 +43,7 @@ defmodule FerretRescue.MixProject do
       {:ex_machina, "~> 2.4"},
       {:excoveralls, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
+      {:hammox, "~> 0.2.2", only: :test},
       {:jason, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.11"},
@@ -50,7 +51,8 @@ defmodule FerretRescue.MixProject do
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix, "~> 1.4.16"},
       {:plug_cowboy, "~> 2.0"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:stripity_stripe, "~> 2.8.0"}
     ]
   end
 
