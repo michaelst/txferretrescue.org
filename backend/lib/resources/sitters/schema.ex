@@ -5,10 +5,10 @@ defmodule FerretRescue.Resources.Sitter do
   use Ecto.Schema
 
   schema "sitters" do
-    field :name, :string
-    field :phone, :string
     field :email, :string
+    field :name, :string
     field :notes, :string
+    field :phone, :string
 
     timestamps()
   end

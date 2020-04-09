@@ -8,10 +8,10 @@ defmodule FerretRescue.Resources.Sitter.Types do
 
   object :sitter do
     field :id, non_null(:id)
-    field :name, :string
-    field :phone, :string
     field :email, :string
+    field :name, :string
     field :notes, :string
+    field :phone, :string
   end
 
   object :sitter_queries do

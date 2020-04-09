@@ -5,15 +5,15 @@ defmodule FerretRescue.Resources.Vet do
   use Ecto.Schema
 
   schema "vets" do
-    field :company_name, :string
-    field :website, :string
-    field :vet_name, :string
-    field :street, :string
     field :city, :string
-    field :state, :string
-    field :zip, :string
-    field :phone, :string
+    field :company_name, :string
     field :notes, :string
+    field :phone, :string
+    field :state, :string
+    field :street, :string
+    field :vet_name, :string
+    field :website, :string
+    field :zip, :string
 
     timestamps()
   end

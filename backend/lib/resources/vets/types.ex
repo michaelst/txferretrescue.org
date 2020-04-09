@@ -8,15 +8,15 @@ defmodule FerretRescue.Resources.Vet.Types do
 
   object :vet do
     field :id, non_null(:id)
-    field :name, :string
-    field :website, :string
-    field :vet_name, :string
-    field :street, :string
     field :city, :string
-    field :state, :string
-    field :zip, :string
-    field :phone, :string
+    field :company_name, :string
     field :notes, :string
+    field :phone, :string
+    field :state, :string
+    field :street, :string
+    field :vet_name, :string
+    field :website, :string
+    field :zip, :string
   end
 
   object :vet_queries do
