@@ -17,7 +17,7 @@ function FerretRow({ ferret }: FerretRowProps) {
             {ferret.imageUrl &&
               <img src={ferret.imageUrl} className="w-100 mb-2" alt={"Ferret - " + ferret.name} />
             }
-            <LinkContainer to="/adopt">
+            <LinkContainer to="/apply">
               <Button className="btn-success">Apply to Adopt</Button>
             </LinkContainer>
           </div>

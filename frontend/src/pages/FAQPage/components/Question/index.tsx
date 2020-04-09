@@ -29,7 +29,7 @@ function Question({ question }: QuestionProps) {
         </Card.Header>
         <Collapse in={open}>
           <Card.Body id={`collapse-${question.id}`}>
-            {question.content?.split('\\r\\n').map((item, i) => <p key={i}>{item}</p>)}
+            <p dangerouslySetInnerHTML={{__html: question.content || ''}} />
         </Card.Body>
         </Collapse>
       </Card>

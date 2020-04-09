@@ -7,7 +7,7 @@ function LinkRow() {
     <div className="LinkRow">
       <div className="row d-flex align-items-center">
         <div className="col-lg-4 d-none d-sm-block">
-          <LinkBox to="/adopt">
+          <LinkBox to="/apply">
             <h3>Apply to Adopt</h3>
           </LinkBox>
         </div>

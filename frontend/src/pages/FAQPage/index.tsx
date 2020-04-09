@@ -30,7 +30,7 @@ export function FAQPage() {
       <ContentBox>
         {data?.faqTopics.map(topic => <Topic key={topic.id} topic={topic} />)}
 
-        <LinkContainer to="/adopt">
+        <LinkContainer to="/apply">
           <Button className="btn-lg btn-success">Adopt A Ferret!</Button>
         </LinkContainer>
       </ContentBox>

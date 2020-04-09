@@ -17,7 +17,7 @@ function App() {
         <Navbar />
         <Container className="mt-4">
           <Switch>
-            <Route path="/adopt">
+            <Route path="/apply">
               adopt
           </Route>
             <Route path="/ferrets">

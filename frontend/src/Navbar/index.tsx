@@ -20,7 +20,7 @@ function App() {
               <LinkContainer exact={true} to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/adopt">
+              <LinkContainer to="/apply">
                 <Nav.Link>Adopt</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/ferrets">

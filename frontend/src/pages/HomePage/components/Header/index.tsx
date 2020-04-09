@@ -18,7 +18,7 @@ function Header() {
 
               <p>Our Mission: We're saving lives, as many as we can. Finding forever homes for our thieving friends.</p>
 
-              <LinkContainer to="/adopt">
+              <LinkContainer to="/apply">
                 <Button className="btn-lg btn-success">Adopt A Ferret!</Button>
               </LinkContainer>
             </div>
