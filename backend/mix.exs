@@ -43,6 +43,7 @@ defmodule FerretRescue.MixProject do
       {:ex_machina, "~> 2.4"},
       {:excoveralls, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
+      {:hammox, "~> 0.2.2", only: :test},
       {:jason, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.11"},

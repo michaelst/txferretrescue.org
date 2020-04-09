@@ -16,15 +16,12 @@ query GetStripeCheckoutSession($amount: Int!) {
 const openStripeCheckout = async (checkout_session_id: string) => {
   const stripe = await loadStripe('pk_test_cUSmWw5bR0vOjLC2Eg75Etej')
 
-  await stripe?.redirectToCheckout({
-    sessionId: checkout_session_id
-  })
+  await stripe?.redirectToCheckout({ sessionId: checkout_session_id })
 }
 
 export function DonateForm() {
   const [amount, setAmount] = useState('')
   const amountCents = Math.round(parseFloat(amount) * 100)
-
   const [getStripeCheckoutSession, { data }] = useLazyQuery<GetStripeCheckoutSession>(GET_STRIPE_CHECKOUT_SESSION)
 
   if (data && data.stripeCheckoutSession && amount) {
