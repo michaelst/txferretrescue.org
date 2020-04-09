@@ -26,6 +26,11 @@ export function DonateForm() {
 
   if (data && data.stripeCheckoutSession && amount) {
     openStripeCheckout(data.stripeCheckoutSession.id)
+    return <div className="DonateForm text-center">
+      <ContentBox>
+        Redirecting to Stripe
+      </ContentBox>
+    </div>
   }
 
   return (
@@ -39,11 +44,13 @@ export function DonateForm() {
               type="text"
               name="amount"
               placeholder="amount"
+              data-testid="donate-amount-input"
             />
           </label>
           <Button
             className="btn-success"
             onClick={() => getStripeCheckoutSession({ variables: { amount: amountCents } })}
+            data-testid="donate-button"
           >
             Donate
           </Button>
