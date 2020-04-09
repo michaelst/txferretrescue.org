@@ -13,8 +13,10 @@ query GetStripeCheckoutSession($amount: Int!) {
 }
 `
 
+const stripePublicKey = process.env.NODE_ENV === 'production' ? 'pk_live_HqxP68DVWboD0yL65DJoWizs' : 'pk_test_cUSmWw5bR0vOjLC2Eg75Etej'
+
 const openStripeCheckout = async (checkout_session_id: string) => {
-  const stripe = await loadStripe('pk_test_cUSmWw5bR0vOjLC2Eg75Etej')
+  const stripe = await loadStripe(stripePublicKey)
 
   await stripe?.redirectToCheckout({ sessionId: checkout_session_id })
 }
