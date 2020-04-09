@@ -3,8 +3,8 @@ defmodule FerretRescue.Resources.Vet.Resolver do
   Resolver for vets.
   """
 
-  alias FerretRescue.Resources.Vet
   alias FerretRescue.Repo
+  alias FerretRescue.Resources.Vet
 
   def list(_args, _resolution) do
     {:ok, Repo.all(Vet)}
