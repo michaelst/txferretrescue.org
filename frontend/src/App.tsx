@@ -2,13 +2,13 @@ import React from 'react';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
 import './App.scss';
-import ContactPage from './pages/ContactPage'
-import HomePage from './pages/HomePage'
-import Navbar from './Navbar'
-import { FAQPage } from './pages/FAQPage'
-import { FerretsPage } from './pages/FerretsPage'
-import { SittersPage } from './pages/resources/SittersPage'
-import { VetsPage } from './pages/resources/VetsPage'
+import ContactPage from 'ContactPage'
+import HomePage from 'HomePage'
+import Navbar from 'Navbar'
+import { FAQPage } from 'FAQPage'
+import { FerretsPage } from 'FerretsPage'
+import { SittersPage } from 'SittersPage'
+import { VetsPage } from 'VetsPage'
 
 function App() {
   return (
