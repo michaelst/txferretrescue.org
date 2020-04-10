@@ -7,6 +7,10 @@ defmodule FerretRescueWeb.Router do
 
   forward "/_health", FerretRescue.HealthCheck
 
+  if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
+
   scope "/" do
     pipe_through :api
 
