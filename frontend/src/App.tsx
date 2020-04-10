@@ -6,6 +6,7 @@ import ContactPage from 'ContactPage'
 import HomePage from 'HomePage'
 import Navbar from 'Navbar'
 import { FAQPage } from 'FAQPage'
+import { AdoptPage } from 'AdoptPage'
 import { FerretsPage } from 'FerretsPage'
 import { SittersPage } from 'SittersPage'
 import { VetsPage } from 'VetsPage'
@@ -18,7 +19,7 @@ function App() {
         <Container className="mt-4">
           <Switch>
             <Route path="/apply">
-              adopt
+              <AdoptPage />
           </Route>
             <Route path="/ferrets">
               <FerretsPage foster={false} />
