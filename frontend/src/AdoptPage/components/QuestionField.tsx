@@ -5,9 +5,10 @@ type QuestionFieldProps = {
   label: string,
   value: boolean | undefined,
   setValue: React.Dispatch<React.SetStateAction<boolean | undefined>>
+  testId?: string
 }
 
-function QuestionField({ label, value, setValue }: QuestionFieldProps) {
+function QuestionField({ label, value, setValue, testId }: QuestionFieldProps) {
   return (
     <Form.Group>
       <Form.Label>{label}</Form.Label>
@@ -18,6 +19,7 @@ function QuestionField({ label, value, setValue }: QuestionFieldProps) {
           type="radio"
           checked={value === true}
           onChange={() => setValue(true)}
+          data-testid={`${testId}-yes`}
         />
         <Form.Check
           inline
@@ -25,6 +27,7 @@ function QuestionField({ label, value, setValue }: QuestionFieldProps) {
           type="radio"
           checked={value === false}
           onChange={() => setValue(false)}
+          data-testid={`${testId}-no`}
         />
       </div>
     </Form.Group>

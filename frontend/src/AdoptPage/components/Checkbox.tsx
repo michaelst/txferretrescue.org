@@ -4,10 +4,11 @@ import { Form } from 'react-bootstrap'
 type CheckboxProps = {
   label: string,
   value: boolean,
-  setValue: React.Dispatch<React.SetStateAction<boolean>>
+  setValue: React.Dispatch<React.SetStateAction<boolean>>,
+  testId?: string
 }
 
-function Checkbox({ label, value, setValue }: CheckboxProps) {
+function Checkbox({ label, value, setValue, testId }: CheckboxProps) {
   return (
     <Form.Group>
       <Form.Check
@@ -15,6 +16,7 @@ function Checkbox({ label, value, setValue }: CheckboxProps) {
         label={label}
         checked={value}
         onChange={() => setValue(!value)}
+        data-testid={testId}
       />
     </Form.Group>
   )

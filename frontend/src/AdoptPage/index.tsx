@@ -153,20 +153,20 @@ export function AdoptPage() {
         <TextInput label="Email" value={email} setValue={setEmail} />
         <TextField label="How many people live at this house (or visit frequently such as grandchildren/stepchildren) and what are their ages?" value={peopleAtAddress} setValue={setPeopleAtAddress} />
         <SelectField label="What type of home is this?" value={homeType} setValue={setHomeType} possibleValues={['House', 'Apartment', 'Trailer', 'Other (explain in notes)']} />
-        <QuestionField label="Do you own this home?" value={ownHome} setValue={setOwnHome} />
+        <QuestionField label="Do you own this home?" value={ownHome} setValue={setOwnHome} testId='own-home' />
         {ownHome === false && (
           <TextField label="Please provide name, address, and phone number of your landlord." value={landlordInfo} setValue={setLandlordInfo} />
         )}
         <QuestionField label="Is this a smoker's home?" value={smoker} setValue={setSmoker} />
         <QuestionField label="Are ferrets legal where you live?" value={legalToOwn} setValue={setLegalToOwn} />
-        <QuestionField label="Have you owned ferrets before?" value={ownedBefore} setValue={setOwnedBefore} />
+        <QuestionField label="Have you owned ferrets before?" value={ownedBefore} setValue={setOwnedBefore} testId='owned-before' />
         {ownedBefore === true && (
           <TextField label="When and how many? Do you still have them? If not, where are they now?" value={ownedDetails} setValue={setOwnedDetails} />
         )}
         <TextField label="What animals/pets do you currently own?" value={otherAnimals} setValue={setOtherAnimals} />
         <QuestionField label="Are these pets current on their vaccinations?" value={vaccinesCurrent} setValue={setVaccinesCurrent} />
         <TextField label="Please provide your veterinarian's name and address?" value={vetInfo} setValue={setVetInfo} />
-        <QuestionField label="Have you ever surrendered a pet to a shelter?" value={surrendered} setValue={setSurrendered} />
+        <QuestionField label="Have you ever surrendered a pet to a shelter?" value={surrendered} setValue={setSurrendered} testId='surrendered' />
         {surrendered === true && (
           <TextField label="Please give details. When? Why?" value={surrenderedDetails} setValue={setSurrenderedDetails} />
         )}
@@ -190,7 +190,7 @@ export function AdoptPage() {
 
         <QuestionField label="Are you interested in fostering ferrets?" value={fostering} setValue={setFostering} />
 
-        <Checkbox label={acceptTermsLabel} value={acceptTerms} setValue={setAcceptTerms} />
+        <Checkbox label={acceptTermsLabel} value={acceptTerms} setValue={setAcceptTerms} testId="accept-terms" />
 
         {showError && (
           <Alert variant="danger">
@@ -202,6 +202,7 @@ export function AdoptPage() {
           className="btn-success"
           disabled={!acceptTerms || loading}
           onClick={() => createApplication()}
+          data-testid='submit-button'
         >
           Submit
         </Button>
