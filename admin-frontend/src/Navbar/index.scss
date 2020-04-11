@@ -1,0 +1,11 @@
+.navbar {
+  -webkit-box-shadow: 0 0 8px 0 rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 8px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.3);
+  background-color: #FFF;
+
+  .nav-link.active {
+    background-color: #E0F5CC !important;
+    color: #000 !important;
+  }
+}

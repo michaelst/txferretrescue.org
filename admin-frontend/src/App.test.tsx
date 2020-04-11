@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { HashRouter } from "react-router-dom";
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders app', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
+  const linkElement = getByText(/Our mission:/i);
   expect(linkElement).toBeInTheDocument();
 });
