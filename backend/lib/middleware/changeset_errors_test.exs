@@ -16,6 +16,8 @@ defmodule FerretRescue.Middleware.ChangesetErrorsTest do
     end
 
     def middleware(middleware, _field, %{identifier: :mutation}) do
+      # this middleware needs to append to the end
+      # credo:disable-for-next-line Credo.Check.Refactor.AppendSingleItem
       middleware ++ [FerretRescue.Middleware.ChangesetErrors]
     end
 
