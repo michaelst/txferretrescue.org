@@ -94,6 +94,7 @@ deploy:
       condition: $DEPLOY_PROVIDER = gcs
   - provider: firebase
     token: $FIREBASE_TOKEN
+    skip_cleanup: true
     on:
       branch: master
       condition: $DEPLOY_PROVIDER = firebase
