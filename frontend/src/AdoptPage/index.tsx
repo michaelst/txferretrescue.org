@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import ContentBox from 'ContentBox'
-import { Alert, Form, Button } from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap'
 import TextInput from './components/TextInput'
 import TextField from './components/TextField'
+import QuestionField from './components/QuestionField'
+import SelectField from './components/SelectField'
+import Checkbox from './components/Checkbox'
 import { gql, useMutation } from '@apollo/client'
 import { useHistory } from "react-router-dom"
 
@@ -15,7 +18,7 @@ mutation CreateApplication($age: Int! $cageInfo: String! $city: String! $disease
 `
 
 const acceptTermsLabel = `
-By selecting this box and clicking the 'Submit' button below I am confirming that 
+By selecting this box and clicking the submit button below I am confirming that 
 I understand ferrets are not caged animals, they are not like hamsters and mice, 
 that they must have time out of a cage daily for their well being both physically 
 and mentally and that they do need human interaction with their play. I am ready 
@@ -24,58 +27,6 @@ depend completely on my schedule to determine when they will play, sleep and eat
 Furthermore, I submit that my answers to the questions above are truthful and 
 accurate to the best of my ability.
 `
-
-const selectField = (label: string, value: string, setValue: React.Dispatch<React.SetStateAction<string>>, possibleValues: Array<string>) => {
-  return (
-    <Form.Group>
-      <Form.Label>{label}</Form.Label>
-      <Form.Control
-        as="select"
-        value={value}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
-      >
-        {possibleValues.map(item => <option key={item}>{item}</option>)}
-      </Form.Control>
-    </Form.Group>
-  )
-}
-
-const checkbox = (label: string, value: boolean, setValue: React.Dispatch<React.SetStateAction<boolean>>) => {
-  return (
-    <Form.Group>
-      <Form.Check
-        type="checkbox"
-        label={label}
-        checked={value}
-        onChange={() => setValue(!value)}
-      />
-    </Form.Group>
-  )
-}
-
-const questionField = (label: string, value: boolean | undefined, setValue: React.Dispatch<React.SetStateAction<boolean | undefined>>) => {
-  return (
-    <Form.Group>
-      <Form.Label>{label}</Form.Label>
-      <div>
-        <Form.Check
-          inline
-          label="Yes"
-          type="radio"
-          checked={value === true}
-          onChange={() => setValue(true)}
-        />
-        <Form.Check
-          inline
-          label="No"
-          type="radio"
-          checked={value === false}
-          onChange={() => setValue(false)}
-        />
-      </div>
-    </Form.Group>
-  )
-}
 
 export function AdoptPage() {
   const [showError, setShowError] = useState(false)
@@ -201,21 +152,21 @@ export function AdoptPage() {
         <TextInput label="Secondary Phone" value={phoneSecondary} setValue={setPhoneSecondary} required={false} />
         <TextInput label="Email" value={email} setValue={setEmail} />
         <TextField label="How many people live at this house (or visit frequently such as grandchildren/stepchildren) and what are their ages?" value={peopleAtAddress} setValue={setPeopleAtAddress} />
-        {selectField("What type of home is this?", homeType, setHomeType, ['House', 'Apartment', 'Trailer', 'Other (explain in notes)'])}
-        {questionField("Do you own this home?", ownHome, setOwnHome)}
+        <SelectField label="What type of home is this?" value={homeType} setValue={setHomeType} possibleValues={['House', 'Apartment', 'Trailer', 'Other (explain in notes)']} />
+        <QuestionField label="Do you own this home?" value={ownHome} setValue={setOwnHome} />
         {ownHome === false && (
-          <TextField label="Please provide name, address, and phone number of landlord." value={landlordInfo} setValue={setLandlordInfo} />
+          <TextField label="Please provide name, address, and phone number of your landlord." value={landlordInfo} setValue={setLandlordInfo} />
         )}
-        {questionField("Is this a smoker's home?", smoker, setSmoker)}
-        {questionField("Are ferrets legal where you live?", legalToOwn, setLegalToOwn)}
-        {questionField("Have you owned ferrets before?", ownedBefore, setOwnedBefore)}
+        <QuestionField label="Is this a smoker's home?" value={smoker} setValue={setSmoker} />
+        <QuestionField label="Are ferrets legal where you live?" value={legalToOwn} setValue={setLegalToOwn} />
+        <QuestionField label="Have you owned ferrets before?" value={ownedBefore} setValue={setOwnedBefore} />
         {ownedBefore === true && (
           <TextField label="When and how many? Do you still have them? If not, where are they now?" value={ownedDetails} setValue={setOwnedDetails} />
         )}
         <TextField label="What animals/pets do you currently own?" value={otherAnimals} setValue={setOtherAnimals} />
-        {questionField("Are these pets current on their vaccinations?", vaccinesCurrent, setVaccinesCurrent)}
+        <QuestionField label="Are these pets current on their vaccinations?" value={vaccinesCurrent} setValue={setVaccinesCurrent} />
         <TextField label="Please provide your veterinarian's name and address?" value={vetInfo} setValue={setVetInfo} />
-        {questionField("Have you ever surrendered a pet to a shelter?", surrendered, setSurrendered)}
+        <QuestionField label="Have you ever surrendered a pet to a shelter?" value={surrendered} setValue={setSurrendered} />
         {surrendered === true && (
           <TextField label="Please give details. When? Why?" value={surrenderedDetails} setValue={setSurrenderedDetails} />
         )}
@@ -230,16 +181,16 @@ export function AdoptPage() {
         <TextField label="How often should a ferret be allowed out of his cage? Where should he play and with whom?" value={playInfo} setValue={setPlayInfo} />
         <TextField label="What should a ferret be allowed to play with? Give examples of right toys and wrong toys?" value={toyInfo} setValue={setToyInfo} />
         <TextField label="What diseases do ferrets get and what is the treatment?" value={diseasesInfo} setValue={setDiseasesInfo} />
-        {questionField("Can ferrets get heartworms?", heartworms, setHeartworms)}
-        {questionField("Is there a treatment to get rid of heartworms in ferrets?", heartwormTreat, setHeartwormTreat)}
+        <QuestionField label="Can ferrets get heartworms?" value={heartworms} setValue={setHeartworms} />
+        <QuestionField label="Is there a treatment to get rid of heartworms in ferrets?" value={heartwormTreat} setValue={setHeartwormTreat} />
         <TextField label="How do you prevent heartworms in ferrets?" value={heartwormPrevent} setValue={setHeartwormPrevent} />
         <TextField label="Under what conditions would you move to a place which would not accept ferrets? What would you do with yours?" value={moveInfo} setValue={setMoveInfo} />
         <TextField label="What does FOREVER HOME mean to you?" value={foreverHome} setValue={setForeverHome} />
         <TextField label="Notes, anything else you think we need to know, or questions you may have for us:" value={notes} setValue={setNotes} required={false} />
 
-        {questionField("Are you interested in fostering ferrets?", fostering, setFostering)}
+        <QuestionField label="Are you interested in fostering ferrets?" value={fostering} setValue={setFostering} />
 
-        {checkbox(acceptTermsLabel, acceptTerms, setAcceptTerms)}
+        <Checkbox label={acceptTermsLabel} value={acceptTerms} setValue={setAcceptTerms} />
 
         {showError && (
           <Alert variant="danger">
