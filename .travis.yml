@@ -54,7 +54,8 @@ jobs:
     - DEPLOY_BUCKET=admin.txferretrescue.org
     - DEPLOY_PROVIDER=gcs
     before_install: cd admin-frontend
-    script: yarn test
+    script: yarn test --coverage
+    after_success: bash <(curl -s https://codecov.io/bash)
     before_deploy: yarn build
 deploy:
   provider: gcs

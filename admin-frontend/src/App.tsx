@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Switch, Route, HashRouter } from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
+import './App.scss'
+import ApplicationsPage from 'ApplicationsPage'
+import FAQPage from 'FAQPage'
+import FerretsPage from 'FerretsPage'
+import SittersPage from 'SittersPage'
+import VetsPage from 'VetsPage'
+import Navbar from 'Navbar'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HashRouter>
+        <Navbar />
+        <Container className="mt-4">
+          <Switch>
+            <Route path="/applications">
+              <ApplicationsPage />
+            </Route>
+            <Route path="/ferrets">
+              <FerretsPage />
+            </Route>
+            <Route path="/sitters">
+              <SittersPage />
+            </Route>
+            <Route path="/vets">
+              <VetsPage />
+            </Route>
+            <Route path="/faq">
+              <FAQPage />
+            </Route>
+            <Route path="/">
+              <ApplicationsPage />
+            </Route>
+          </Switch>
+        </Container>
+      </HashRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
