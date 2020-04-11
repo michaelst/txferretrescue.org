@@ -43,17 +43,17 @@ defmodule FerretRescue.Application.Types do
     field :smoker, non_null(:boolean)
     field :state, non_null(:string)
     field :street, non_null(:string)
-    field :surrendered_details, non_null(:string)
+    field :surrendered_details, :string
     field :surrendered, non_null(:boolean)
     field :time_at_address, :string
     field :toy_info, non_null(:string)
     field :vaccines_current, non_null(:boolean)
-    field :vet_info, :string
+    field :vet_info, non_null(:string)
     field :zip_code, non_null(:integer)
   end
 
   object :application_mutations do
-    field :create_application, :application do
+    field :create_application, non_null(:application) do
       arg(:age, non_null(:integer))
       arg(:cage_info, non_null(:string))
       arg(:city, non_null(:string))
@@ -85,12 +85,12 @@ defmodule FerretRescue.Application.Types do
       arg(:smoker, non_null(:boolean))
       arg(:state, non_null(:string))
       arg(:street, non_null(:string))
-      arg(:surrendered_details, non_null(:string))
+      arg(:surrendered_details, :string)
       arg(:surrendered, non_null(:boolean))
       arg(:time_at_address, :string)
       arg(:toy_info, non_null(:string))
       arg(:vaccines_current, non_null(:boolean))
-      arg(:vet_info, :string)
+      arg(:vet_info, non_null(:string))
       arg(:zip_code, non_null(:integer))
 
       resolve(&Resolver.create/2)

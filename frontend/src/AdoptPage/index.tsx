@@ -1,6 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import ContentBox from 'ContentBox'
-import { Form, Button } from 'react-bootstrap'
+import { Alert, Form, Button } from 'react-bootstrap'
+import TextInput from './components/TextInput'
+import TextField from './components/TextField'
+import { gql, useMutation } from '@apollo/client'
+import { useHistory } from "react-router-dom"
+
+export const CREATE_APPLICATION = gql`
+mutation CreateApplication($age: Int! $cageInfo: String! $city: String! $diseasesInfo: String! $eatInfo: String! $email: String! $foreverHome: String! $fostering: Boolean! $heartwormPrevent: String! $heartworms: Boolean! $heartwormTreat: Boolean! $homeType: String! $keptInfo: String! $landlordInfo: String $legalToOwn: Boolean! $moveInfo: String! $name: String! $notes: String $numFerretsInfo: String! $otherAnimals: String! $ownedBefore: Boolean! $ownedDetails: String $ownHome: Boolean! $peopleAtAddress: String! $phonePrimary: String! $phoneSecondary: String $playInfo: String! $proofingInfo: String! $smoker: Boolean! $state: String! $street: String! $surrendered: Boolean! $surrenderedDetails: String $timeAtAddress: String! $toyInfo: String! $vaccinesCurrent: Boolean! $vetInfo: String! $zipCode: Int!) {
+  createApplication(age: $age cageInfo: $cageInfo city: $city diseasesInfo: $diseasesInfo eatInfo: $eatInfo email: $email foreverHome: $foreverHome fostering: $fostering heartwormPrevent: $heartwormPrevent heartworms: $heartworms heartwormTreat: $heartwormTreat homeType: $homeType keptInfo: $keptInfo landlordInfo: $landlordInfo legalToOwn: $legalToOwn moveInfo: $moveInfo name: $name notes: $notes numFerretsInfo: $numFerretsInfo otherAnimals: $otherAnimals ownedBefore: $ownedBefore ownedDetails: $ownedDetails ownHome: $ownHome peopleAtAddress: $peopleAtAddress phonePrimary: $phonePrimary phoneSecondary: $phoneSecondary playInfo: $playInfo proofingInfo: $proofingInfo smoker: $smoker state: $state street: $street surrendered: $surrendered surrenderedDetails: $surrenderedDetails timeAtAddress: $timeAtAddress toyInfo: $toyInfo vaccinesCurrent: $vaccinesCurrent vetInfo: $vetInfo zipCode: $zipCode) {
+    id
+  }
+}
+`
 
 const acceptTermsLabel = `
 By selecting this box and clicking the 'Submit' button below I am confirming that 
@@ -13,13 +25,145 @@ Furthermore, I submit that my answers to the questions above are truthful and
 accurate to the best of my ability.
 `
 
-export function AdoptPage() {
-  const [acceptTerms, setAcceptTerms] = useState(false)
-  const [name, setName] = useState('')
-  const [age, setAge] = useState<number>()
-  const [street, setStreet] = useState('')
+const selectField = (label: string, value: string, setValue: React.Dispatch<React.SetStateAction<string>>, possibleValues: Array<string>) => {
+  return (
+    <Form.Group>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control
+        as="select"
+        value={value}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
+      >
+        {possibleValues.map(item => <option key={item}>{item}</option>)}
+      </Form.Control>
+    </Form.Group>
+  )
+}
 
+const checkbox = (label: string, value: boolean, setValue: React.Dispatch<React.SetStateAction<boolean>>) => {
+  return (
+    <Form.Group>
+      <Form.Check
+        type="checkbox"
+        label={label}
+        checked={value}
+        onChange={() => setValue(!value)}
+      />
+    </Form.Group>
+  )
+}
+
+const questionField = (label: string, value: boolean | undefined, setValue: React.Dispatch<React.SetStateAction<boolean | undefined>>) => {
+  return (
+    <Form.Group>
+      <Form.Label>{label}</Form.Label>
+      <div>
+        <Form.Check
+          inline
+          label="Yes"
+          type="radio"
+          checked={value === true}
+          onChange={() => setValue(true)}
+        />
+        <Form.Check
+          inline
+          label="No"
+          type="radio"
+          checked={value === false}
+          onChange={() => setValue(false)}
+        />
+      </div>
+    </Form.Group>
+  )
+}
+
+export function AdoptPage() {
+  const [showError, setShowError] = useState(false)
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
+  const [zipCode, setZipCode] = useState('')
+  const [timeAtAddress, setTimeAtAddress] = useState('')
+  const [phonePrimary, setPhonePrimary] = useState('')
+  const [phoneSecondary, setPhoneSecondary] = useState('')
+  const [email, setEmail] = useState('')
+  const [peopleAtAddress, setPeopleAtAddress] = useState('')
+  const [homeType, setHomeType] = useState('House')
+  const [ownHome, setOwnHome] = useState<boolean>()
+  const [landlordInfo, setLandlordInfo] = useState('')
+  const [smoker, setSmoker] = useState<boolean>()
+  const [legalToOwn, setLegalToOwn] = useState<boolean>()
+  const [ownedBefore, setOwnedBefore] = useState<boolean>()
+  const [ownedDetails, setOwnedDetails] = useState('')
+  const [otherAnimals, setOtherAnimals] = useState('')
+  const [vaccinesCurrent, setVaccinesCurrent] = useState<boolean>()
+  const [vetInfo, setVetInfo] = useState('')
+  const [surrendered, setSurrendered] = useState<boolean>()
+  const [surrenderedDetails, setSurrenderedDetails] = useState('')
   const [eatInfo, setEatInfo] = useState('')
+  const [keptInfo, setKeptInfo] = useState('')
+  const [proofingInfo, setProofingInfo] = useState('')
+  const [numFerretsInfo, setNumFerretsInfo] = useState('')
+  const [cageInfo, setCageInfo] = useState('')
+  const [playInfo, setPlayInfo] = useState('')
+  const [toyInfo, setToyInfo] = useState('')
+  const [diseasesInfo, setDiseasesInfo] = useState('')
+  const [heartworms, setHeartworms] = useState<boolean>()
+  const [heartwormTreat, setHeartwormTreat] = useState<boolean>()
+  const [heartwormPrevent, setHeartwormPrevent] = useState('')
+  const [moveInfo, setMoveInfo] = useState('')
+  const [foreverHome, setForeverHome] = useState('')
+  const [notes, setNotes] = useState('')
+  const [fostering, setFostering] = useState<boolean>()
+  const [acceptTerms, setAcceptTerms] = useState(false)
+
+  let history = useHistory()
+  const [createApplication, { loading }] = useMutation(CREATE_APPLICATION, {
+    variables: {
+      name: name,
+      age: parseInt(age),
+      street: street,
+      city: city,
+      state: state,
+      zipCode: parseInt(zipCode),
+      timeAtAddress: timeAtAddress,
+      phonePrimary: phonePrimary,
+      phoneSecondary: phoneSecondary,
+      email: email,
+      peopleAtAddress: peopleAtAddress,
+      homeType: homeType,
+      ownHome: ownHome,
+      landlordInfo: landlordInfo,
+      smoker: smoker,
+      legalToOwn: legalToOwn,
+      ownedBefore: ownedBefore,
+      ownedDetails: ownedDetails,
+      otherAnimals: otherAnimals,
+      vaccinesCurrent: vaccinesCurrent,
+      vetInfo: vetInfo,
+      surrendered: surrendered,
+      surrenderedDetails: surrenderedDetails,
+      eatInfo: eatInfo,
+      keptInfo: keptInfo,
+      proofingInfo: proofingInfo,
+      numFerretsInfo: numFerretsInfo,
+      cageInfo: cageInfo,
+      playInfo: playInfo,
+      toyInfo: toyInfo,
+      diseasesInfo: diseasesInfo,
+      heartworms: heartworms,
+      heartwormTreat: heartwormTreat,
+      heartwormPrevent: heartwormPrevent,
+      moveInfo: moveInfo,
+      foreverHome: foreverHome,
+      notes: notes,
+      fostering: fostering
+    },
+    onCompleted: () => history.push("/"),
+    onError: () => setShowError(true)
+  })
 
   return (
     <div className="AdoptPage">
@@ -45,64 +189,72 @@ export function AdoptPage() {
         </p>
 
         <h3>Personal Information</h3>
-        <Form.Group>
-          <Form.Label>Full Name</Form.Label>
-          <Form.Control
-            type="text"
-            value={name}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
-            isInvalid={name.length === 0}
-          />
-        </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Age</Form.Label>
-          <Form.Control
-            type="text"
-            value={age}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAge(parseInt(event.target.value || '0'))}
-            isInvalid={age === undefined || age < 18}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Home Address</Form.Label>
-          <Form.Control
-            type="text"
-            value={street}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setStreet(event.target.value)}
-            isInvalid={street.length === 0}
-          />
-        </Form.Group>
+        <TextInput label="Full Name" value={name} setValue={setName} />
+        <TextInput label="Age" value={age} setValue={setAge} required={true} isInvalid={(parseInt(age) || 0) < 18} />
+        <TextInput label="Home Address" value={street} setValue={setStreet} />
+        <TextInput label="City" value={city} setValue={setCity} />
+        <TextInput label="State" value={state} setValue={setState} />
+        <TextInput label="Zip Code" value={zipCode} setValue={setZipCode} required={true} isInvalid={(parseInt(zipCode) || 0) < 9999} />
+        <TextInput label="How long at this address?" value={timeAtAddress} setValue={setTimeAtAddress} />
+        <TextInput label="Primary Phone" value={phonePrimary} setValue={setPhonePrimary} />
+        <TextInput label="Secondary Phone" value={phoneSecondary} setValue={setPhoneSecondary} required={false} />
+        <TextInput label="Email" value={email} setValue={setEmail} />
+        <TextField label="How many people live at this house (or visit frequently such as grandchildren/stepchildren) and what are their ages?" value={peopleAtAddress} setValue={setPeopleAtAddress} />
+        {selectField("What type of home is this?", homeType, setHomeType, ['House', 'Apartment', 'Trailer', 'Other (explain in notes)'])}
+        {questionField("Do you own this home?", ownHome, setOwnHome)}
+        {ownHome === false && (
+          <TextField label="Please provide name, address, and phone number of landlord." value={landlordInfo} setValue={setLandlordInfo} />
+        )}
+        {questionField("Is this a smoker's home?", smoker, setSmoker)}
+        {questionField("Are ferrets legal where you live?", legalToOwn, setLegalToOwn)}
+        {questionField("Have you owned ferrets before?", ownedBefore, setOwnedBefore)}
+        {ownedBefore === true && (
+          <TextField label="When and how many? Do you still have them? If not, where are they now?" value={ownedDetails} setValue={setOwnedDetails} />
+        )}
+        <TextField label="What animals/pets do you currently own?" value={otherAnimals} setValue={setOtherAnimals} />
+        {questionField("Are these pets current on their vaccinations?", vaccinesCurrent, setVaccinesCurrent)}
+        <TextField label="Please provide your veterinarian's name and address?" value={vetInfo} setValue={setVetInfo} />
+        {questionField("Have you ever surrendered a pet to a shelter?", surrendered, setSurrendered)}
+        {surrendered === true && (
+          <TextField label="Please give details. When? Why?" value={surrenderedDetails} setValue={setSurrenderedDetails} />
+        )}
 
         <h3>How much do you know about ferrets?</h3>
-        <Form.Group>
-          <Form.Label>What should a ferret eat and drink? How often? What treats are OK and not OK?</Form.Label>
-          <Form.Control 
-            as="textarea" 
-            rows="5"
-            value={eatInfo}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEatInfo(event.target.value)} 
-            isInvalid={eatInfo.length === 0}
-          />
-        </Form.Group>
 
-        <Form.Group>
-          <Form.Check
-            type="checkbox"
-            label={acceptTermsLabel}
-            checked={acceptTerms}
-            onChange={() => setAcceptTerms(!acceptTerms)}
-          />
-        </Form.Group>
+        <TextField label="What should a ferret eat and drink? How often? What treats are OK and not OK?" value={eatInfo} setValue={setEatInfo} />
+        <TextField label="Where should a ferret be kept and why? In the house? Garage? Backyard?" value={keptInfo} setValue={setKeptInfo} />
+        <TextField label="What is ferret proofing and how do you do it?" value={proofingInfo} setValue={setProofingInfo} />
+        <TextField label="What is a good number of ferrets to have and why?" value={numFerretsInfo} setValue={setNumFerretsInfo} />
+        <TextField label="When should a ferret be in a cage?" value={cageInfo} setValue={setCageInfo} />
+        <TextField label="How often should a ferret be allowed out of his cage? Where should he play and with whom?" value={playInfo} setValue={setPlayInfo} />
+        <TextField label="What should a ferret be allowed to play with? Give examples of right toys and wrong toys?" value={toyInfo} setValue={setToyInfo} />
+        <TextField label="What diseases do ferrets get and what is the treatment?" value={diseasesInfo} setValue={setDiseasesInfo} />
+        {questionField("Can ferrets get heartworms?", heartworms, setHeartworms)}
+        {questionField("Is there a treatment to get rid of heartworms in ferrets?", heartwormTreat, setHeartwormTreat)}
+        <TextField label="How do you prevent heartworms in ferrets?" value={heartwormPrevent} setValue={setHeartwormPrevent} />
+        <TextField label="Under what conditions would you move to a place which would not accept ferrets? What would you do with yours?" value={moveInfo} setValue={setMoveInfo} />
+        <TextField label="What does FOREVER HOME mean to you?" value={foreverHome} setValue={setForeverHome} />
+        <TextField label="Notes, anything else you think we need to know, or questions you may have for us:" value={notes} setValue={setNotes} required={false} />
+
+        {questionField("Are you interested in fostering ferrets?", fostering, setFostering)}
+
+        {checkbox(acceptTermsLabel, acceptTerms, setAcceptTerms)}
+
+        {showError && (
+          <Alert variant="danger">
+            You must fill out all required fields.
+          </Alert>
+        )}
 
         <Button
           className="btn-success"
-          disabled={!acceptTerms}
+          disabled={!acceptTerms || loading}
+          onClick={() => createApplication()}
         >
           Submit
         </Button>
       </ContentBox>
     </div>
-  );
+  )
 }

@@ -64,10 +64,31 @@ defmodule FerretRescue.Application do
           :notes,
           :owned_details,
           :phone_secondary,
-          :time_at_address,
-          :updated_at,
-          :vet_info
+          :surrendered_details,
+          :updated_at
         ]
     )
+    |> validate_number(:age, greater_than: 17)
+    |> validate_landlord_info()
+    |> validate_owned_details()
+    |> validate_surrendered_details()
+  end
+
+  defp validate_landlord_info(changeset) do
+    if get_field(changeset, :own_home) == false,
+      do: validate_required(changeset, [:landlord_info]),
+      else: changeset
+  end
+
+  defp validate_owned_details(changeset) do
+    if get_field(changeset, :owned_before),
+      do: validate_required(changeset, [:owned_details]),
+      else: changeset
+  end
+
+  defp validate_surrendered_details(changeset) do
+    if get_field(changeset, :surrendered),
+      do: validate_required(changeset, [:surrendered_details]),
+      else: changeset
   end
 end
