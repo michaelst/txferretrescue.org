@@ -134,12 +134,12 @@ defmodule FerretRescue.Application.Types.CreateApplicationTest do
                   "toyInfo" => "Some info",
                   "vaccinesCurrent" => true,
                   "vetInfo" => "Some info",
-                  "zipCode" => 75035,
+                  "zipCode" => 75035
                 }
               }
             }} = Absinthe.run(doc, FerretRescue.Schema)
 
     expected_email = Repo.get(Application, id) |> Email.new_application()
-    assert_delivered_email expected_email
+    assert_delivered_email(expected_email)
   end
 end

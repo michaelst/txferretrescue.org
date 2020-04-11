@@ -26,7 +26,7 @@ defmodule FerretRescue.Schema do
 
   def context(ctx) do
     loader =
-      Dataloader.new
+      Dataloader.new()
       |> Dataloader.add_source(FerretRescue, FerretRescue.data())
 
     Map.put(ctx, :loader, loader)
