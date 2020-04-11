@@ -128,7 +128,7 @@ defmodule FerretRescue.Application.Types.CreateApplicationTest do
                   "smoker" => false,
                   "state" => "Texas",
                   "street" => "555 Some Ln",
-                  "surrendered" => false
+                  "surrendered" => false,
                   "surrenderedDetails" => "Some info",
                   "timeAtAddress" => "1 year",
                   "toyInfo" => "Some info",

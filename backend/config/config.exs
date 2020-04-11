@@ -1,6 +1,7 @@
 use Mix.Config
 
 config :ferret_rescue,
+  env: Mix.env(),
   ecto_repos: [FerretRescue.Repo],
   application_email: "txflrapplications@gmail.com"
 
