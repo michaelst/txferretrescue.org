@@ -1,7 +1,9 @@
 use Mix.Config
 
 config :ferret_rescue,
-  ecto_repos: [FerretRescue.Repo]
+  env: Mix.env(),
+  ecto_repos: [FerretRescue.Repo],
+  application_email: "txflrapplications@gmail.com"
 
 # Configures the endpoint
 config :ferret_rescue, FerretRescueWeb.Endpoint,
@@ -17,5 +19,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :stripity_stripe, api_key: System.get_env("STRIPE_SECRET")
+
+config :ferret_rescue, FerretRescue.Mailer, adapter: Bamboo.SendGridAdapter
 
 import_config "#{Mix.env()}.exs"

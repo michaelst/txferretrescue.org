@@ -9,7 +9,7 @@ defmodule FerretRescue.Repo.Migrations.Applications do
       add :city, :text, null: false
       add :state, :text, null: false
       add :zip_code, :integer, null: false
-      add :time_at_address, :text
+      add :time_at_address, :text, null: false
       add :phone_primary, :text, null: false
       add :phone_secondary, :text
       add :email, :text, null: false
@@ -18,14 +18,14 @@ defmodule FerretRescue.Repo.Migrations.Applications do
       add :own_home, :boolean, null: false
       add :landlord_info, :text
       add :smoker, :boolean, null: false
-      add :legal_to_own, :text, null: false
+      add :legal_to_own, :boolean, null: false
       add :owned_before, :boolean, null: false
       add :owned_details, :text
       add :other_animals, :text, null: false
       add :vaccines_current, :boolean, null: false
-      add :vet_info, :text
+      add :vet_info, :text, null: false
       add :surrendered, :boolean, null: false
-      add :surrendered_details, :text, null: false
+      add :surrendered_details, :text
       add :eat_info, :text, null: false
       add :kept_info, :text, null: false
       add :proofing_info, :text, null: false

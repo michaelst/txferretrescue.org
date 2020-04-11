@@ -14,3 +14,5 @@ config :ferret_rescue, FerretRescueWeb.Endpoint,
 config :logger, level: :warn
 
 config :ferret_rescue, stripe_session_module: Stripe.SessionMock
+
+config :ferret_rescue, FerretRescue.Mailer, adapter: Bamboo.TestAdapter

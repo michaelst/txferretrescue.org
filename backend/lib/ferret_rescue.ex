@@ -1,12 +1,26 @@
 defmodule FerretRescue do
-  @moduledoc """
-  FerretRescue keeps the contexts that define your domain
-  and business logic.
+  # See https://hexdocs.pm/elixir/Application.html
+  # for more information on OTP Applications
+  @moduledoc false
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
-  """
+  use Application
+
   import Ecto.Query
+
+  def start(_type, _args) do
+    children = [
+      FerretRescue.Repo,
+      FerretRescueWeb.Endpoint
+    ]
+
+    opts = [strategy: :one_for_one, name: FerretRescue.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+
+  def config_change(changed, _new, removed) do
+    FerretRescueWeb.Endpoint.config_change(changed, removed)
+    :ok
+  end
 
   def data, do: Dataloader.Ecto.new(FerretRescue.Repo, query: &query/2)
 

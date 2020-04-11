@@ -21,7 +21,7 @@ defmodule FerretRescue.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {FerretRescue.Application, []},
+      mod: {FerretRescue, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -37,6 +37,7 @@ defmodule FerretRescue.MixProject do
     [
       {:absinthe_plug, "~> 1.5.0-rc.2"},
       {:absinthe, "~> 1.5.0-rc.5"},
+      {:bamboo, "~> 1.4"},
       {:cors_plug, "~> 2.0"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
       {:dataloader, "~> 1.0.0"},
@@ -45,7 +46,7 @@ defmodule FerretRescue.MixProject do
       {:excoveralls, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
       {:hammox, "~> 0.2.2", only: :test},
-      {:jason, "~> 1.0"},
+      {:jason, "~> 1.2", override: true},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},

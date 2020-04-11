@@ -10,6 +10,7 @@ defmodule FerretRescue.Schema do
   import_types(FerretRescue.Resources.Sitter.Types)
   import_types(FerretRescue.Resources.Vet.Types)
   import_types(FerretRescue.Stripe.Types)
+  import_types(FerretRescue.Application.Types)
 
   query do
     import_fields(:faq_topic_queries)
@@ -19,9 +20,13 @@ defmodule FerretRescue.Schema do
     import_fields(:vet_queries)
   end
 
+  mutation do
+    import_fields(:application_mutations)
+  end
+
   def context(ctx) do
     loader =
-      Dataloader.new
+      Dataloader.new()
       |> Dataloader.add_source(FerretRescue, FerretRescue.data())
 
     Map.put(ctx, :loader, loader)
@@ -30,4 +35,12 @@ defmodule FerretRescue.Schema do
   def plugins do
     [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
+
+  def middleware(middleware, _field, %{identifier: :mutation}) do
+    # this middleware needs to append to the end
+    # credo:disable-for-next-line Credo.Check.Refactor.AppendSingleItem
+    middleware ++ [FerretRescue.Middleware.ChangesetErrors]
+  end
+
+  def middleware(middleware, _field, _object), do: middleware
 end
