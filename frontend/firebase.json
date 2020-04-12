@@ -9,11 +9,21 @@
     ],
     "headers": [
       {
-        "source": "index.html",
+        "source": "/**",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "max-age=604800"
+          }
+        ]
+      },
+      {
+        "source":
+          "**/*.@(html|json)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
           }
         ]
       }
