@@ -10,8 +10,19 @@ import SitterCreatePage from 'sitters/SitterCreatePage'
 import SitterUpdatePage from 'sitters/SitterUpdatePage'
 import VetsPage from 'VetsPage'
 import Navbar from 'Navbar'
+import LoginPage from 'LoginPage'
 
 function App() {
+  const [token, setToken] = React.useState(localStorage.getItem('token') || null)
+
+  React.useEffect(() => {
+    if (token) localStorage.setItem('token', token)
+  }, [token])
+
+  if (!token) {
+    return <LoginPage />
+  }
+
   return (
     <div className="App">
       <BrowserRouter>

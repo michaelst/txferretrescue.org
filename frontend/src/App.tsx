@@ -1,7 +1,7 @@
-import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import React from 'react'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
-import './App.scss';
+import './App.scss'
 import ContactPage from 'ContactPage'
 import HomePage from 'HomePage'
 import Navbar from 'Navbar'
@@ -46,7 +46,7 @@ function App() {
         </Container>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

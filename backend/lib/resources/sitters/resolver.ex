@@ -3,10 +3,14 @@ defmodule FerretRescue.Resources.Sitter.Resolver do
   Resolver for sitters.
   """
 
+  import Ecto.Query
+
   alias FerretRescue.Repo
   alias FerretRescue.Resources.Sitter
 
   def list(_args, _resolution) do
-    {:ok, Repo.all(Sitter)}
+    sitters = from(Sitter, order_by: :name) |> Repo.all()
+
+    {:ok, sitters}
   end
 end

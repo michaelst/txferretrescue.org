@@ -30,7 +30,6 @@ function SittersPage() {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
@@ -40,7 +39,6 @@ function SittersPage() {
         <tbody>
           {data?.sitters.map(sitter => (
             <tr key={sitter.id}>
-              <td>{sitter.id}</td>
               <td>{sitter.name}</td>
               <td>{sitter.phone}</td>
               <td>{sitter.email}</td>
