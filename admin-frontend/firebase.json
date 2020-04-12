@@ -13,17 +13,17 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "no-cache, no-store, must-revalidate"
           }
         ]
       },
       {
         "source":
-          "**/*.@(html|json)",
+          "**/*.@(ico|png|js|js.map|css|css.map)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "max-age=604800"
           }
         ]
       }
