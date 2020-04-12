@@ -2,7 +2,7 @@ import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import { LIST_FERRETS, FerretsPage } from './'
 import { MockedProvider } from '@apollo/client/testing'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 function mocks(foster: boolean) {
   return [
@@ -48,9 +48,9 @@ function mocks(foster: boolean) {
 test('renders FerretsPage with foster=false', async () => {
   const { getByText, getAllByTestId } = render(
     <MockedProvider mocks={mocks(false)}>
-      <HashRouter>
+      <BrowserRouter>
         <FerretsPage foster={false} />
-      </HashRouter>
+      </BrowserRouter>
     </MockedProvider>
   )
 
@@ -66,9 +66,9 @@ test('renders FerretsPage with foster=false', async () => {
 test('renders FerretsPage with foster=true', async () => {
   const { getByText, getAllByTestId } = render(
     <MockedProvider mocks={mocks(true)}>
-      <HashRouter>
+      <BrowserRouter>
         <FerretsPage foster={true} />
-      </HashRouter>
+      </BrowserRouter>
     </MockedProvider>
   )
 

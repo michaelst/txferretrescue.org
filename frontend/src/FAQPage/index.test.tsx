@@ -2,7 +2,7 @@ import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import { LIST_TOPICS, FAQPage } from './'
 import { MockedProvider } from '@apollo/client/testing'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 function mocks(foster: boolean) {
   return [
@@ -62,9 +62,9 @@ function mocks(foster: boolean) {
 test('renders FAQPage', async () => {
   const { getByText, getAllByTestId } = render(
     <MockedProvider mocks={mocks(false)}>
-      <HashRouter>
+      <BrowserRouter>
         <FAQPage />
-      </HashRouter>
+      </BrowserRouter>
     </MockedProvider>
   )
 

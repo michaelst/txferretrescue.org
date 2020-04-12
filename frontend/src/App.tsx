@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, HashRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
 import './App.scss';
 import ContactPage from 'ContactPage'
@@ -14,7 +14,7 @@ import { VetsPage } from 'VetsPage'
 function App() {
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
         <Navbar />
         <Container className="mt-4">
           <Switch>
@@ -44,7 +44,7 @@ function App() {
             </Route>
           </Switch>
         </Container>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }
