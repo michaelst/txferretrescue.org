@@ -5,7 +5,9 @@ import './App.scss'
 import ApplicationsPage from 'ApplicationsPage'
 import FAQPage from 'FAQPage'
 import FerretsPage from 'FerretsPage'
-import SittersPage from 'SittersPage'
+import SittersPage from 'sitters/SittersPage'
+import SitterCreatePage from 'sitters/SitterCreatePage'
+import SitterUpdatePage from 'sitters/SitterUpdatePage'
 import VetsPage from 'VetsPage'
 import Navbar from 'Navbar'
 
@@ -21,6 +23,12 @@ function App() {
             </Route>
             <Route path="/ferrets">
               <FerretsPage />
+            </Route>
+            <Route path="/sitters/:sitterId">
+              <SitterUpdatePage />
+            </Route>
+            <Route path="/sitters/create">
+              <SitterCreatePage />
             </Route>
             <Route path="/sitters">
               <SittersPage />
