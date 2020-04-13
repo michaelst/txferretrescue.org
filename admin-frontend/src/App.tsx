@@ -37,11 +37,11 @@ function App() {
             <Route path="/ferrets">
               <FerretsPage />
             </Route>
-            <Route path="/sitters/:sitterId">
-              <SitterUpdatePage />
-            </Route>
             <Route path="/sitters/create">
               <SitterCreatePage />
+            </Route>
+            <Route path="/sitters/:sitterId">
+              <SitterUpdatePage />
             </Route>
             <Route path="/sitters">
               <SittersPage />

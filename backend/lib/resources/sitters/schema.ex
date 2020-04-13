@@ -4,6 +4,8 @@ defmodule FerretRescue.Resources.Sitter do
   """
   use Ecto.Schema
 
+  import Ecto.Changeset
+
   schema "sitters" do
     field :email, :string
     field :name, :string
@@ -11,5 +13,11 @@ defmodule FerretRescue.Resources.Sitter do
     field :phone, :string
 
     timestamps()
+  end
+
+  def changeset(struct, params) do
+    struct
+    |> cast(params, __schema__(:field) -- [:id])
+    |> validate_required([:name])
   end
 end

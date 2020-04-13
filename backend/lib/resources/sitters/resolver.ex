@@ -14,9 +14,21 @@ defmodule FerretRescue.Resources.Sitter.Resolver do
     {:ok, sitters}
   end
 
-  def create(args, _resolution) do
-    sitters = from(Sitter, order_by: :name) |> Repo.all()
+  def get(_args, %{context: %{model: model}}), do: {:ok, model}
 
-    {:ok, sitters}
+  def create(%{input: params}, _resolution) do
+    %Sitter{}
+    |> Sitter.changeset(params)
+    |> Repo.insert()
+  end
+
+  def update(%{input: params}, %{context: %{model: model}}) do
+    model
+    |> Sitter.changeset(params)
+    |> Repo.update()
+  end
+
+  def delete(_args, %{context: %{model: model}}) do
+    Repo.delete(model)
   end
 end
