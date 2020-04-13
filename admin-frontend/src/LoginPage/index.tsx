@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Form } from 'react-bootstrap'
 import { gql, useMutation } from '@apollo/client'
+import { Login } from './graphql/Login'
 import './index.scss'
 
 export const LOGIN = gql`
@@ -11,7 +11,11 @@ mutation Login($username: String!, $password: String!) {
 }
 `
 
-function LoginPage() {
+type LoginPageProps = {
+  setToken: React.Dispatch<React.SetStateAction<string | null>>
+}
+
+function LoginPage({ setToken }: LoginPageProps) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isInvalid, setInvalid] = useState(false)
@@ -21,7 +25,7 @@ function LoginPage() {
       username: username,
       password: password,
     },
-    onCompleted: () => { },
+    onCompleted: (data: Login) => setToken(data.login.token),
     onError: () => setInvalid(true)
   })
 
@@ -44,11 +48,13 @@ function LoginPage() {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
               className={`p-3 mb-3 ${isInvalid && 'is-invalid'}`}
             />
-            <div id="ember449" className="login-button ember-view">
-              <button className="p-3 login-button bg-success" data-ember-action="" data-ember-action-450="450">
+              <button 
+                className="p-3 login-button bg-success" 
+                onClick={() => login()}
+                disabled={loading}
+              >
                 login
               </button>
-            </div>
           </div>
         </div>
       </div>

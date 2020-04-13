@@ -13,4 +13,10 @@ defmodule FerretRescue.Resources.Sitter.Resolver do
 
     {:ok, sitters}
   end
+
+  def create(args, _resolution) do
+    sitters = from(Sitter, order_by: :name) |> Repo.all()
+
+    {:ok, sitters}
+  end
 end

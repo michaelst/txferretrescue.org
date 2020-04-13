@@ -13,20 +13,22 @@ import Navbar from 'Navbar'
 import LoginPage from 'LoginPage'
 
 function App() {
-  const [token, setToken] = React.useState(localStorage.getItem('token') || null)
+  const [token, setToken] = React.useState(localStorage.getItem('token'))
 
   React.useEffect(() => {
-    if (token) localStorage.setItem('token', token)
+    if (token) {
+      localStorage.setItem('token', token)
+    } else {
+      localStorage.removeItem('token')
+    }
   }, [token])
 
-  if (!token) {
-    return <LoginPage />
-  }
+  if (!token) return <LoginPage setToken={setToken} />
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar setToken={setToken} />
         <Container className="mt-4">
           <Switch>
             <Route path="/applications">

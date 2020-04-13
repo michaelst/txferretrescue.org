@@ -3,6 +3,7 @@ defmodule FerretRescueWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug FerretRescue.Plug.Auth
   end
 
   forward "/_health", FerretRescue.HealthCheck

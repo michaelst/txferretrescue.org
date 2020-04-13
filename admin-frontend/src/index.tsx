@@ -17,7 +17,7 @@ const httpLink = new HttpLink({ uri: uri })
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
-      authorization: localStorage.getItem('token') || null,
+      authorization: localStorage.getItem('token'),
     }
   })
 
