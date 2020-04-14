@@ -40,6 +40,7 @@ function AppNavbar({ setToken }: LoginPageProps) {
                 variant="link"
                 className="nav-link"
                 onClick={() => setToken(null)}
+                data-testid='logout-button'
               >
                 Logout
               </Button>
