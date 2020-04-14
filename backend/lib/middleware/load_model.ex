@@ -1,4 +1,7 @@
 defmodule FerretRescue.Middleware.LoadModel do
+  @moduledoc """
+  Middleware to load model by id and add it to absinthe context.
+  """
   @behaviour Absinthe.Middleware
 
   alias Absinthe.Resolution

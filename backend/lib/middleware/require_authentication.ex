@@ -1,4 +1,7 @@
 defmodule FerretRescue.Middleware.RequireAuthentication do
+  @moduledoc """
+  Middleware to ensure request is authenticated.
+  """
   @behaviour Absinthe.Middleware
 
   alias Absinthe.Resolution
