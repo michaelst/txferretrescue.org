@@ -70,7 +70,8 @@ export function AdoptPage() {
   const [fostering, setFostering] = useState<boolean>()
   const [acceptTerms, setAcceptTerms] = useState(false)
 
-  let history = useHistory()
+  const history = useHistory()
+  
   const [createApplication, { loading }] = useMutation(CREATE_APPLICATION, {
     variables: {
       name: name,

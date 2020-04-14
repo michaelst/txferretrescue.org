@@ -4,18 +4,18 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ListSitters
+// GraphQL mutation operation: DeleteSitter
 // ====================================================
 
-export interface ListSitters_sitters {
+export interface DeleteSitter_deleteSitter {
   __typename: "Sitter";
   id: string;
-  email: string | null;
-  name: string;
-  notes: string | null;
-  phone: string | null;
 }
 
-export interface ListSitters {
-  sitters: ListSitters_sitters[];
+export interface DeleteSitter {
+  deleteSitter: DeleteSitter_deleteSitter;
+}
+
+export interface DeleteSitterVariables {
+  id: string;
 }

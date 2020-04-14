@@ -15,9 +15,10 @@ const uri = process.env.NODE_ENV === 'production' ? 'https://api.txferretrescue.
 const httpLink = new HttpLink({ uri: uri })
 
 const authMiddleware = new ApolloLink((operation, forward) => {
+  const token = localStorage.getItem('token')
   operation.setContext({
     headers: {
-      authorization: localStorage.getItem('token'),
+      authorization: token ? `Bearer ${token}` : null,
     }
   })
 
