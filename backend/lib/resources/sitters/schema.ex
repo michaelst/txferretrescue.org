@@ -17,7 +17,7 @@ defmodule FerretRescue.Resources.Sitter do
 
   def changeset(struct, params) do
     struct
-    |> cast(params, __schema__(:field) -- [:id])
+    |> cast(params, __schema__(:fields) -- [:id])
     |> validate_required([:name])
   end
 end

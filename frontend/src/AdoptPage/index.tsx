@@ -129,9 +129,10 @@ export function AdoptPage() {
         </p>
 
         <p>
-          Your application should only take about 5 hours to process but may take several days.
-          If you have any questions or wish to check on the status of your application
-          please email <a href={`mailto:txflrapplications@gmail.com`}>txflrapplications@gmail.com</a>.
+          We are a volunteer organization. Your application should take a few days to process but may take several days 
+          depending on how quickly your references return our calls and on the volunteer's schedules. If you have any 
+          questions or wish to check on the status of your application please 
+          email <a href={`mailto:txflrapplications@gmail.com`}>txflrapplications@gmail.com</a>.
         </p>
 
         <p>
