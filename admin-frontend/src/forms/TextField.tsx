@@ -5,10 +5,11 @@ type TextFieldProps = {
   label: string, 
   value: string, 
   setValue: React.Dispatch<React.SetStateAction<string>>, 
-  required?: boolean
+  required?: boolean,
+  testId?: string
 }
 
-function TextField({ label, value, setValue, required = true }: TextFieldProps) {
+function TextField({ label, value, setValue, required = true, testId }: TextFieldProps) {
   return (
     <Form.Group>
       <Form.Label>{label}</Form.Label>
@@ -18,6 +19,7 @@ function TextField({ label, value, setValue, required = true }: TextFieldProps) 
         value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
         isInvalid={value.length === 0 && required}
+        data-testid={testId}
       />
     </Form.Group>
   )

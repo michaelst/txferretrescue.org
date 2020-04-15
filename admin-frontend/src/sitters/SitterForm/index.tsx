@@ -18,7 +18,7 @@ function SitterForm({ name, setName, email, setEmail, phone, setPhone, notes, se
       <TextInput label="Name" value={name} setValue={setName} testId="sitter-form-name-field" />
       <TextInput label="Email" value={email} setValue={setEmail} required={false} />
       <TextInput label="Phone" value={phone} setValue={setPhone} required={false} />
-      <TextField label="Notes" value={notes} setValue={setNotes} required={false} />
+      <TextField label="Notes" value={notes} setValue={setNotes} required={false} testId='sitter-form-notes-field' />
     </div>
   )
 }

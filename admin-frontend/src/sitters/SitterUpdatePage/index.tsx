@@ -25,6 +25,7 @@ mutation UpdateSitter($id: ID!, $email: String, $name: String!, $notes: String, 
     email
     name
     phone
+    notes
   }
 }
 `
@@ -76,6 +77,7 @@ function SitterUpdatePage() {
         <Button
           className="btn-success"
           onClick={() => updateSitter()}
+          data-testid='update-sitter-button'
         >
           Update
         </Button>

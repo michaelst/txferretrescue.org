@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from 'react-router-dom'
 import { InMemoryCache } from '@apollo/client'
 
-const cache = new InMemoryCache().restore({'Sitter:2': {name: "test"}})
+const cache = new InMemoryCache().restore({ 'Sitter:2': { name: "test" } })
 
 const mocks = [
   {
