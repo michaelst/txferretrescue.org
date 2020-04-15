@@ -35,7 +35,7 @@ function SittersPage() {
 
       cache.writeQuery({
         query: LIST_SITTERS,
-        data: { sitters: data?.sitters.filter(sitter => sitter.id !== deleteSitter.id) },
+        data: { sitters: data?.sitters.filter(sitter => sitter.id !== deleteSitter.id) }
       })
     }
   })
@@ -65,11 +65,12 @@ function SittersPage() {
                 <div className="d-flex align-items-center justify-content-center">
                   <Link to={`/sitters/${sitter.id}`} className="pr-1">edit</Link> |
                   <Button
-                      variant="link"
-                      className="m-0 p-0 pl-1"
-                      onClick={() => deleteSitter({ variables: { id: sitter.id } })}
-                    >
-                      delete
+                    variant="link"
+                    className="m-0 p-0 pl-1"
+                    onClick={() => deleteSitter({ variables: { id: sitter.id } })}
+                    data-testid={`delete-sitter-${sitter.id}`}
+                  >
+                    delete
                   </Button>
                 </div>
               </td>
