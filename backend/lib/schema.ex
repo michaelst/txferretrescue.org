@@ -4,13 +4,14 @@ defmodule FerretRescue.Schema do
   """
   use Absinthe.Schema
 
+  import_types(FerretRescue.Application.Types)
+  import_types(FerretRescue.Auth.Types)
   import_types(FerretRescue.FAQ.Content.Types)
   import_types(FerretRescue.FAQ.Topic.Types)
   import_types(FerretRescue.Ferret.Types)
   import_types(FerretRescue.Resources.Sitter.Types)
   import_types(FerretRescue.Resources.Vet.Types)
   import_types(FerretRescue.Stripe.Types)
-  import_types(FerretRescue.Application.Types)
 
   query do
     import_fields(:faq_topic_queries)
@@ -22,6 +23,8 @@ defmodule FerretRescue.Schema do
 
   mutation do
     import_fields(:application_mutations)
+    import_fields(:auth_mutations)
+    import_fields(:sitter_mutations)
   end
 
   def context(ctx) do

@@ -1,6 +1,6 @@
 jobs:
   include:
-  - stage: Build & Test
+  - stage: Test
     name: Backend
     language: elixir
     elixir: 1.10.2

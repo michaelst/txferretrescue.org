@@ -3,11 +3,16 @@ import './index.scss';
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer'
 
-function App() {
+type LoginPageProps = {
+  setToken: React.Dispatch<React.SetStateAction<string | null>>
+}
+
+function AppNavbar({ setToken }: LoginPageProps) {
   return (
-    <div className="App">
+    <div className="Navbar">
       <Navbar bg="white" expand="lg">
         <Container>
           <LinkContainer exact={true} to="/">
@@ -31,6 +36,14 @@ function App() {
               <LinkContainer to="/faq">
                 <Nav.Link>FAQ</Nav.Link>
               </LinkContainer>
+              <Button
+                variant="link"
+                className="nav-link"
+                onClick={() => setToken(null)}
+                data-testid='logout-button'
+              >
+                Logout
+              </Button>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -39,4 +52,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppNavbar;

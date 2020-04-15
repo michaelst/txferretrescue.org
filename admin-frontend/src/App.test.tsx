@@ -1,10 +1,102 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { BrowserRouter } from "react-router-dom";
-import App from './App';
+import React from 'react'
+import { render, act, waitFor } from '@testing-library/react'
+import { MockedProvider } from '@apollo/client/testing'
+import App from './App'
+import { LOGIN } from 'LoginPage'
+import userEvent from '@testing-library/user-event'
 
-test('renders app', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/Applications/i);
-  expect(linkElement).toBeInTheDocument();
-});
+const mocks = [
+  {
+    request: {
+      query: LOGIN,
+      variables: {
+        username: 'admin',
+        password: 'password'
+      },
+    },
+    result: {
+      data: {
+        login: {
+          "__typename": "Auth",
+          "token": "test-token"
+        }
+      }
+    },
+  },
+  {
+    request: {
+      query: LOGIN,
+      variables: {
+        username: 'admin',
+        password: 'invalid'
+      },
+    },
+    error: new Error("invalid")
+  },
+]
+
+test('invalid login', async () => {
+  const { getByTestId } = render(
+    <MockedProvider mocks={mocks}>
+      <App />
+    </MockedProvider>
+  )
+
+  const usernameField = getByTestId('username-field')
+  const passwordField = getByTestId('password-field')
+  const loginButton = getByTestId('login-button')
+
+  await act(async () => {
+    await userEvent.type(usernameField, "admin")
+    await userEvent.type(passwordField, "invalid")
+    userEvent.click(loginButton)
+
+    await waitFor(() => {
+      expect(usernameField).toHaveClass('is-invalid')
+      expect(passwordField).toHaveClass('is-invalid')
+    })
+  })
+})
+
+
+test('login', async () => {
+  const { getByTestId, getByText } = render(
+    <MockedProvider mocks={mocks}>
+      <App />
+    </MockedProvider>
+  )
+
+  const usernameField = getByTestId('username-field')
+  const passwordField = getByTestId('password-field')
+  const loginButton = getByTestId('login-button')
+
+  await act(async () => {
+    await userEvent.type(usernameField, "admin")
+    await userEvent.type(passwordField, "password")
+    userEvent.click(loginButton)
+
+    await waitFor(() => {
+      const linkElement = getByText(/applications/i)
+      expect(linkElement).toBeInTheDocument()
+    })
+  })
+})
+
+test('logout', async () => {
+  localStorage.setItem('token', 'test-token')
+
+  const { getByTestId } = render(
+    <MockedProvider>
+      <App />
+    </MockedProvider>
+  )
+  const logoutButton = getByTestId('logout-button')
+
+  await act(async () => {
+    userEvent.click(logoutButton)
+
+    await waitFor(() => {
+      expect(logoutButton).not.toBeInTheDocument()
+    })
+  })
+})

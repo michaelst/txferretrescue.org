@@ -1,5 +1,8 @@
 use Mix.Config
 
+config :ferret_rescue,
+  login_verification: "admin:password"
+
 config :ferret_rescue, FerretRescue.Repo,
   username: System.get_env("DB_USERNAME", "postgres"),
   password: System.get_env("DB_PASSWORD", "postgres"),
@@ -10,6 +13,7 @@ config :ferret_rescue, FerretRescue.Repo,
 
 config :ferret_rescue, FerretRescueWeb.Endpoint,
   http: [port: 4000],
+  secret_key_base: "4DFzJBdaBpWgtkrl2CPGLKjtfpJ9i1IKQJ0Hb6eto7IsLF+Ij3d3yuWboBCfw0oG",
   debug_errors: true,
   code_reloader: true,
   check_origin: false
@@ -21,3 +25,6 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 config :ferret_rescue, FerretRescue.Mailer, adapter: Bamboo.LocalAdapter
+
+config :ferret_rescue, FerretRescue.Auth.Guardian,
+  secret_key: "IWJGRILoWj+0JE89DyB26wwc5eKNqNIr8u/ikkpOk1ozKwJTyCEvTJgnmlMqejqX"

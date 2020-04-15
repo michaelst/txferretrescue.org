@@ -3,7 +3,7 @@ defmodule FerretRescue.Repo.Migrations.Sitters do
 
   def change do
     create table(:sitters) do
-      add :name, :text
+      add :name, :text, null: false
       add :phone, :text
       add :email, :text
       add :notes, :text

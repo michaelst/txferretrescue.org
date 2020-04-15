@@ -11,7 +11,7 @@ export interface ListSitters_sitters {
   __typename: "Sitter";
   id: string;
   email: string | null;
-  name: string | null;
+  name: string;
   notes: string | null;
   phone: string | null;
 }

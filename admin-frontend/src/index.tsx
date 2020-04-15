@@ -1,15 +1,33 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import {
+  ApolloProvider,
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  ApolloLink,
+  concat
+} from '@apollo/client'
 
-const uri = process.env.NODE_ENV === 'production' ? 'https://txferretrescue.org/graphql' : 'http://localhost:4000/graphql'
+const uri = process.env.NODE_ENV === 'production' ? 'https://api.txferretrescue.org/graphql' : 'http://localhost:4000/graphql'
+
+const httpLink = new HttpLink({ uri: uri })
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  const token = localStorage.getItem('token')
+  operation.setContext({
+    headers: {
+      authorization: token ? `Bearer ${token}` : null,
+    }
+  })
+
+  return forward(operation)
+})
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: uri,
-  })
+  link: concat(authMiddleware, httpLink)
 })
 
 ReactDOM.render(

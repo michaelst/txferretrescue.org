@@ -44,6 +44,7 @@ defmodule FerretRescue.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:ex_machina, "~> 2.4"},
       {:excoveralls, "~> 0.12.0"},
+      {:guardian, "~> 2.0"},
       {:gettext, "~> 0.11"},
       {:hammox, "~> 0.2.2", only: :test},
       {:jason, "~> 1.2", override: true},
