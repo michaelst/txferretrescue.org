@@ -34,6 +34,7 @@ function SitterCreatePage() {
       phone: phone
     },
     onCompleted: () => history.push("/sitters"),
+    onError: () => {},
     update(cache, { data: { createSitter } }) {
       const data = cache.readQuery<ListSitters | null>({ query: LIST_SITTERS })
 
@@ -61,6 +62,7 @@ function SitterCreatePage() {
         <Button
           className="btn-success"
           onClick={() => createSitter()}
+          data-testid="create-sitter-button"
         >
           Create
         </Button>
