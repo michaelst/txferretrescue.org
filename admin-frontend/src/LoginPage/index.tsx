@@ -40,6 +40,7 @@ function LoginPage({ setToken }: LoginPageProps) {
               placeholder="username"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
               className={`p-3 mb-3 ${isInvalid && 'is-invalid'}`}
+              data-testid="username-field"
             />
             <input
               type="password"
@@ -47,11 +48,13 @@ function LoginPage({ setToken }: LoginPageProps) {
               placeholder="password"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
               className={`p-3 mb-3 ${isInvalid && 'is-invalid'}`}
+              data-testid="password-field"
             />
               <button 
                 className="p-3 login-button bg-success" 
                 onClick={() => login()}
                 disabled={loading}
+                data-testid="login-button"
               >
                 login
               </button>
