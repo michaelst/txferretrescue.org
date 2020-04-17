@@ -6,6 +6,7 @@ defmodule FerretRescue.Plug.Auth do
 
   import Plug.Conn
 
+  alias FerretRescue.Auth
   alias FerretRescue.Auth.Guardian
 
   def init(opts), do: opts
@@ -23,6 +24,6 @@ defmodule FerretRescue.Plug.Auth do
     |> assign_resource(conn)
   end
 
-  defp assign_resource({:ok, _, _claims}, conn), do: Absinthe.Plug.put_options(conn, context: %{auth: true})
+  defp assign_resource({:ok, %Auth{} = auth, _claims}, conn), do: Absinthe.Plug.put_options(conn, context: %{auth: auth})
   defp assign_resource(_guardian_result, conn), do: conn
 end

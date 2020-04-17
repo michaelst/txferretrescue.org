@@ -1,6 +1,7 @@
 defmodule FerretRescue.Plug.AuthTest do
   use FerretRescue.DataCase, async: true
   use Phoenix.ConnTest
+  import FerretRescue.Factory
 
   alias FerretRescue.Auth.Guardian
   alias FerretRescue.Plug.Auth
@@ -27,14 +28,15 @@ defmodule FerretRescue.Plug.AuthTest do
   end
 
   test "assigns auth true" do
-    {:ok, token, _claims} = Guardian.encode_and_sign("admin")
+    auth = insert(:auth)
+    {:ok, token, _claims} = Guardian.encode_and_sign(auth)
 
     conn =
       build_conn()
       |> put_req_header("authorization", "Bearer #{token}")
       |> Auth.call()
 
-    assert %{context: %{auth: true}} == conn.private[:absinthe]
+    assert %{context: %{auth: auth}} == conn.private[:absinthe]
     assert conn.state == :unset
     assert conn.status == nil
   end

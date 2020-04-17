@@ -3,6 +3,7 @@ defmodule FerretRescue.Resources.Sitter.Types.UpdateSitterTest do
   import FerretRescue.Factory
 
   test "update sitter" do
+    auth = insert(:auth)
     sitter = insert(:sitter)
 
     doc = """
@@ -22,6 +23,6 @@ defmodule FerretRescue.Resources.Sitter.Types.UpdateSitterTest do
                   "name" => "New name"
                 }
               }
-            }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: true})
+            }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
   end
 end

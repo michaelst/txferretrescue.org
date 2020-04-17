@@ -36,13 +36,13 @@ defmodule FerretRescue.Resources.Sitter.Types do
 
   object :sitter_mutations do
     field :create_sitter, non_null(:sitter) do
-      middleware(FerretRescue.Middleware.RequireAuthentication)
+      middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_website)
       arg(:input, non_null(:sitter_input))
       resolve(&Resolver.create/2)
     end
 
     field :update_sitter, non_null(:sitter) do
-      middleware(FerretRescue.Middleware.RequireAuthentication)
+      middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_website)
       middleware(FerretRescue.Middleware.LoadModel, module: Sitter)
       arg(:id, non_null(:id))
       arg(:input, non_null(:sitter_input))
@@ -50,7 +50,7 @@ defmodule FerretRescue.Resources.Sitter.Types do
     end
 
     field :delete_sitter, non_null(:sitter) do
-      middleware(FerretRescue.Middleware.RequireAuthentication)
+      middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_website)
       middleware(FerretRescue.Middleware.LoadModel, module: Sitter)
       arg(:id, non_null(:id))
       resolve(&Resolver.delete/2)

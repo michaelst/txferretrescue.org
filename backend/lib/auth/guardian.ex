@@ -2,7 +2,12 @@ defmodule FerretRescue.Auth.Guardian do
   @moduledoc false
   use Guardian, otp_app: :ferret_rescue
 
-  def subject_for_token(sub, _claims), do: {:ok, sub}
+  alias FerretRescue.Auth
+  alias FerretRescue.Repo
 
-  def resource_from_claims(%{"sub" => sub}), do: {:ok, sub}
+  def subject_for_token(%Auth{id: id}, _claims), do: {:ok, id}
+
+  def resource_from_claims(%{"sub" => sub}) do
+    {:ok, Repo.get!(Auth, sub)}
+  end
 end

@@ -17,6 +17,6 @@ export interface Login {
 }
 
 export interface LoginVariables {
-  username: string;
+  email: string;
   password: string;
 }

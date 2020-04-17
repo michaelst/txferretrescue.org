@@ -1,8 +1,5 @@
 use Mix.Config
 
-config :ferret_rescue,
-  login_verification: System.get_env("LOGIN_VERIFICATION")
-
 config :ferret_rescue, FerretRescueWeb.Endpoint, url: [host: "new.txferretrescue.org", port: 443]
 
 config :logger, level: :info
