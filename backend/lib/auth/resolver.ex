@@ -6,6 +6,8 @@ defmodule FerretRescue.Auth.Resolver do
 
   alias FerretRescue.Auth
   alias FerretRescue.Auth.Guardian
+  alias FerretRescue.Email
+  alias FerretRescue.Mailer
   alias FerretRescue.Repo
 
   def login(%{email: email, password: password}, _resolution) do
@@ -30,6 +32,17 @@ defmodule FerretRescue.Auth.Resolver do
     %Auth{}
     |> Auth.changeset(params)
     |> Repo.insert()
+    |> case do
+      {:ok, auth} ->
+        auth
+        |> Email.set_password()
+        |> Mailer.deliver_now()
+
+        {:ok, auth}
+
+      response ->
+        response
+    end
   end
 
   def update(%{input: params}, %{context: %{model: model}}) do
