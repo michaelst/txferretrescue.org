@@ -1,8 +1,5 @@
 use Mix.Config
 
-config :ferret_rescue,
-  login_verification: "admin:password"
-
 config :ferret_rescue, FerretRescue.Repo,
   username: "postgres",
   password: nil,

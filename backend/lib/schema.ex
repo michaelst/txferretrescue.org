@@ -14,6 +14,7 @@ defmodule FerretRescue.Schema do
   import_types(FerretRescue.Stripe.Types)
 
   query do
+    import_fields(:auth_queries)
     import_fields(:faq_topic_queries)
     import_fields(:ferret_queries)
     import_fields(:sitter_queries)

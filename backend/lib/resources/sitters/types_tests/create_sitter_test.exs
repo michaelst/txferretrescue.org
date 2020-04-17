@@ -1,7 +1,10 @@
 defmodule FerretRescue.Resources.Sitter.Types.CreateSitterTest do
   use FerretRescue.DataCase, async: true
+  import FerretRescue.Factory
 
   test "create sitter" do
+    auth = insert(:auth)
+
     doc = """
     mutation {
       createSitter(input: { name: "New sitter" }) {
@@ -17,6 +20,6 @@ defmodule FerretRescue.Resources.Sitter.Types.CreateSitterTest do
                   "name" => "New sitter"
                 }
               }
-            }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: true})
+            }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
   end
 end

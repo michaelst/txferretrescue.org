@@ -1,5 +1,6 @@
 defmodule FerretRescue.Middleware.RequireAuthenticationTest do
   use FerretRescue.DataCase, async: true
+  import FerretRescue.Factory
 
   defmodule Schema do
     use Absinthe.Schema
@@ -13,13 +14,15 @@ defmodule FerretRescue.Middleware.RequireAuthenticationTest do
 
     mutation do
       field :update_ferret, :ferret do
-        middleware(FerretRescue.Middleware.RequireAuthentication)
+        middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_ferrets)
         resolve(fn _args, _resolution -> {:ok, %{result: "authenticated"}} end)
       end
     end
   end
 
   test "is authenticated" do
+    auth = insert(:auth)
+
     doc = """
     mutation {
       updateFerret {
@@ -35,7 +38,7 @@ defmodule FerretRescue.Middleware.RequireAuthenticationTest do
                   "result" => "authenticated"
                 }
               }
-            }} == Absinthe.run(doc, Schema, context: %{auth: true})
+            }} == Absinthe.run(doc, Schema, context: %{auth: auth})
   end
 
   test "not authenticated" do

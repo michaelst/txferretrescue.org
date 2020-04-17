@@ -4,8 +4,8 @@ import { Login } from './graphql/Login'
 import './index.scss'
 
 export const LOGIN = gql`
-mutation Login($username: String!, $password: String!) {
-  login(username: $username, password: $password) {
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
     token
   }
 }
@@ -16,13 +16,13 @@ type LoginPageProps = {
 }
 
 function LoginPage({ setToken }: LoginPageProps) {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isInvalid, setInvalid] = useState(false)
 
   const [login, { loading }] = useMutation(LOGIN, {
     variables: {
-      username: username,
+      email: email,
       password: password,
     },
     onCompleted: (data: Login) => setToken(data.login.token),
@@ -36,11 +36,11 @@ function LoginPage({ setToken }: LoginPageProps) {
           <div className="login-form">
             <input
               type="text"
-              value={username}
-              placeholder="username"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
+              value={email}
+              placeholder="email"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
               className={`p-3 mb-3 ${isInvalid && 'is-invalid'}`}
-              data-testid="username-field"
+              data-testid="email-field"
             />
             <input
               type="password"

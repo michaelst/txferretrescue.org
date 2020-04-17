@@ -10,7 +10,7 @@ const mocks = [
     request: {
       query: LOGIN,
       variables: {
-        username: 'admin',
+        email: 'admin',
         password: 'password'
       },
     },
@@ -27,7 +27,7 @@ const mocks = [
     request: {
       query: LOGIN,
       variables: {
-        username: 'admin',
+        email: 'admin',
         password: 'invalid'
       },
     },
@@ -42,17 +42,17 @@ test('invalid login', async () => {
     </MockedProvider>
   )
 
-  const usernameField = getByTestId('username-field')
+  const emailField = getByTestId('email-field')
   const passwordField = getByTestId('password-field')
   const loginButton = getByTestId('login-button')
 
   await act(async () => {
-    await userEvent.type(usernameField, "admin")
+    await userEvent.type(emailField, "admin")
     await userEvent.type(passwordField, "invalid")
     userEvent.click(loginButton)
 
     await waitFor(() => {
-      expect(usernameField).toHaveClass('is-invalid')
+      expect(emailField).toHaveClass('is-invalid')
       expect(passwordField).toHaveClass('is-invalid')
     })
   })
@@ -66,12 +66,12 @@ test('login', async () => {
     </MockedProvider>
   )
 
-  const usernameField = getByTestId('username-field')
+  const emailField = getByTestId('email-field')
   const passwordField = getByTestId('password-field')
   const loginButton = getByTestId('login-button')
 
   await act(async () => {
-    await userEvent.type(usernameField, "admin")
+    await userEvent.type(emailField, "admin")
     await userEvent.type(passwordField, "password")
     userEvent.click(loginButton)
 
