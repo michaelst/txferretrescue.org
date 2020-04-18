@@ -33,7 +33,7 @@ const mocks = [
         currentUser: {
           "__typename": "User",
           "canManageApplications": true,
-          "canManageUsers": false,
+          "canManageUsers": true,
           "canManageFerrets": true,
           "canManageWebsite": true
         }
