@@ -3,7 +3,9 @@ defmodule FerretRescue.Auth.Types.UsersTest do
   import FerretRescue.Factory
 
   test "list users" do
+    # should not return auth user
     auth = insert(:auth)
+    user = insert(:auth, email: "user@zipbooks.com")
 
     doc = """
     query {
@@ -18,7 +20,7 @@ defmodule FerretRescue.Auth.Types.UsersTest do
               data: %{
                 "users" => [
                   %{
-                    "id" => "#{auth.id}"
+                    "id" => "#{user.id}"
                   }
                 ]
               }
