@@ -10,7 +10,6 @@ defmodule FerretRescue.Auth.Types.LoginTest do
     doc = """
     mutation {
       login(email: "test@example.com", password: "password") {
-        email
         token
       }
     }
@@ -20,7 +19,6 @@ defmodule FerretRescue.Auth.Types.LoginTest do
             %{
               data: %{
                 "login" => %{
-                  "email" => "test@example.com",
                   "token" => token
                 }
               }
