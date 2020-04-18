@@ -32,6 +32,14 @@ defmodule FerretRescue.Auth.Resolver do
 
   def reset_password(_args, _resolution), do: {:error, :missing_token}
 
+  def send_password_reset(_args, %{context: %{model: model}}) do
+    model
+    |> Email.set_password()
+    |> Mailer.deliver_now()
+
+    {:ok, model}
+  end
+
   def list(_args, %{context: %{auth: %{id: id}}}) do
     users = from(a in Auth, where: a.id != ^id, order_by: :email) |> Repo.all()
 

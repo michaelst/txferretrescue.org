@@ -49,11 +49,21 @@ mutation DeleteUser($id: ID!) {
 }
 `
 
+export const SEND_PASSWORD_RESET = gql`
+mutation SendPasswordReset($id: ID!) {
+  sendPasswordReset(id: $id) {
+    id
+  }
+}
+`
+
 type UserRowProps = {
   user: ListUsers_users
 }
 
 function UserRow({ user }: UserRowProps) {
+  const [resetSent, setResetSent] = useState(false)
+
   const [setCanManageApplications] = useMutation(UPDATE_USER_CAN_MANAGE_APPLICATIONS, {
     variables: {
       id: user.id,
@@ -81,6 +91,8 @@ function UserRow({ user }: UserRowProps) {
       canManageWebsite: !user.canManageWebsite,
     }
   })
+
+  const [sendPasswordReset] = useMutation(SEND_PASSWORD_RESET)
 
   const [deleteUser] = useMutation(DELETE_USER, {
     update(cache, { data: { deleteUser } }) {
@@ -128,7 +140,19 @@ function UserRow({ user }: UserRowProps) {
         <div className="d-flex align-items-center justify-content-center">
           <Button
             variant="link"
-            className="m-0 p-0"
+            className="m-0 p-0 mr-1"
+            onClick={() => {
+              sendPasswordReset({ variables: { id: user.id } })
+              setResetSent(true)
+            }}
+            data-testid={`reset-user-${user.id}`}
+            disabled={resetSent}
+          >
+            {resetSent ? 'reset sent' : 'reset password'}
+          </Button> |
+          <Button
+            variant="link"
+            className="m-0 p-0 ml-1"
             onClick={() => deleteUser({ variables: { id: user.id } })}
             data-testid={`delete-user-${user.id}`}
           >

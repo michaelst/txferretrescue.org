@@ -7,7 +7,8 @@ import {
   UPDATE_USER_CAN_MANAGE_FERRETS,
   UPDATE_USER_CAN_MANAGE_USERS,
   UPDATE_USER_CAN_MANAGE_WEBSITE,
-  DELETE_USER
+  DELETE_USER,
+  SEND_PASSWORD_RESET
 } from './'
 import UsersPage, { LIST_USERS } from '../UsersPage'
 import userEvent from '@testing-library/user-event'
@@ -120,6 +121,22 @@ const mocks = [
         }
       }
     },
+  },
+  {
+    request: {
+      query: SEND_PASSWORD_RESET,
+      variables: {
+        id: "1",
+      }
+    },
+    result: {
+      data: {
+        sendPasswordReset: {
+          "__typename": "User",
+          "id": "1",
+        }
+      }
+    },
   }
 ]
 
@@ -162,7 +179,13 @@ test('render UsersPage', async () => {
       expect(websiteInput).toHaveProperty('checked', true)
     })
 
+    const resetButton = getByTestId('reset-user-1')
+    expect(resetButton.textContent).toBe('reset password')
+    userEvent.click(resetButton)
+    expect(resetButton.textContent).toBe('reset sent')
+
     const userRow = getByText('test@example.com')
+    
     const deleteButton = getByTestId('delete-user-1')
     userEvent.click(deleteButton)
 

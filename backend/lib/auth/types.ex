@@ -62,6 +62,13 @@ defmodule FerretRescue.Auth.Types do
       resolve(&Resolver.reset_password/2)
     end
 
+    field :send_password_reset, non_null(:user) do
+      middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_users)
+      middleware(FerretRescue.Middleware.LoadModel, module: Auth)
+      arg(:id, non_null(:id))
+      resolve(&Resolver.send_password_reset/2)
+    end
+
     field :create_user, non_null(:user) do
       middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_users)
       arg(:input, non_null(:create_user_input))
