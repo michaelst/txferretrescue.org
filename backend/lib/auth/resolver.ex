@@ -20,6 +20,18 @@ defmodule FerretRescue.Auth.Resolver do
     end
   end
 
+  def reset_password(%{password: password}, %{context: %{auth: auth}}) do
+    with changeset <- Auth.changeset(auth, %{password: password}),
+         {:ok, auth} <- Repo.update(changeset),
+         {:ok, token, _} <- Guardian.encode_and_sign(auth) do
+      {:ok, Map.put(auth, :token, token)}
+    else
+      error -> error
+    end
+  end
+
+  def reset_password(_args, _resolution), do: {:error, :missing_token}
+
   def list(_args, _resolution) do
     users = from(Auth, order_by: :email) |> Repo.all()
 
