@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import SitterForm from 'sitters/SitterForm'
 import ContentBox from 'ContentBox'

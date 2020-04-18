@@ -8,11 +8,6 @@ defmodule FerretRescue.Auth.Types do
   alias FerretRescue.Auth.Resolver
 
   object :auth do
-    field :can_manage_applications, non_null(:boolean)
-    field :can_manage_ferrets, non_null(:boolean)
-    field :can_manage_users, non_null(:boolean)
-    field :can_manage_website, non_null(:boolean)
-    field :email, non_null(:string)
     field :token, non_null(:string)
   end
 
@@ -47,6 +42,10 @@ defmodule FerretRescue.Auth.Types do
       middleware(FerretRescue.Middleware.LoadModel, module: Auth)
       arg(:id, non_null(:id))
       resolve(&Resolver.get/2)
+    end
+
+    field :current_user, non_null(:user) do
+      resolve(&Resolver.current_user/2)
     end
   end
 

@@ -14,7 +14,7 @@ defmodule FerretRescue.Auth.Resolver do
     with %Auth{} = auth <- Repo.get_by(Auth, email: email),
          true <- Bcrypt.verify_pass(password, auth.password),
          {:ok, token, _} <- Guardian.encode_and_sign(auth) do
-      {:ok, Map.put(auth, :token, token)}
+      {:ok, %{token: token}}
     else
       _error -> {:error, "invalid"}
     end
@@ -24,7 +24,7 @@ defmodule FerretRescue.Auth.Resolver do
     with changeset <- Auth.changeset(auth, %{password: password}),
          {:ok, auth} <- Repo.update(changeset),
          {:ok, token, _} <- Guardian.encode_and_sign(auth) do
-      {:ok, Map.put(auth, :token, token)}
+      {:ok, %{token: token}}
     else
       error -> error
     end
@@ -47,6 +47,8 @@ defmodule FerretRescue.Auth.Resolver do
   end
 
   def get(_args, %{context: %{model: model}}), do: {:ok, model}
+
+  def current_user(_args, %{context: %{auth: auth}}), do: {:ok, auth}
 
   def create(%{input: params}, _resolution) do
     %Auth{}

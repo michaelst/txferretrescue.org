@@ -3,6 +3,7 @@ import { render, act, waitFor } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
 import App from './App'
 import { LOGIN } from 'LoginPage'
+import { CURRENT_USER } from 'Navbar'
 import userEvent from '@testing-library/user-event'
 
 const mocks = [
@@ -19,6 +20,22 @@ const mocks = [
         login: {
           "__typename": "Auth",
           "token": "test-token"
+        }
+      }
+    },
+  },
+  {
+    request: {
+      query: CURRENT_USER
+    },
+    result: {
+      data: {
+        currentUser: {
+          "__typename": "User",
+          "canManageApplications": true,
+          "canManageUsers": false,
+          "canManageFerrets": true,
+          "canManageWebsite": true
         }
       }
     },
@@ -75,8 +92,8 @@ test('login', async () => {
     userEvent.click(loginButton)
 
     await waitFor(() => {
-      const linkElement = getByText(/applications/i)
-      expect(linkElement).toBeInTheDocument()
+      const applicationsLink = getByText(/applications/i)
+      expect(applicationsLink).toBeInTheDocument()
     })
   })
 })
