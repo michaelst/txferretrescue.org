@@ -32,8 +32,8 @@ defmodule FerretRescue.Auth.Resolver do
 
   def reset_password(_args, _resolution), do: {:error, :missing_token}
 
-  def list(_args, _resolution) do
-    users = from(Auth, order_by: :email) |> Repo.all()
+  def list(_args, %{context: %{auth: %{id: id}}}) do
+    users = from(a in Auth, where: a.id != ^id, order_by: :email) |> Repo.all()
 
     {:ok, users}
   end

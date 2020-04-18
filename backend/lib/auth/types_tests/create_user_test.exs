@@ -11,17 +11,13 @@ defmodule FerretRescue.Auth.Types.CreateUserTest do
     mutation {
       createUser(input: {
         email: "new@example.com",
-        can_manage_applications: false,
-        can_manage_users: false,
-        can_manage_ferrets: true,
-        can_manage_website: false
       }) {
         id
         email
-        can_manage_applications
-        can_manage_users
-        can_manage_ferrets
-        can_manage_website
+        canManageApplications
+        canManageUsers
+        canManageFerrets
+        canManageWebsite
       }
     }
     """
@@ -31,10 +27,10 @@ defmodule FerretRescue.Auth.Types.CreateUserTest do
               data: %{
                 "createUser" => %{
                   "id" => id,
-                  "can_manage_applications" => false,
-                  "can_manage_ferrets" => true,
-                  "can_manage_users" => false,
-                  "can_manage_website" => false,
+                  "canManageApplications" => false,
+                  "canManageFerrets" => false,
+                  "canManageUsers" => false,
+                  "canManageWebsite" => false,
                   "email" => "new@example.com"
                 }
               }
@@ -50,16 +46,12 @@ defmodule FerretRescue.Auth.Types.CreateUserTest do
     mutation {
       createUser(input: {
         email: "new@example.com",
-        can_manage_applications: false,
-        can_manage_users: false,
-        can_manage_ferrets: true,
-        can_manage_website: false
       }) {
         email
-        can_manage_applications
-        can_manage_users
-        can_manage_ferrets
-        can_manage_website
+        canManageApplications
+        canManageUsers
+        canManageFerrets
+        canManageWebsite
       }
     }
     """

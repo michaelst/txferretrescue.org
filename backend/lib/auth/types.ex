@@ -25,12 +25,15 @@ defmodule FerretRescue.Auth.Types do
     field :email, non_null(:string)
   end
 
-  input_object :user_input do
-    field :can_manage_applications, non_null(:boolean)
-    field :can_manage_ferrets, non_null(:boolean)
-    field :can_manage_users, non_null(:boolean)
-    field :can_manage_website, non_null(:boolean)
+  input_object :create_user_input do
     field :email, non_null(:string)
+  end
+
+  input_object :update_user_input do
+    field :can_manage_applications, :boolean
+    field :can_manage_ferrets, :boolean
+    field :can_manage_users, :boolean
+    field :can_manage_website, :boolean
   end
 
   object :auth_queries do
@@ -61,7 +64,7 @@ defmodule FerretRescue.Auth.Types do
 
     field :create_user, non_null(:user) do
       middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_users)
-      arg(:input, non_null(:user_input))
+      arg(:input, non_null(:create_user_input))
       resolve(&Resolver.create/2)
     end
 
@@ -69,7 +72,7 @@ defmodule FerretRescue.Auth.Types do
       middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_users)
       middleware(FerretRescue.Middleware.LoadModel, module: Auth)
       arg(:id, non_null(:id))
-      arg(:input, non_null(:user_input))
+      arg(:input, non_null(:update_user_input))
       resolve(&Resolver.update/2)
     end
 

@@ -12,7 +12,7 @@ import VetsPage from 'VetsPage'
 import Navbar from 'Navbar'
 import LoginPage from 'LoginPage'
 import ResetPasswordPage from 'ResetPasswordPage'
-import UsersPage from 'UsersPage'
+import UsersPage from 'users/UsersPage'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'))
