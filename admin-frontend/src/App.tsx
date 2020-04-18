@@ -13,6 +13,7 @@ import Navbar from 'Navbar'
 import LoginPage from 'LoginPage'
 import ResetPasswordPage from 'ResetPasswordPage'
 import UsersPage from 'users/UsersPage'
+import UserCreatePage from 'users/UserCreatePage'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -52,6 +53,9 @@ function App() {
               </Route>
               <Route path="/ferrets">
                 <FerretsPage />
+              </Route>
+              <Route path="/users/create">
+                <UserCreatePage />
               </Route>
               <Route path="/users">
                 <UsersPage />
