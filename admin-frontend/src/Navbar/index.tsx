@@ -24,6 +24,9 @@ function AppNavbar({ setToken }: LoginPageProps) {
               <LinkContainer to="/applications">
                 <Nav.Link>Applications</Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/users">
+                <Nav.Link>Users</Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/ferrets">
                 <Nav.Link>Ferrets</Nav.Link>
               </LinkContainer>

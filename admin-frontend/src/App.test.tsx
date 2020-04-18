@@ -58,7 +58,6 @@ test('invalid login', async () => {
   })
 })
 
-
 test('login', async () => {
   const { getByTestId, getByText } = render(
     <MockedProvider mocks={mocks}>

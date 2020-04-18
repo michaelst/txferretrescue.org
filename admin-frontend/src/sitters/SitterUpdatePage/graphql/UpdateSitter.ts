@@ -13,6 +13,7 @@ export interface UpdateSitter_updateSitter {
   email: string | null;
   name: string;
   phone: string | null;
+  notes: string | null;
 }
 
 export interface UpdateSitter {

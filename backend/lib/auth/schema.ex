@@ -20,7 +20,8 @@ defmodule FerretRescue.Auth do
   def changeset(struct, params) do
     struct
     |> cast(params, __schema__(:fields) -- [:id])
-    |> validate_length(:password, min: 20)
+    |> validate_required(__schema__(:fields) -- [:id, :password, :inserted_at, :updated_at])
+    |> validate_length(:password, min: 12, message: "should be at least 12 characters")
     |> hash_password()
     |> unique_constraint(:email, name: :auth_email_index)
   end

@@ -1,15 +1,15 @@
-defmodule FerretRescue.Auth.Types.UsersTest do
+defmodule FerretRescue.Auth.Types.SendPasswordResetTest do
   use FerretRescue.DataCase, async: true
+  use Bamboo.Test
+
   import FerretRescue.Factory
 
-  test "list users" do
-    # should not return auth user
+  test "send password reset" do
     auth = insert(:auth)
-    user = insert(:auth, email: "user@zipbooks.com")
 
     doc = """
-    query {
-      users {
+    mutation {
+      sendPasswordReset(id: "#{auth.id}") {
         id
       }
     }
@@ -18,21 +18,21 @@ defmodule FerretRescue.Auth.Types.UsersTest do
     assert {:ok,
             %{
               data: %{
-                "users" => [
-                  %{
-                    "id" => "#{user.id}"
-                  }
-                ]
+                "sendPasswordReset" => %{
+                  "id" => "#{auth.id}"
+                }
               }
             }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
+
+    assert_email_delivered_with(subject: "Set your password for admin.txferretrescue.org")
   end
 
-  test "can't list users without permission" do
+  test "can't send password reset without permission" do
     auth = insert(:auth, can_manage_users: false)
 
     doc = """
-    query {
-      users {
+    mutation {
+      sendPasswordReset(id: "#{auth.id}") {
         id
       }
     }
@@ -45,9 +45,11 @@ defmodule FerretRescue.Auth.Types.UsersTest do
                 %{
                   locations: [%{column: 3, line: 2}],
                   message: "unauthenticated",
-                  path: ["users"]
+                  path: ["sendPasswordReset"]
                 }
               ]
             }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
+
+    refute_email_delivered_with(subject: "Set your password for admin.txferretrescue.org")
   end
 end

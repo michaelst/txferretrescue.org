@@ -1,5 +1,7 @@
 defmodule FerretRescue.Auth.Types.CreateUserTest do
   use FerretRescue.DataCase, async: true
+  use Bamboo.Test
+
   import FerretRescue.Factory
 
   test "create user" do
@@ -9,16 +11,13 @@ defmodule FerretRescue.Auth.Types.CreateUserTest do
     mutation {
       createUser(input: {
         email: "new@example.com",
-        can_manage_applications: false,
-        can_manage_users: false,
-        can_manage_ferrets: true,
-        can_manage_website: false
       }) {
+        id
         email
-        can_manage_applications
-        can_manage_users
-        can_manage_ferrets
-        can_manage_website
+        canManageApplications
+        canManageUsers
+        canManageFerrets
+        canManageWebsite
       }
     }
     """
@@ -27,14 +26,17 @@ defmodule FerretRescue.Auth.Types.CreateUserTest do
             %{
               data: %{
                 "createUser" => %{
-                  "can_manage_applications" => false,
-                  "can_manage_ferrets" => true,
-                  "can_manage_users" => false,
-                  "can_manage_website" => false,
+                  "id" => id,
+                  "canManageApplications" => false,
+                  "canManageFerrets" => false,
+                  "canManageUsers" => false,
+                  "canManageWebsite" => false,
                   "email" => "new@example.com"
                 }
               }
-            }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
+            }} = Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
+
+    assert_email_delivered_with(subject: "Set your password for admin.txferretrescue.org")
   end
 
   test "can't create user without permission" do
@@ -44,16 +46,12 @@ defmodule FerretRescue.Auth.Types.CreateUserTest do
     mutation {
       createUser(input: {
         email: "new@example.com",
-        can_manage_applications: false,
-        can_manage_users: false,
-        can_manage_ferrets: true,
-        can_manage_website: false
       }) {
         email
-        can_manage_applications
-        can_manage_users
-        can_manage_ferrets
-        can_manage_website
+        canManageApplications
+        canManageUsers
+        canManageFerrets
+        canManageWebsite
       }
     }
     """
@@ -69,5 +67,7 @@ defmodule FerretRescue.Auth.Types.CreateUserTest do
                 }
               ]
             }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
+
+    refute_email_delivered_with(subject: "Set your password for admin.txferretrescue.org")
   end
 end

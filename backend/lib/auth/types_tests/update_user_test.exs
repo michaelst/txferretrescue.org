@@ -9,18 +9,13 @@ defmodule FerretRescue.Auth.Types.UpdateUserTest do
     doc = """
     mutation {
       updateUser(id: "#{user.id}", input: {
-        email: "update-test@example.com"
-        can_manage_applications: false,
-        can_manage_users: false,
-        can_manage_ferrets: true,
-        can_manage_website: false
+        canManageFerrets: false
       }) {
         id
-        email
-        can_manage_applications
-        can_manage_users
-        can_manage_ferrets
-        can_manage_website
+        canManageApplications
+        canManageUsers
+        canManageFerrets
+        canManageWebsite
       }
     }
     """
@@ -30,11 +25,10 @@ defmodule FerretRescue.Auth.Types.UpdateUserTest do
               data: %{
                 "updateUser" => %{
                   "id" => "#{user.id}",
-                  "can_manage_applications" => false,
-                  "can_manage_ferrets" => true,
-                  "can_manage_users" => false,
-                  "can_manage_website" => false,
-                  "email" => "update-test@example.com"
+                  "canManageApplications" => true,
+                  "canManageFerrets" => false,
+                  "canManageUsers" => true,
+                  "canManageWebsite" => true
                 }
               }
             }} == Absinthe.run(doc, FerretRescue.Schema, context: %{auth: auth})
@@ -47,18 +41,16 @@ defmodule FerretRescue.Auth.Types.UpdateUserTest do
     doc = """
     mutation {
       updateUser(id: "#{user.id}", input: {
-        email: "update-test@example.com"
-        can_manage_applications: false,
-        can_manage_users: false,
-        can_manage_ferrets: true,
-        can_manage_website: false
+        canManageApplications: false
+        canManageUsers: false
+        canManageFerrets: true
+        canManageWebsite: false
       }) {
         id
-        email
-        can_manage_applications
-        can_manage_users
-        can_manage_ferrets
-        can_manage_website
+        canManageApplications
+        canManageUsers
+        canManageFerrets
+        canManageWebsite
       }
     }
     """

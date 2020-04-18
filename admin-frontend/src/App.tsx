@@ -11,6 +11,9 @@ import SitterUpdatePage from 'sitters/SitterUpdatePage'
 import VetsPage from 'VetsPage'
 import Navbar from 'Navbar'
 import LoginPage from 'LoginPage'
+import ResetPasswordPage from 'ResetPasswordPage'
+import UsersPage from 'users/UsersPage'
+import UserCreatePage from 'users/UserCreatePage'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -23,40 +26,61 @@ function App() {
     }
   }, [token])
 
-  if (!token) return <LoginPage setToken={setToken} />
-
   return (
-    <div className="App">
+    <div className="App h-100">
       <BrowserRouter>
-        <Navbar setToken={setToken} />
-        <Container className="mt-4">
+        {!token && (
           <Switch>
-            <Route path="/applications">
-              <ApplicationsPage />
-            </Route>
-            <Route path="/ferrets">
-              <FerretsPage />
-            </Route>
-            <Route path="/sitters/create">
-              <SitterCreatePage />
-            </Route>
-            <Route path="/sitters/:sitterId">
-              <SitterUpdatePage />
-            </Route>
-            <Route path="/sitters">
-              <SittersPage />
-            </Route>
-            <Route path="/vets">
-              <VetsPage />
-            </Route>
-            <Route path="/faq">
-              <FAQPage />
+            <Route path="/auth/reset-password">
+              <ResetPasswordPage setToken={setToken} />
             </Route>
             <Route path="/">
-              <ApplicationsPage />
+              <LoginPage setToken={setToken} />
             </Route>
           </Switch>
-        </Container>
+        )}
+
+        {token && <Navbar setToken={setToken} />}
+
+        {token && (
+          <Container className="mt-4">
+            <Switch>
+              <Route path="/auth/reset-password">
+                <ResetPasswordPage setToken={setToken} />
+              </Route>
+              <Route path="/applications">
+                <ApplicationsPage />
+              </Route>
+              <Route path="/ferrets">
+                <FerretsPage />
+              </Route>
+              <Route path="/users/create">
+                <UserCreatePage />
+              </Route>
+              <Route path="/users">
+                <UsersPage />
+              </Route>
+              <Route path="/sitters/create">
+                <SitterCreatePage />
+              </Route>
+              <Route path="/sitters/:sitterId">
+                <SitterUpdatePage />
+              </Route>
+              <Route path="/sitters">
+                <SittersPage />
+              </Route>
+              <Route path="/vets">
+                <VetsPage />
+              </Route>
+              <Route path="/faq">
+                <FAQPage />
+              </Route>
+              <Route path="/">
+                <ApplicationsPage />
+              </Route>
+            </Switch>
+          </Container>)}
+
       </BrowserRouter>
     </div>
   )
