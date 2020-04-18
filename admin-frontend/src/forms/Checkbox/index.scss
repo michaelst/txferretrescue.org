@@ -1,5 +1,5 @@
 .checkbox {
-  display: flex;
+  display: block;
   position: relative;
   cursor: pointer;
   font-size: 22px;
@@ -17,7 +17,7 @@
   }
 
   input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: #28a745;
   }
 
   input:checked ~ .checkmark:after {

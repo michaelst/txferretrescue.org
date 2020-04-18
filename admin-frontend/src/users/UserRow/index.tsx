@@ -7,7 +7,7 @@ import Checkbox from 'forms/Checkbox'
 
 export const UPDATE_USER_CAN_MANAGE_APPLICATIONS = gql`
 mutation UpdateUserCanManageApplications($id: ID!, $canManageApplications: Boolean!) {
-  updateUser(id: $id, input: { canManageApplications: $canManageApplications, }) {
+  updateUser(id: $id, input: { canManageApplications: $canManageApplications }) {
     id
     canManageApplications
   }
@@ -16,7 +16,7 @@ mutation UpdateUserCanManageApplications($id: ID!, $canManageApplications: Boole
 
 export const UPDATE_USER_CAN_MANAGE_USERS = gql`
 mutation UpdateUserCanManageUsers($id: ID!, $canManageUsers: Boolean!) {
-  updateUser(id: $id, input: { canManageUsers: $canManageUsers, }) {
+  updateUser(id: $id, input: { canManageUsers: $canManageUsers }) {
     id
     canManageUsers
   }
@@ -25,7 +25,7 @@ mutation UpdateUserCanManageUsers($id: ID!, $canManageUsers: Boolean!) {
 
 export const UPDATE_USER_CAN_MANAGE_FERRETS = gql`
 mutation UpdateUserCanManageFerrets($id: ID!, $canManageFerrets: Boolean!) {
-  updateUser(id: $id, input: { canManageFerrets: $canManageFerrets, }) {
+  updateUser(id: $id, input: { canManageFerrets: $canManageFerrets }) {
     id
     canManageFerrets
   }
@@ -34,7 +34,7 @@ mutation UpdateUserCanManageFerrets($id: ID!, $canManageFerrets: Boolean!) {
 
 export const UPDATE_USER_CAN_MANAGE_WEBSITE = gql`
 mutation UpdateUserCanManageWebsite($id: ID!, $canManageWebsite: Boolean!) {
-  updateUser(id: $id, input: { canManageWebsite: $canManageWebsite, }) {
+  updateUser(id: $id, input: { canManageWebsite: $canManageWebsite }) {
     id
     canManageWebsite
   }
@@ -100,24 +100,28 @@ function UserRow({ user }: UserRowProps) {
         <Checkbox
           value={user.canManageApplications}
           onChange={() => setCanManageApplications()}
+          testId="application-checkbox"
         />
       </td>
       <td>
         <Checkbox
           value={user.canManageUsers}
           onChange={() => setCanManageUsers()}
+          testId="users-checkbox"
         />
       </td>
       <td>
         <Checkbox
           value={user.canManageFerrets}
           onChange={() => setCanManageFerrets()}
+          testId="ferrets-checkbox"
         />
       </td>
       <td>
         <Checkbox
           value={user.canManageWebsite}
           onChange={() => setCanManageWebsite()}
+          testId="website-checkbox"
         />
       </td>
       <td>
