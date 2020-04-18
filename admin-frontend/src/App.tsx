@@ -11,6 +11,7 @@ import SitterUpdatePage from 'sitters/SitterUpdatePage'
 import VetsPage from 'VetsPage'
 import Navbar from 'Navbar'
 import LoginPage from 'LoginPage'
+import ResetPasswordPage from 'ResetPasswordPage'
 import UsersPage from 'UsersPage'
 
 function App() {
@@ -29,8 +30,8 @@ function App() {
       <BrowserRouter>
         {!token && (
           <Switch>
-            <Route path="/auth/password">
-              <LoginPage setToken={setToken} />
+            <Route path="/auth/reset-password">
+              <ResetPasswordPage setToken={setToken} />
             </Route>
             <Route path="/">
               <LoginPage setToken={setToken} />
@@ -43,8 +44,8 @@ function App() {
         {token && (
           <Container className="mt-4">
             <Switch>
-              <Route path="/auth/password">
-                <LoginPage setToken={setToken} />
+              <Route path="/auth/reset-password">
+                <ResetPasswordPage setToken={setToken} />
               </Route>
               <Route path="/applications">
                 <ApplicationsPage />
