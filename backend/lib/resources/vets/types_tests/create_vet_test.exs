@@ -1,4 +1,4 @@
-defmodule FerretRescue.Resources.Sitter.Types.CreateVetTest do
+defmodule FerretRescue.Resources.Vet.Types.CreateVetTest do
   use FerretRescue.DataCase, async: true
   import FerretRescue.Factory
 
