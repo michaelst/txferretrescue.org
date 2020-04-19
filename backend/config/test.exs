@@ -5,7 +5,8 @@ config :ferret_rescue, FerretRescue.Repo,
   password: nil,
   database: "ferret_rescue_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  pool_size: 20
 
 config :ferret_rescue, FerretRescueWeb.Endpoint,
   http: [port: 4002],

@@ -3,6 +3,7 @@ defmodule FerretRescue.Resources.Vet do
   Schema for vets table.
   """
   use Ecto.Schema
+  import Ecto.Changeset
 
   schema "vets" do
     field :city, :string
@@ -16,5 +17,10 @@ defmodule FerretRescue.Resources.Vet do
     field :zip, :string
 
     timestamps()
+  end
+
+  def changeset(struct, params) do
+    struct
+    |> cast(params, __schema__(:fields) -- [:id])
   end
 end
