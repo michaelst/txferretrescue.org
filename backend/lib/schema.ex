@@ -26,6 +26,7 @@ defmodule FerretRescue.Schema do
     import_fields(:application_mutations)
     import_fields(:auth_mutations)
     import_fields(:sitter_mutations)
+    import_fields(:vet_mutations)
   end
 
   def context(ctx) do
