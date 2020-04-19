@@ -8,7 +8,7 @@ type VetBoxProps = {
 
 function CompanyName(vet: ListVets_vets) {
   if (vet.website) {
-    return <h5><a href={vet.website}>{vet.companyName}</a></h5>
+    return <h5><a href={vet.website} target="_blank">{vet.companyName}</a></h5>
   }
 
   return <h5>{vet.companyName}</h5>

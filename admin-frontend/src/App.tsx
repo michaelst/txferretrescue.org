@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
-import './App.scss'
 import ApplicationsPage from 'ApplicationsPage'
 import FAQPage from 'FAQPage'
 import FerretsPage from 'FerretsPage'
-import SittersPage from 'sitters/SittersPage'
-import SitterCreatePage from 'sitters/SitterCreatePage'
-import SitterUpdatePage from 'sitters/SitterUpdatePage'
-import VetsPage from 'VetsPage'
-import Navbar from 'Navbar'
 import LoginPage from 'LoginPage'
+import Navbar from 'Navbar'
 import ResetPasswordPage from 'ResetPasswordPage'
-import UsersPage from 'users/UsersPage'
+import SitterCreatePage from 'sitters/SitterCreatePage'
+import SittersPage from 'sitters/SittersPage'
+import SitterUpdatePage from 'sitters/SitterUpdatePage'
 import UserCreatePage from 'users/UserCreatePage'
+import UsersPage from 'users/UsersPage'
+import VetCreatePage from 'vets/VetCreatePage'
+import VetsPage from 'vets/VetsPage'
+import VetUpdatePage from 'vets/VetUpdatePage'
+import './App.scss'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -68,6 +70,12 @@ function App() {
               </Route>
               <Route path="/sitters">
                 <SittersPage />
+              </Route>
+              <Route path="/vets/create">
+                <VetCreatePage />
+              </Route>
+              <Route path="/vets/:vetId">
+                <VetUpdatePage />
               </Route>
               <Route path="/vets">
                 <VetsPage />

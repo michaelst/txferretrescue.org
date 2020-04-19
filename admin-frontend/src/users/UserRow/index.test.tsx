@@ -140,7 +140,7 @@ const mocks = [
   }
 ]
 
-test('render UsersPage', async () => {
+test('render UserRow', async () => {
   const { getByTestId, getByText } = render(
     <MockedProvider mocks={mocks}>
       <BrowserRouter>
