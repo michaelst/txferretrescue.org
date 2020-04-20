@@ -21,3 +21,7 @@ config :ferret_rescue, FerretRescue.Mailer, api_key: System.fetch_env!("SENDGRID
 config :ferret_rescue, FerretRescue.Auth.Guardian, secret_key: System.fetch_env!("GUARDIAN_SECRET")
 
 config :stripity_stripe, api_key: System.fetch_env!("STRIPE_SECRET")
+
+config :cors_plug,
+  origin: ["https://admin.txferretrescue.org", "https://new.txferretrescue.org", "https://txferretrescue.org"],
+  max_age: 86400

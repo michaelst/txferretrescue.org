@@ -25,3 +25,7 @@ config :ferret_rescue, FerretRescue.Mailer, adapter: Bamboo.LocalAdapter
 
 config :ferret_rescue, FerretRescue.Auth.Guardian,
   secret_key: "IWJGRILoWj+0JE89DyB26wwc5eKNqNIr8u/ikkpOk1ozKwJTyCEvTJgnmlMqejqX"
+
+config :cors_plug,
+  origin: ["http://localhost:3000"],
+  max_age: 86400
