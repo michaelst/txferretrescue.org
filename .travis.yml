@@ -82,7 +82,10 @@ jobs:
   - name: Backend
     if: branch = master
     language: minimal
-    before_install: cd backend
+    before_install: 
+    - cd backend
+    - openssl aes-256-cbc -K $encrypted_3b9f0b9d36d1_key -iv $encrypted_3b9f0b9d36d1_iv -in deploy/secrets.tar.enc -out deploy/secrets.tar -d
+    - (cd deploy && tar xvf secrets.tar)
     before_script:
     - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk;
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com |
@@ -112,9 +115,6 @@ jobs:
       directories:
       - "$HOME/google-cloud-sdk/"
 
-before_install:
-- openssl aes-256-cbc -K $encrypted_3b9f0b9d36d1_key -iv $encrypted_3b9f0b9d36d1_iv -in backend/deploy/secrets.tar.enc -out backend/deploy/secrets.tar -d
-- (cd backend/deploy && tar xvf secrets.tar)
 deploy:
   - provider: firebase
     token: $FIREBASE_TOKEN
