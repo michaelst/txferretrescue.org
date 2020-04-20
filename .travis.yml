@@ -57,6 +57,7 @@ jobs:
     if: NOT branch = master
 
   - stage: Deploy
+    if: branch = master
     name: Frontend
     language: node_js
     node_js: stable
@@ -67,8 +68,8 @@ jobs:
     - DEPLOY_PROVIDER=firebase
     before_install: cd frontend
     script: yarn build
-    if: branch = master
   - name: Admin Frontend
+    if: branch = master
     language: node_js
     node_js: stable
     cache:
@@ -78,8 +79,41 @@ jobs:
     - DEPLOY_PROVIDER=firebase
     before_install: cd admin-frontend
     script: yarn build
+  - name: Backend
     if: branch = master
+    language: minimal
+    before_script:
+    - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk;
+        export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com |
+      bash; fi
+    - source $HOME/google-cloud-sdk/path.bash.inc
+    - gcloud auth activate-service-account --key-file deploy/secrets/cloud-57-5c0f26f6cb53.json
+    - gcloud config set project cloud-57
+    - cat deploy/secrets/cloud-57-5c0f26f6cb53.json | docker login -u _json_key --password-stdin https://us.gcr.io
+    - docker pull us.gcr.io/cloud-57/txferretrescue-api:latest
+    script:
+    - docker build 
+      --build-arg DB_PASSWORD 
+      --build-arg GUARDIAN_SECRET 
+      --build-arg SECRET_KEY_BASE 
+      --build-arg SENDGRID_API_KEY 
+      --build-arg STRIPE_SECRET 
+      --cache-from us.gcr.io/cloud-57/txferretrescue-api:latest
+      -f deploy/Dockerfile
+      -t us.gcr.io/cloud-57/txferretrescue-api:latest 
+      .
+    - docker push us.gcr.io/cloud-57/txferretrescue-api:latest
+    - gcloud compute instance-groups managed rolling-action replace txferretrescue-api
+      --region=us-central1 
+      --max-unavailable 0 
+      --max-surge 4
+    cache:
+      directories:
+      - "$HOME/google-cloud-sdk/"
 
+before_install:
+- openssl aes-256-cbc -K $encrypted_3b9f0b9d36d1_key -iv $encrypted_3b9f0b9d36d1_iv -in deploy/secrets.tar.enc -out deploy/secrets.tar -d
+- (cd deploy && tar xvf secrets.tar)
 deploy:
   - provider: firebase
     token: $FIREBASE_TOKEN
