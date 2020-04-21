@@ -2,16 +2,9 @@ defmodule FerretRescue.FAQ.Content.Resolver do
   @moduledoc """
   Resolver for FAQ Content.
   """
-  import Ecto.Query
 
   alias FerretRescue.FAQ.Content
   alias FerretRescue.Repo
-
-  def list(_args, _resolution) do
-    topics = from(Content, order_by: :rank) |> Repo.all()
-
-    {:ok, topics}
-  end
 
   def get(_args, %{context: %{model: model}}), do: {:ok, model}
 
