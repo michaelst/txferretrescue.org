@@ -1,14 +1,14 @@
-defmodule FerretRescue.FAQ.Topic.Resolver do
+defmodule FerretRescue.FAQ.Content.Resolver do
   @moduledoc """
-  Resolver for FAQ Topics.
+  Resolver for FAQ Content.
   """
   import Ecto.Query
 
-  alias FerretRescue.FAQ.Topic
+  alias FerretRescue.FAQ.Content
   alias FerretRescue.Repo
 
   def list(_args, _resolution) do
-    topics = from(Topic, order_by: :rank) |> Repo.all()
+    topics = from(Content, order_by: :rank) |> Repo.all()
 
     {:ok, topics}
   end
@@ -16,14 +16,14 @@ defmodule FerretRescue.FAQ.Topic.Resolver do
   def get(_args, %{context: %{model: model}}), do: {:ok, model}
 
   def create(%{input: params}, _resolution) do
-    %Topic{}
-    |> Topic.changeset(params)
+    %Content{}
+    |> Content.changeset(params)
     |> Repo.insert()
   end
 
   def update(%{input: params}, %{context: %{model: model}}) do
     model
-    |> Topic.changeset(params)
+    |> Content.changeset(params)
     |> Repo.update()
   end
 

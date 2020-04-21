@@ -1,4 +1,4 @@
-defmodule FerretRescue.FAQ.Topic.Types.FAQTopicsTest do
+defmodule FerretRescue.FAQ.Topic.Types.ListTest do
   use FerretRescue.DataCase, async: true
   import FerretRescue.Factory
 
