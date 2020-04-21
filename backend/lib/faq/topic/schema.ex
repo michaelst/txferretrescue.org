@@ -3,6 +3,7 @@ defmodule FerretRescue.FAQ.Topic do
   Schema for faq_content table.
   """
   use Ecto.Schema
+  import Ecto.Changeset
 
   schema "faq_topics" do
     field :name, :string
@@ -11,5 +12,11 @@ defmodule FerretRescue.FAQ.Topic do
     has_many :questions, FerretRescue.FAQ.Content
 
     timestamps()
+  end
+
+  def changeset(struct, params) do
+    struct
+    |> cast(params, __schema__(:fields) -- [:id])
+    |> validate_required([:name, :rank])
   end
 end

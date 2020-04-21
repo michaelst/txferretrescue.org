@@ -15,6 +15,7 @@ defmodule FerretRescue.Schema do
 
   query do
     import_fields(:auth_queries)
+    import_fields(:faq_content_queries)
     import_fields(:faq_topic_queries)
     import_fields(:ferret_queries)
     import_fields(:sitter_queries)
@@ -25,6 +26,8 @@ defmodule FerretRescue.Schema do
   mutation do
     import_fields(:application_mutations)
     import_fields(:auth_mutations)
+    import_fields(:faq_content_mutations)
+    import_fields(:faq_topic_mutations)
     import_fields(:sitter_mutations)
     import_fields(:vet_mutations)
   end
