@@ -26,7 +26,7 @@ function VetsPage() {
         <Button className="btn-success">Add vet</Button>
       </LinkContainer>
 
-      <Table striped bordered hover>
+      <Table bordered hover>
         <thead>
           <tr>
             <th>Company Name</th>

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import ApplicationsPage from 'ApplicationsPage'
-import FAQPage from 'FAQPage'
+import TopicCreatePage from 'faq/TopicCreatePage'
+import TopicUpdatePage from 'faq/TopicUpdatePage'
+import FAQPage from 'faq/FAQPage'
 import FerretsPage from 'FerretsPage'
 import LoginPage from 'LoginPage'
 import Navbar from 'Navbar'
@@ -79,6 +81,12 @@ function App() {
               </Route>
               <Route path="/vets">
                 <VetsPage />
+              </Route>
+              <Route path="/faq/create">
+                <TopicCreatePage />
+              </Route>
+              <Route path="/faq/:topicId">
+                <TopicUpdatePage />
               </Route>
               <Route path="/faq">
                 <FAQPage />

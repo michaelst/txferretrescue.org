@@ -21,9 +21,9 @@ type VetFormProps = {
   setWebsite: React.Dispatch<React.SetStateAction<string>>,
   setZip: React.Dispatch<React.SetStateAction<string>>
 }
-function SitterForm({ city, companyName, notes, phone, state, street, vetName, website, zip, setCity, setCompanyName, setNotes, setPhone, setState, setStreet, setVetName, setWebsite, setZip }: VetFormProps) {
+function VetForm({ city, companyName, notes, phone, state, street, vetName, website, zip, setCity, setCompanyName, setNotes, setPhone, setState, setStreet, setVetName, setWebsite, setZip }: VetFormProps) {
   return (
-    <div className="SitterForm">
+    <div className="VetForm">
       <TextInput label="Company Name" value={companyName} setValue={setCompanyName} required={false} testId='vet-form-name-field' />
       <TextInput label="Vet Name" value={vetName} setValue={setVetName} required={false} />
       <TextInput label="Street" value={street} setValue={setStreet} required={false} />
@@ -37,4 +37,4 @@ function SitterForm({ city, companyName, notes, phone, state, street, vetName, w
   )
 }
 
-export default SitterForm
+export default VetForm
