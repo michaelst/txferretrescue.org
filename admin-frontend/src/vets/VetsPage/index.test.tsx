@@ -1,8 +1,7 @@
 import React from 'react'
-import { render, act, waitFor } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
 import VetsPage, { LIST_VETS } from './'
-import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from 'react-router-dom'
 
 const mocks = [

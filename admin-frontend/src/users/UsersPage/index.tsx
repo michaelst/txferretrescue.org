@@ -29,7 +29,7 @@ function UsersPage() {
         <Button className="btn-success">Add user</Button>
       </LinkContainer>
 
-      <Table bordered>
+      <Table hover bordered>
         <thead>
           <tr>
             <th>Email</th>

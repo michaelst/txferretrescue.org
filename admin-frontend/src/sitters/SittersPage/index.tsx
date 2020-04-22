@@ -46,7 +46,7 @@ function SittersPage() {
         <Button className="btn-success">Add sitter</Button>
       </LinkContainer>
 
-      <Table striped bordered hover>
+      <Table bordered hover>
         <thead>
           <tr>
             <th>Name</th>
