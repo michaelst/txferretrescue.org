@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button'
 import { gql, useQuery } from '@apollo/client'
 import { ListUsers } from './graphql/ListUsers'
 import UserRow from 'users/UserRow'
-import './index.scss'
 
 export const LIST_USERS = gql`
 query ListUsers {

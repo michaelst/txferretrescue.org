@@ -5,6 +5,9 @@ import TopicForm from 'faq/TopicForm'
 import ContentBox from 'ContentBox'
 import Button from 'react-bootstrap/Button'
 import { useHistory } from "react-router-dom"
+import QuestionRow from 'faq/QuestionRow'
+import Table from 'react-bootstrap/Table'
+import { GetFaqTopic } from './graphql/GetFaqTopic'
 
 export const GET_FAQ_TOPIC = gql`
 query GetFaqTopic($id: ID!) {
@@ -12,6 +15,11 @@ query GetFaqTopic($id: ID!) {
     id
     name
     rank
+    questions {
+      id
+      title
+      rank
+    }
   }
 }
 `
@@ -31,11 +39,11 @@ function TopicUpdatePage() {
   const [name, setName] = useState('')
   const [rank, setRank] = useState('')
 
-  useQuery(GET_FAQ_TOPIC, {
+  const { data } = useQuery<GetFaqTopic>(GET_FAQ_TOPIC, {
     variables: { id: topicId },
     onCompleted: data => {
       setName(data.faqTopic.name)
-      setRank(data.faqTopic.rank)
+      setRank(`${data.faqTopic.rank}`)
     }
   })
 
@@ -68,6 +76,21 @@ function TopicUpdatePage() {
           Update
         </Button>
       </ContentBox>
+
+      {data?.faqTopic && (
+        <Table bordered hover>
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Order</th>
+              <th className="action-row"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.faqTopic.questions.map(question => <QuestionRow topicId={data.faqTopic.id} question={question} key={question.id} />)}
+          </tbody>
+        </Table>
+      )}
     </div>
   )
 }

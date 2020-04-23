@@ -85,6 +85,9 @@ function App() {
               <Route path="/faq/create">
                 <TopicCreatePage />
               </Route>
+              <Route path="/faq/:topicId/:questionId">
+                <TopicUpdatePage />
+              </Route>
               <Route path="/faq/:topicId">
                 <TopicUpdatePage />
               </Route>

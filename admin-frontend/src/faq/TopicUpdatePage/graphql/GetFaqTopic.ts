@@ -7,11 +7,19 @@
 // GraphQL query operation: GetFaqTopic
 // ====================================================
 
+export interface GetFaqTopic_faqTopic_questions {
+  __typename: "FaqContent";
+  id: string;
+  title: string;
+  rank: number;
+}
+
 export interface GetFaqTopic_faqTopic {
   __typename: "FaqTopic";
   id: string;
   name: string;
   rank: number;
+  questions: GetFaqTopic_faqTopic_questions[];
 }
 
 export interface GetFaqTopic {

@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button'
 import { gql, useQuery } from '@apollo/client'
 import { ListVets } from './graphql/ListVets'
 import VetRow from 'vets/VetRow'
-import './index.scss'
 
 export const LIST_VETS = gql`
 query ListVets {
