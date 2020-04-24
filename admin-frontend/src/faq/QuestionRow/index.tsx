@@ -39,7 +39,7 @@ function QuestionRow({ topicId, question }: QuestionRowProps) {
   })
 
   return (
-    <tr key={question.id} className="QuestionRow" data-testid="QuestionRow">
+    <tr className="QuestionRow" data-testid="QuestionRow">
       <td>{question.title}</td>
       <td>{question.rank}</td>
       <td>
