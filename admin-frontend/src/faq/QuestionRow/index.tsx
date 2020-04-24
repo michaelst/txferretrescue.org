@@ -45,7 +45,7 @@ function QuestionRow({ topicId, question }: QuestionRowProps) {
       <td>
         <div className="d-flex align-items-center justify-content-center">
           <Link to={`/faq/${topicId}/${question.id}`} className="pr-1">edit</Link> |
-                  <Button
+          <Button
             variant="link"
             className="m-0 p-0 pl-1"
             onClick={() => deleteFaqContent({ variables: { id: question.id } })}

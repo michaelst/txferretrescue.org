@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container'
 import ApplicationsPage from 'ApplicationsPage'
 import TopicCreatePage from 'faq/TopicCreatePage'
 import TopicUpdatePage from 'faq/TopicUpdatePage'
+import QuestionCreatePage from 'faq/QuestionCreatePage'
 import FAQPage from 'faq/FAQPage'
 import FerretsPage from 'FerretsPage'
 import LoginPage from 'LoginPage'
@@ -47,7 +48,7 @@ function App() {
         {token && <Navbar setToken={setToken} />}
 
         {token && (
-          <Container className="mt-4">
+          <Container className="py-4">
             <Switch>
               <Route path="/auth/reset-password">
                 <ResetPasswordPage setToken={setToken} />
@@ -84,6 +85,9 @@ function App() {
               </Route>
               <Route path="/faq/create">
                 <TopicCreatePage />
+              </Route>
+              <Route path="/faq/:topicId/create">
+                <QuestionCreatePage />
               </Route>
               <Route path="/faq/:topicId/:questionId">
                 <TopicUpdatePage />

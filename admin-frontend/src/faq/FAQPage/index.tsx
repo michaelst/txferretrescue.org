@@ -35,7 +35,11 @@ function FAQPage() {
           </tr>
         </thead>
         <tbody>
-          {data?.faqTopics.map(topic => <TopicRow topic={topic} key={topic.id} />)}
+          {data &&
+            [...data.faqTopics]
+              .sort((a, b) => a.rank - b.rank)
+              .map(topic => <TopicRow key={topic.id} topic={topic} />)
+          }
         </tbody>
       </Table>
     </div>

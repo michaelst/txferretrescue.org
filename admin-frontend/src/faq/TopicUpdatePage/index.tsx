@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import TopicForm from 'faq/TopicForm'
 import ContentBox from 'ContentBox'
@@ -75,7 +75,10 @@ function TopicUpdatePage() {
         >
           Update
         </Button>
+        <Link to={'/faq'} className="btn btn-danger ml-2">Cancel</Link>
       </ContentBox>
+
+      <Link to={`/faq/${topicId}/create`} className="btn btn-success mb-2">Add question</Link>
 
       {data?.faqTopic && (
         <Table bordered hover>
@@ -87,7 +90,11 @@ function TopicUpdatePage() {
             </tr>
           </thead>
           <tbody>
-            {data.faqTopic.questions.map(question => <QuestionRow topicId={data.faqTopic.id} question={question} key={question.id} />)}
+            {
+              [...data.faqTopic.questions]
+                .sort((a, b) => a.rank - b.rank)
+                .map(question => <QuestionRow topicId={data.faqTopic.id} question={question} key={question.id} />)
+            }
           </tbody>
         </Table>
       )}

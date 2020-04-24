@@ -24,7 +24,5 @@ defmodule FerretRescue do
 
   def data, do: Dataloader.Ecto.new(FerretRescue.Repo, query: &query/2)
 
-  def query(FerretRescue.FAQ.Topic, _params), do: from(FerretRescue.FAQ.Topic, order_by: :rank)
-  def query(FerretRescue.FAQ.Content, _params), do: from(FerretRescue.FAQ.Content, order_by: :rank)
   def query(queryable, _params), do: queryable
 end
