@@ -16,6 +16,7 @@ query ListTopics {
       id
       content
       title
+      rank
     }
   }
 }

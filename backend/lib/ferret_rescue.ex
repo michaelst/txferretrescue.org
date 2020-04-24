@@ -5,8 +5,6 @@ defmodule FerretRescue do
 
   use Application
 
-  import Ecto.Query
-
   def start(_type, _args) do
     children = [
       FerretRescue.Repo,

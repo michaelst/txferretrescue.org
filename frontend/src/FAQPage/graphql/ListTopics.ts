@@ -12,6 +12,7 @@ export interface ListTopics_faqTopics_questions {
   id: string;
   content: string;
   title: string;
+  rank: number;
 }
 
 export interface ListTopics_faqTopics {
