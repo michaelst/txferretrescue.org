@@ -1,6 +1,6 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { ListTopics } from 'faq/FAQPage/graphql/ListTopics'
+import { ListTopics } from './graphql/ListTopics'
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer'
 import Button from 'react-bootstrap/Button'
 import ContentBox from 'ContentBox'
