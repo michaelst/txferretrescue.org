@@ -10,14 +10,15 @@
 export interface ListTopics_faqTopics_questions {
   __typename: "FaqContent";
   id: string;
-  content: string | null;
-  title: string | null;
+  content: string;
+  title: string;
 }
 
 export interface ListTopics_faqTopics {
   __typename: "FaqTopic";
   id: string;
-  name: string | null;
+  name: string;
+  rank: number;
   questions: ListTopics_faqTopics_questions[];
 }
 
