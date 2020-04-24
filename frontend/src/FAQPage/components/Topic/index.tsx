@@ -11,7 +11,11 @@ function Topic({ topic }: TopicProps) {
     <div className="Topic mb-4" data-testid="Topic">
       <h3>{topic.name}</h3>
 
-      {topic.questions.map(question => <Question key={question.id} question={question} />)}
+      {
+        [...topic.questions]
+          .sort((a, b) => a.rank - b.rank)
+          .map(question => <Question key={question.id} question={question} />)
+      }
     </div>
   )
 }

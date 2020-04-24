@@ -4,25 +4,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ListTopics
+// GraphQL fragment: faqTopic
 // ====================================================
 
-export interface ListTopics_faqTopics_questions {
+export interface faqTopic_questions {
   __typename: "FaqContent";
   id: string;
-  content: string;
   title: string;
   rank: number;
 }
 
-export interface ListTopics_faqTopics {
+export interface faqTopic {
   __typename: "FaqTopic";
-  id: string;
-  name: string;
-  rank: number;
-  questions: ListTopics_faqTopics_questions[];
-}
-
-export interface ListTopics {
-  faqTopics: ListTopics_faqTopics[];
+  questions: faqTopic_questions[];
 }

@@ -3,7 +3,7 @@ import { gql, useMutation } from '@apollo/client'
 import TopicForm from 'faq/TopicForm'
 import ContentBox from 'ContentBox'
 import Button from 'react-bootstrap/Button'
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { LIST_FAQ_TOPICS } from '../FAQPage'
 import { ListFaqTopics } from '../FAQPage/graphql/ListFaqTopics'
 
@@ -57,6 +57,7 @@ function TopicCreatePage() {
         >
           Create
         </Button>
+        <Link to={'/faq'} className="btn btn-danger ml-2">Cancel</Link>
       </ContentBox>
     </div>
   )

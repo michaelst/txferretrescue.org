@@ -11,10 +11,12 @@ query ListTopics {
   faqTopics {
     id
     name
+    rank
     questions {
       id
       content
       title
+      rank
     }
   }
 }
@@ -28,7 +30,11 @@ export function FAQPage() {
       <h3>Frequently Asked Questions</h3>
 
       <ContentBox>
-        {data?.faqTopics.map(topic => <Topic key={topic.id} topic={topic} />)}
+        {data &&
+          [...data.faqTopics]
+            .sort((a, b) => a.rank - b.rank)
+            .map(topic => <Topic key={topic.id} topic={topic} />)
+        }
 
         <LinkContainer to="/apply">
           <Button className="btn-lg btn-success">Adopt A Ferret!</Button>

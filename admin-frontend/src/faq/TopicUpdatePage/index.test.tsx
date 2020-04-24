@@ -2,6 +2,7 @@ import React from 'react'
 import { render, act, waitFor } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
 import TopicUpdatePage, { GET_FAQ_TOPIC, UPDATE_FAQ_TOPIC } from './'
+import { DELETE_FAQ_CONTENT } from '../QuestionRow'
 import userEvent from '@testing-library/user-event'
 import { Route, MemoryRouter } from 'react-router-dom'
 import { InMemoryCache } from '@apollo/client'
@@ -22,7 +23,15 @@ const mocks = [
           "__typename": "FaqTopic",
           "id": "1",
           "name": "test",
-          "rank": 2
+          "rank": 2,
+          "questions": [
+            {
+              "__typename": "FaqContent",
+              "id": "1",
+              "title": "What is a ferret?",
+              "rank": 1,
+            }
+          ]
         }
       }
     },
@@ -46,11 +55,27 @@ const mocks = [
         }
       }
     },
+  },
+  {
+    request: {
+      query: DELETE_FAQ_CONTENT,
+      variables: {
+        id: "1",
+      }
+    },
+    result: {
+      data: {
+        deleteFaqContent: {
+          "__typename": "FaqContent",
+          "id": "1",
+        }
+      }
+    },
   }
 ]
 
 test('render TopicUpdatePage', async () => {
-  const { getByTestId } = render(
+  const { getByTestId, getByText } = render(
     <MockedProvider cache={cache} mocks={mocks}>
       <MemoryRouter initialEntries={['/faq/1']}>
         <Route path="/faq/:topicId">
@@ -59,6 +84,15 @@ test('render TopicUpdatePage', async () => {
       </MemoryRouter>
     </MockedProvider>
   )
+
+  await waitFor(() => getByText('What is a ferret?'))
+
+  const row = getByText('What is a ferret?')
+
+  const deleteButton = getByTestId('delete-question-1')
+  userEvent.click(deleteButton)
+
+  await waitFor(() => expect(row).not.toBeInTheDocument())
 
   const nameField = getByTestId('topic-form-name-field')
   userEvent.type(nameField, 'Basic')

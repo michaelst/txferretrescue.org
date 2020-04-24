@@ -5,7 +5,6 @@ import LinkContainer from 'react-router-bootstrap/lib/LinkContainer'
 import Button from 'react-bootstrap/Button'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import { ListSitters } from './graphql/ListSitters'
-import './index.scss'
 
 export const LIST_SITTERS = gql`
 query ListSitters {
