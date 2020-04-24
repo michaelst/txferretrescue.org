@@ -29,8 +29,10 @@ function Question({ question }: QuestionProps) {
         </Card.Header>
         <Collapse in={open}>
           <Card.Body id={`collapse-${question.id}`}>
-            <p dangerouslySetInnerHTML={{__html: question.content || ''}} />
-        </Card.Body>
+            {
+              question.content.split('\n').map((item, i) => <p key={i} dangerouslySetInnerHTML={{ __html: item }} /> )
+            }
+          </Card.Body>
         </Collapse>
       </Card>
     </div>

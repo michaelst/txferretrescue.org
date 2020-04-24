@@ -5,6 +5,7 @@ import ApplicationsPage from 'ApplicationsPage'
 import TopicCreatePage from 'faq/TopicCreatePage'
 import TopicUpdatePage from 'faq/TopicUpdatePage'
 import QuestionCreatePage from 'faq/QuestionCreatePage'
+import QuestionUpdatePage from 'faq/QuestionUpdatePage'
 import FAQPage from 'faq/FAQPage'
 import FerretsPage from 'FerretsPage'
 import LoginPage from 'LoginPage'
@@ -90,7 +91,7 @@ function App() {
                 <QuestionCreatePage />
               </Route>
               <Route path="/faq/:topicId/:questionId">
-                <TopicUpdatePage />
+                <QuestionUpdatePage />
               </Route>
               <Route path="/faq/:topicId">
                 <TopicUpdatePage />
