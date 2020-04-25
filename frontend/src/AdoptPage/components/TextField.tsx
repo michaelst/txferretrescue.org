@@ -14,7 +14,7 @@ function TextField({ label, value, setValue, required = true }: TextFieldProps) 
       <Form.Label>{label}</Form.Label>
       <Form.Control
         as="textarea"
-        rows="4"
+        rows={4}
         value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
         isInvalid={value.length === 0 && required}

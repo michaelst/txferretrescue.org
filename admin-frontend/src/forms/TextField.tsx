@@ -7,10 +7,10 @@ type TextFieldProps = {
   setValue: React.Dispatch<React.SetStateAction<string>>, 
   required?: boolean,
   testId?: string
-  rows?: string
+  rows?: number
 }
 
-function TextField({ label, value, setValue, required = true, testId, rows = '4' }: TextFieldProps) {
+function TextField({ label, value, setValue, required = true, testId, rows = 4 }: TextFieldProps) {
   return (
     <Form.Group>
       <Form.Label>{label}</Form.Label>

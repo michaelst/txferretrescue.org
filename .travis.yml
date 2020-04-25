@@ -40,7 +40,7 @@ jobs:
     - CI=true
     - DEPLOY_BUCKET=txferretrescue.org
     before_install: cd frontend
-    script: yarn test --coverage
+    script: npm run test --coverage
     after_success: bash <(curl -s https://codecov.io/bash)
     if: NOT branch = master
   - name: Admin Frontend
@@ -52,7 +52,7 @@ jobs:
     env:
     - CI=true
     before_install: cd admin-frontend
-    script: yarn test --coverage
+    script: npm run test --coverage
     after_success: bash <(curl -s https://codecov.io/bash)
     if: NOT branch = master
 
@@ -67,7 +67,11 @@ jobs:
     env:
     - DEPLOY_PROVIDER=firebase
     before_install: cd frontend
-    script: yarn build
+    script: npm run build
+    deploy:
+      provider: firebase
+      token: $FIREBASE_TOKEN
+      skip_cleanup: true
   - name: Admin Frontend
     if: branch = master
     language: node_js
@@ -75,10 +79,12 @@ jobs:
     cache:
       directories:
       - admin-frontend/node_modules
-    env:
-    - DEPLOY_PROVIDER=firebase
     before_install: cd admin-frontend
-    script: yarn build
+    script: npm run build
+    deploy:
+      provider: firebase
+      token: $FIREBASE_TOKEN
+      skip_cleanup: true
   - name: Backend
     if: branch = master
     language: minimal
@@ -114,11 +120,3 @@ jobs:
     cache:
       directories:
       - "$HOME/google-cloud-sdk/"
-
-deploy:
-  - provider: firebase
-    token: $FIREBASE_TOKEN
-    skip_cleanup: true
-    on:
-      branch: master
-      condition: $DEPLOY_PROVIDER = firebase

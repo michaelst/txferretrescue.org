@@ -15,7 +15,7 @@ function TopicForm({ title, rank, content, setTitle, setRank, setContent }: Topi
     <div className="TopicForm">
       <TextInput label="Question" value={title} setValue={setTitle} testId='topic-form-title-field' />
       <TextInput label="Rank" value={rank} setValue={setRank} testId='topic-form-rank-field' />
-      <TextField label="Answer" value={content} setValue={setContent} rows='15' testId='topic-form-content-field' />
+      <TextField label="Answer" value={content} setValue={setContent} rows={15} testId='topic-form-content-field' />
     </div>
   )
 }
