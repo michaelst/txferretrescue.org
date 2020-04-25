@@ -1,6 +1,5 @@
 defmodule FerretRescue.Plug.AuthTest do
-  use FerretRescue.DataCase, async: true
-  use Phoenix.ConnTest
+  use FerretRescue.ConnCase, async: true
   import FerretRescue.Factory
 
   alias FerretRescue.Auth.Guardian

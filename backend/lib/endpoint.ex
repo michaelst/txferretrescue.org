@@ -1,4 +1,4 @@
-defmodule FerretRescueWeb.Endpoint do
+defmodule FerretRescue.Endpoint do
   use Phoenix.Endpoint, otp_app: :ferret_rescue
 
   plug CORSPlug
@@ -21,5 +21,5 @@ defmodule FerretRescueWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
-  plug FerretRescueWeb.Router
+  plug FerretRescue.Router
 end

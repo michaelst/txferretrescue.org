@@ -8,7 +8,7 @@ defmodule FerretRescue do
   def start(_type, _args) do
     children = [
       FerretRescue.Repo,
-      FerretRescueWeb.Endpoint
+      FerretRescue.Endpoint
     ]
 
     opts = [strategy: :one_for_one, name: FerretRescue.Supervisor]
@@ -16,7 +16,7 @@ defmodule FerretRescue do
   end
 
   def config_change(changed, _new, removed) do
-    FerretRescueWeb.Endpoint.config_change(changed, removed)
+    FerretRescue.Endpoint.config_change(changed, removed)
     :ok
   end
 

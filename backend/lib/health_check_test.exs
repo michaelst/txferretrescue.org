@@ -1,5 +1,5 @@
 defmodule FerretRescue.HealthCheckTest do
-  use FerretRescueWeb.ConnCase, async: true
+  use FerretRescue.ConnCase, async: true
 
   test "health check", %{conn: conn} do
     assert "ok" ==
