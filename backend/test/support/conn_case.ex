@@ -1,4 +1,4 @@
-defmodule FerretRescueWeb.ConnCase do
+defmodule FerretRescue.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule FerretRescueWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use FerretRescueWeb.ConnCase, async: true`, although
+  by setting `use FerretRescue.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,11 +22,12 @@ defmodule FerretRescueWeb.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
-      alias FerretRescueWeb.Router.Helpers, as: Routes
+      import Plug.Conn
+      import Phoenix.ConnTest
+      alias FerretRescue.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint FerretRescueWeb.Endpoint
+      @endpoint FerretRescue.Endpoint
     end
   end
 

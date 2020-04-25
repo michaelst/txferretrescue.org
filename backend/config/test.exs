@@ -8,7 +8,7 @@ config :ferret_rescue, FerretRescue.Repo,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 20
 
-config :ferret_rescue, FerretRescueWeb.Endpoint,
+config :ferret_rescue, FerretRescue.Endpoint,
   http: [port: 4002],
   server: false
 

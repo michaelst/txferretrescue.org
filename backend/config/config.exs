@@ -5,10 +5,9 @@ config :ferret_rescue,
   ecto_repos: [FerretRescue.Repo],
   application_email: "txflrapplications@gmail.com"
 
-config :ferret_rescue, FerretRescueWeb.Endpoint,
+config :ferret_rescue, FerretRescue.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: FerretRescueWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: FerretRescue.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: FerretRescue.ErrorView, accepts: ~w(html json)]
 
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -1,5 +1,5 @@
 defmodule FerretRescue.RouterTest do
-  use FerretRescueWeb.ConnCase
+  use FerretRescue.ConnCase
 
   test "graphql", %{conn: conn} do
     query = """

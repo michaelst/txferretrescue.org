@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :ferret_rescue, FerretRescueWeb.Endpoint,
+config :ferret_rescue, FerretRescue.Endpoint,
   url: [host: "api.txferretrescue.org", port: 443],
   http: [port: 80],
   secret_key_base: System.fetch_env!("SECRET_KEY_BASE"),

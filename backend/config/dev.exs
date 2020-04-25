@@ -8,7 +8,7 @@ config :ferret_rescue, FerretRescue.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
-config :ferret_rescue, FerretRescueWeb.Endpoint,
+config :ferret_rescue, FerretRescue.Endpoint,
   http: [port: 4000],
   secret_key_base: "4DFzJBdaBpWgtkrl2CPGLKjtfpJ9i1IKQJ0Hb6eto7IsLF+Ij3d3yuWboBCfw0oG",
   debug_errors: true,
