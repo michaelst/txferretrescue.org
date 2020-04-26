@@ -3,28 +3,30 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { Gender } from "./../../globalTypes";
+import { Gender } from "./../../../globalTypes";
 
 // ====================================================
-// GraphQL query operation: ListFerrets
+// GraphQL query operation: GetFerret
 // ====================================================
 
-export interface ListFerrets_ferrets {
+export interface GetFerret_ferret {
   __typename: "Ferret";
   id: string;
   ageMonths: number;
   ageYears: number;
+  available: boolean;
   bio: string | null;
   fee: string;
+  foster: boolean;
   gender: Gender;
   imageUrl: string | null;
   name: string;
 }
 
-export interface ListFerrets {
-  ferrets: ListFerrets_ferrets[];
+export interface GetFerret {
+  ferret: GetFerret_ferret;
 }
 
-export interface ListFerretsVariables {
-  foster: boolean;
+export interface GetFerretVariables {
+  id: string;
 }

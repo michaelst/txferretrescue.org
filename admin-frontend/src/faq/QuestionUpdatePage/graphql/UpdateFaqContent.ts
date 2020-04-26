@@ -12,6 +12,7 @@ export interface UpdateFaqContent_updateFaqContent {
   id: string;
   title: string;
   rank: number;
+  content: string;
 }
 
 export interface UpdateFaqContent {

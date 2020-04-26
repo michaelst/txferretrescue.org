@@ -15,10 +15,10 @@ defmodule FerretRescue.FAQ.Content.Types do
   end
 
   input_object :faq_content_input do
+    field :topic_id, :id
     field :content, :string
     field :rank, :integer
     field :title, :string
-    field :topic_id, :id
   end
 
   object :faq_content_queries do

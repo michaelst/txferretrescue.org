@@ -28,7 +28,7 @@ function FerretRow({ ferret }: FerretRowProps) {
               {ferret.ageYears} {ferret.ageYears === 1 ? 'year ' : 'years '}
               {ferret.ageMonths} {ferret.ageMonths === 1 ? 'month' : 'months'}
               <br />
-              <b>Gender:</b> {ferret.gender}
+              <b>Gender:</b> {ferret.gender.toLowerCase()}
               <br />
               <b>Adoption Fee:</b> ${ferret.fee}
             </p>

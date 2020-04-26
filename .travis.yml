@@ -40,7 +40,7 @@ jobs:
     - CI=true
     - DEPLOY_BUCKET=txferretrescue.org
     before_install: cd frontend
-    script: npm run test --coverage
+    script: npm test -- --coverage
     after_success: bash <(curl -s https://codecov.io/bash)
     if: NOT branch = master
   - name: Admin Frontend
@@ -52,7 +52,7 @@ jobs:
     env:
     - CI=true
     before_install: cd admin-frontend
-    script: npm run test --coverage
+    script: npm test -- --coverage
     after_success: bash <(curl -s https://codecov.io/bash)
     if: NOT branch = master
 

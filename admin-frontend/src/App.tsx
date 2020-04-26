@@ -7,7 +7,9 @@ import TopicUpdatePage from 'faq/TopicUpdatePage'
 import QuestionCreatePage from 'faq/QuestionCreatePage'
 import QuestionUpdatePage from 'faq/QuestionUpdatePage'
 import FAQPage from 'faq/FAQPage'
-import FerretsPage from 'FerretsPage'
+import FerretCreatePage from 'ferrets/FerretCreatePage'
+import FerretUpdatePage from 'ferrets/FerretUpdatePage'
+import FerretsPage from 'ferrets/FerretsPage'
 import LoginPage from 'LoginPage'
 import Navbar from 'Navbar'
 import ResetPasswordPage from 'ResetPasswordPage'
@@ -56,6 +58,12 @@ function App() {
               </Route>
               <Route path="/applications">
                 <ApplicationsPage />
+              </Route>
+              <Route path="/ferrets/create">
+                <FerretCreatePage />
+              </Route>
+              <Route path="/ferrets/:ferretId">
+                <FerretUpdatePage />
               </Route>
               <Route path="/ferrets">
                 <FerretsPage />
