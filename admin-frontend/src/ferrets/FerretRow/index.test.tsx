@@ -45,7 +45,7 @@ const mocks = [
   }
 ]
 
-test('render VetRow', async () => {
+test('render FerretRow', async () => {
   const { getByTestId, getByText } = render(
     <MockedProvider mocks={mocks}>
       <BrowserRouter>

@@ -23,15 +23,15 @@ defmodule FerretRescue.Ferret.Types do
   end
 
   input_object :ferret_input do
-    field :age_months, non_null(:integer)
-    field :age_years, non_null(:integer)
-    field :available, non_null(:boolean)
+    field :age_months, :integer
+    field :age_years, :integer
+    field :available, :boolean
     field :bio, :string
-    field :fee, non_null(:string)
-    field :foster, non_null(:boolean)
-    field :gender, non_null(:gender)
+    field :fee, :string
+    field :foster, :boolean
+    field :gender, :gender
     field :image_url, :string
-    field :name, non_null(:string)
+    field :name, :string
   end
 
   object :ferret_queries do
