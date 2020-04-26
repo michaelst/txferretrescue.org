@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { Gender } from "./../../globalTypes";
+
 // ====================================================
 // GraphQL query operation: ListFerrets
 // ====================================================
@@ -14,7 +16,7 @@ export interface ListFerrets_ferrets {
   ageYears: number;
   bio: string | null;
   fee: string;
-  gender: string;
+  gender: Gender;
   imageUrl: string | null;
   name: string;
 }
