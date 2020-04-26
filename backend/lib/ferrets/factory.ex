@@ -11,7 +11,7 @@ defmodule FerretRescue.Ferret.Factory do
           available: true,
           fee: 125,
           foster: false,
-          gender: "Male",
+          gender: :male,
           name: "My Ferret"
         }
       end
