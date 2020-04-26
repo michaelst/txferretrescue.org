@@ -19,7 +19,7 @@ function TextField({ label, value, setValue, required = true, testId, rows = 4 }
         rows={rows}
         value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
-        isInvalid={value.length === 0 && required}
+        isInvalid={required && value.length === 0}
         data-testid={testId}
       />
     </Form.Group>

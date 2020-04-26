@@ -22,6 +22,6 @@ defmodule FerretRescue.Ferret do
   def changeset(struct, params) do
     struct
     |> cast(params, __schema__(:fields) -- [:id])
-    |> validate_required(__schema__(:fields) -- [:id, :bio, :inserted_at, :updated_at])
+    |> validate_required(__schema__(:fields) -- [:id, :bio, :image_url, :inserted_at, :updated_at])
   end
 end

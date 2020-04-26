@@ -6,19 +6,27 @@
 import { Gender } from "./../../../globalTypes";
 
 // ====================================================
-// GraphQL query operation: ListFerrets
+// GraphQL query operation: GetFerret
 // ====================================================
 
-export interface ListFerrets_ferrets {
+export interface GetFerret_ferret {
   __typename: "Ferret";
   id: string;
-  name: string;
-  gender: Gender;
+  ageMonths: number;
+  ageYears: number;
   available: boolean;
-  foster: boolean;
+  bio: string | null;
   fee: string;
+  foster: boolean;
+  gender: Gender;
+  imageUrl: string | null;
+  name: string;
 }
 
-export interface ListFerrets {
-  ferrets: ListFerrets_ferrets[];
+export interface GetFerret {
+  ferret: GetFerret_ferret;
+}
+
+export interface GetFerretVariables {
+  id: string;
 }
