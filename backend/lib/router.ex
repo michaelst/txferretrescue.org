@@ -2,7 +2,7 @@ defmodule FerretRescue.Router do
   use Phoenix.Router
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, [:urlencoded, :multipart, :json]
     plug FerretRescue.Plug.Auth
   end
 

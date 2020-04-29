@@ -37,5 +37,5 @@ export interface UpdateFerretVariables {
   gender: Gender;
   available: boolean;
   foster: boolean;
-  imageUrl?: string | null;
+  image?: any | null;
 }

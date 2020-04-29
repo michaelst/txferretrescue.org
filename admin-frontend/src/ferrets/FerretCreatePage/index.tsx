@@ -30,9 +30,10 @@ function FerretCreatePage() {
   const [ageMonths, setAgeMonths] = useState('')
   const [fee, setFee] = useState('')
   const [bio, setBio] = useState('')
-  const [gender, setGender] = useState<Gender>()
+  const [gender, setGender] = useState(Gender.MALE)
   const [available, setAvailable] = useState<boolean>()
   const [foster, setFoster] = useState<boolean>()
+  const [image, setImage] = useState<File>()
 
   const history = useHistory()
 
@@ -45,9 +46,10 @@ function FerretCreatePage() {
       bio: bio,
       gender: gender,
       available: available,
-      foster: foster
+      foster: foster,
+      image: image
     },
-    onCompleted: data => history.push(`/ferrets/${data.createFerret.id}`),
+    onCompleted: () => history.push('/ferrets'),
     onError: () => { },
     update(cache, { data: { createFerret } }) {
       const data = cache.readQuery<ListFerrets | null>({ query: LIST_FERRETS })
@@ -71,6 +73,7 @@ function FerretCreatePage() {
           gender={gender}
           available={available}
           foster={foster}
+          image={image}
           setName={setName}
           setAgeYears={setAgeYears}
           setAgeMonths={setAgeMonths}
@@ -79,6 +82,7 @@ function FerretCreatePage() {
           setGender={setGender}
           setAvailable={setAvailable}
           setFoster={setFoster}
+          setImage={setImage}
         />
 
         <Button

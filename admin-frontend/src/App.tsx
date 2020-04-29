@@ -21,6 +21,7 @@ import UsersPage from 'users/UsersPage'
 import VetCreatePage from 'vets/VetCreatePage'
 import VetsPage from 'vets/VetsPage'
 import VetUpdatePage from 'vets/VetUpdatePage'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
 
 function App() {

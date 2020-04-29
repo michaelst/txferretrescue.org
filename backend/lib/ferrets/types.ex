@@ -30,8 +30,8 @@ defmodule FerretRescue.Ferret.Types do
     field :fee, :string
     field :foster, :boolean
     field :gender, :gender
-    field :image_url, :string
     field :name, :string
+    field :image, :upload
   end
 
   object :ferret_queries do
