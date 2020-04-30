@@ -13,7 +13,7 @@ defmodule FerretRescue.Ferret do
     field :fee, :decimal
     field :foster, :boolean
     field :gender, FerretRescue.Ferret.Enum.Gender
-    field :image_url, :string
+    field :image_uploaded, :boolean, default: false
     field :name, :string
 
     timestamps()
@@ -22,6 +22,6 @@ defmodule FerretRescue.Ferret do
   def changeset(struct, params) do
     struct
     |> cast(params, __schema__(:fields) -- [:id])
-    |> validate_required(__schema__(:fields) -- [:id, :bio, :image_url, :inserted_at, :updated_at])
+    |> validate_required(__schema__(:fields) -- [:id, :bio, :inserted_at, :updated_at])
   end
 end

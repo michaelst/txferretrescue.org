@@ -20,15 +20,15 @@ query GetFerret($id: ID!) {
     fee
     foster
     gender
-    imageUrl
+    image
     name
   }
 }
 `
 
 export const UPDATE_FERRET = gql`
-mutation UpdateFerret($id: ID!, $name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: String!, $bio: String, $gender: Gender!, $available: Boolean!, $foster: Boolean!, $image: Upload) {
-  updateFerret(id: $id, input: {name: $name, ageYears: $ageYears, ageMonths: $ageMonths, fee: $fee, bio: $bio, gender: $gender, available: $available, foster: $foster, image: $image}) {
+mutation UpdateFerret($id: ID!, $name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: String!, $bio: String, $gender: Gender!, $available: Boolean!, $foster: Boolean!, $imageUpload: Upload) {
+  updateFerret(id: $id, input: {name: $name, ageYears: $ageYears, ageMonths: $ageMonths, fee: $fee, bio: $bio, gender: $gender, available: $available, foster: $foster, imageUpload: $imageUpload}) {
     id
     ageMonths
     ageYears
@@ -37,7 +37,7 @@ mutation UpdateFerret($id: ID!, $name: String!, $ageYears: Int!, $ageMonths: Int
     fee
     foster
     gender
-    imageUrl
+    image
     name
   }
 }
@@ -53,7 +53,7 @@ function FerretUpdatePage() {
   const [gender, setGender] = useState(Gender.MALE)
   const [available, setAvailable] = useState<boolean>()
   const [foster, setFoster] = useState<boolean>()
-  const [image, setImage] = useState<File>()
+  const [imageUpload, setImageUpload] = useState<File>()
 
   useQuery(GET_FERRET, {
     variables: { id: ferretId },
@@ -66,12 +66,13 @@ function FerretUpdatePage() {
       setGender(data.ferret.gender)
       setAvailable(data.ferret.available)
       setFoster(data.ferret.foster)
+
+      const element = document.getElementById('uploaded-photo') as HTMLImageElement
+      if (element && data.ferret.image) element.src = data.ferret.image
     }
   })
 
   const history = useHistory()
-  
-  console.log(image)
 
   const variables: UpdateFerretVariables = {
     id: ferretId!,
@@ -83,7 +84,7 @@ function FerretUpdatePage() {
     gender: gender,
     available: available || false,
     foster: foster || false,
-    image: image
+    imageUpload: imageUpload
   }
 
   const [updateFerret] = useMutation(UPDATE_FERRET, {
@@ -104,7 +105,7 @@ function FerretUpdatePage() {
           gender={gender}
           available={available}
           foster={foster}
-          image={image}
+          imageUpload={imageUpload}
           setName={setName}
           setAgeYears={setAgeYears}
           setAgeMonths={setAgeMonths}
@@ -113,7 +114,7 @@ function FerretUpdatePage() {
           setGender={setGender}
           setAvailable={setAvailable}
           setFoster={setFoster}
-          setImage={setImage}
+          setImageUpload={setImageUpload}
         />
 
         <Button

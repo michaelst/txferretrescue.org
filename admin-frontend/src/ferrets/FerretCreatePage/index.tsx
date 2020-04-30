@@ -9,8 +9,8 @@ import { ListFerrets } from '../FerretsPage/graphql/ListFerrets'
 import { Gender}  from 'globalTypes'
 
 export const CREATE_FERRET = gql`
-mutation CreateFerret($name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: String!, $bio: String, $gender: Gender!, $available: Boolean!, $foster: Boolean!) {
-  createFerret(input: {name: $name, ageYears: $ageYears, ageMonths: $ageMonths, fee: $fee, bio: $bio, gender: $gender, available: $available, foster: $foster}) {
+mutation CreateFerret($name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: String!, $bio: String, $gender: Gender!, $available: Boolean!, $foster: Boolean!, $imageUpload: Upload) {
+  createFerret(input: {name: $name, ageYears: $ageYears, ageMonths: $ageMonths, fee: $fee, bio: $bio, gender: $gender, available: $available, foster: $foster, imageUpload: $imageUpload}) {
     id
     ageMonths
     ageYears
@@ -19,6 +19,7 @@ mutation CreateFerret($name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: S
     fee
     foster
     gender
+    image
     name
   }
 }
@@ -33,7 +34,7 @@ function FerretCreatePage() {
   const [gender, setGender] = useState(Gender.MALE)
   const [available, setAvailable] = useState<boolean>()
   const [foster, setFoster] = useState<boolean>()
-  const [image, setImage] = useState<File>()
+  const [imageUpload, setImageUpload] = useState<File>()
 
   const history = useHistory()
 
@@ -47,7 +48,7 @@ function FerretCreatePage() {
       gender: gender,
       available: available,
       foster: foster,
-      image: image
+      imageUpload: imageUpload
     },
     onCompleted: () => history.push('/ferrets'),
     onError: () => { },
@@ -73,7 +74,7 @@ function FerretCreatePage() {
           gender={gender}
           available={available}
           foster={foster}
-          image={image}
+          imageUpload={imageUpload}
           setName={setName}
           setAgeYears={setAgeYears}
           setAgeMonths={setAgeMonths}
@@ -82,7 +83,7 @@ function FerretCreatePage() {
           setGender={setGender}
           setAvailable={setAvailable}
           setFoster={setFoster}
-          setImage={setImage}
+          setImageUpload={setImageUpload}
         />
 
         <Button

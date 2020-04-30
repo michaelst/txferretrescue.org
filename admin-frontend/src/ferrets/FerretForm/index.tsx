@@ -16,7 +16,7 @@ type FerretFormProps = {
   gender: Gender,
   available: boolean | undefined,
   foster: boolean | undefined,
-  image: File | undefined,
+  imageUpload: File | undefined,
   setName: React.Dispatch<React.SetStateAction<string>>,
   setAgeYears: React.Dispatch<React.SetStateAction<string>>,
   setAgeMonths: React.Dispatch<React.SetStateAction<string>>,
@@ -25,13 +25,12 @@ type FerretFormProps = {
   setGender: React.Dispatch<React.SetStateAction<Gender>>,
   setAvailable: React.Dispatch<React.SetStateAction<boolean | undefined>>,
   setFoster: React.Dispatch<React.SetStateAction<boolean | undefined>>,
-  setImage: React.Dispatch<React.SetStateAction<File | undefined>>
+  setImageUpload: React.Dispatch<React.SetStateAction<File | undefined>>
 }
 
-const processFile = (selectedFile: File, setImage: React.Dispatch<React.SetStateAction<File | undefined>>) => {
+const processFile = (selectedFile: File, setImageUpload: React.Dispatch<React.SetStateAction<File | undefined>>) => {
   const reader = new FileReader()
   reader.readAsDataURL(selectedFile)
-  const img = new Image()
   reader.onload = event => {
     if (typeof event.target?.result === "string") {
       const img = new Image()
@@ -53,7 +52,7 @@ const processFile = (selectedFile: File, setImage: React.Dispatch<React.SetState
               const element = document.getElementById('uploaded-photo') as HTMLImageElement
               if (element) element.src = URL.createObjectURL(blob)
 
-              setImage(file)
+              setImageUpload(file)
             }
           }, 'image/jpeg', 1)
         }
@@ -62,7 +61,7 @@ const processFile = (selectedFile: File, setImage: React.Dispatch<React.SetState
   }
 }
 
-function FerretForm({ name, ageYears, ageMonths, fee, bio, gender, available, foster, image, setName, setAgeYears, setAgeMonths, setFee, setBio, setGender, setAvailable, setFoster, setImage }: FerretFormProps) {
+function FerretForm({ name, ageYears, ageMonths, fee, bio, gender, available, foster, imageUpload, setName, setAgeYears, setAgeMonths, setFee, setBio, setGender, setAvailable, setFoster, setImageUpload }: FerretFormProps) {
   return (
     <div className="FerretForm mb-5">
       <TextInput label="Name" value={name} setValue={setName} testId='ferret-form-name-field' />
@@ -80,15 +79,15 @@ function FerretForm({ name, ageYears, ageMonths, fee, bio, gender, available, fo
         <div className="col">
           <Form.File
             id="upload-photo"
-            label={image?.name || "Upload photo"}
+            label={imageUpload?.name || "Upload photo"}
             className="d-flex align-items-top"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (event.target.files?.length === 1) processFile(event.target.files[0], setImage)
+              if (event.target.files?.length === 1) processFile(event.target.files[0], setImageUpload)
             }}
             custom
           />
 
-          <img id="uploaded-photo" className="mt-2" />
+          <img id="uploaded-photo" className="mt-2" alt="uploaded" />
         </div>
       </div>
     </div>

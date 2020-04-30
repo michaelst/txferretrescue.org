@@ -29,7 +29,7 @@ const mocks = [
           'foster': false,
           'gender': 'FEMALE',
           'name': 'Some name',
-          'imageUrl': null,
+          'image': null,
         }
       }
     },
@@ -61,7 +61,7 @@ const mocks = [
           'fee': '125.00',
           'foster': false,
           'gender': 'FEMALE',
-          'imageUrl': null,
+          'image': null,
           'name': 'Lois',
         }
       }

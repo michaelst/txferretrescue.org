@@ -19,7 +19,7 @@ export interface UpdateFerret_updateFerret {
   fee: string;
   foster: boolean;
   gender: Gender;
-  imageUrl: string | null;
+  image: string | null;
   name: string;
 }
 
@@ -37,5 +37,5 @@ export interface UpdateFerretVariables {
   gender: Gender;
   available: boolean;
   foster: boolean;
-  image?: any | null;
+  imageUpload?: any | null;
 }

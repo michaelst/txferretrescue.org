@@ -11,7 +11,7 @@ defmodule FerretRescue.Repo.Migrations.Ferrets do
       add :available, :boolean, null: false
       add :foster, :boolean, null: false
       add :fee, :decimal, precision: 5, scale: 2, null: false
-      add :image_url, :text
+      add :image_uploaded, :boolean, null: false, default: false
 
       timestamps()
     end

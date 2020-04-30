@@ -24,7 +24,7 @@ function mocks(foster: boolean) {
               "fee": "100.00",
               "gender": "Male",
               "id": "1",
-              "imageUrl": "https://storage.googleapis.com/ferret-rescue/ferret-images/1466285620.jpg",
+              "image": "https://storage.googleapis.com/ferret-rescue/ferret-images/1466285620.jpg",
               "name": "Test"
             },
             {
@@ -35,7 +35,7 @@ function mocks(foster: boolean) {
               "fee": "100.00",
               "gender": "Male",
               "id": "2",
-              "imageUrl": "https://storage.googleapis.com/ferret-rescue/ferret-images/1466285620.jpg",
+              "image": "https://storage.googleapis.com/ferret-rescue/ferret-images/1466285620.jpg",
               "name": "Test"
             }
           ]

@@ -18,7 +18,7 @@ defmodule FerretRescue.FAQ.Content.Types.GetTest do
             %{
               data: %{
                 "faqContent" => %{
-                  "id" => "#{content.id}",
+                  "id" => "#{content.id}"
                 }
               }
             }} == Absinthe.run(doc, FerretRescue.Schema)

@@ -19,6 +19,8 @@ config :ferret_rescue, FerretRescue.Mailer, adapter: Bamboo.SendGridAdapter
 
 config :ferret_rescue, FerretRescue.Auth.Guardian, issuer: "https://api.txferretrescue.org"
 
-config :goth, project_id: "cloud-57"
+config :goth, project_id: "cloud-57", default: [client_email: "michaelst57@gmail.com"]
+
+config :waffle, storage: Waffle.Storage.Google.CloudStorage
 
 import_config "#{Mix.env()}.exs"

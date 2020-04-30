@@ -17,7 +17,7 @@ export interface ListFerrets_ferrets {
   bio: string | null;
   fee: string;
   gender: Gender;
-  imageUrl: string | null;
+  image: string | null;
   name: string;
 }
 

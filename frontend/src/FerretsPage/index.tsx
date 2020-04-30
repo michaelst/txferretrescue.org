@@ -14,7 +14,7 @@ query ListFerrets($foster : Boolean!) {
     bio
     fee
     gender
-    imageUrl
+    image
     name
   }
 }
