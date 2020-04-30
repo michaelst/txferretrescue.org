@@ -31,4 +31,6 @@ defmodule FerretRescue.Ferret.Utils do
         {:error, error}
     end
   end
+
+  def upload_image(ferret, _params), do: {:ok, ferret}
 end
