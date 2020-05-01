@@ -19,7 +19,7 @@ export interface GetFerret_ferret {
   fee: string;
   foster: boolean;
   gender: Gender;
-  imageUrl: string | null;
+  image: string | null;
   name: string;
 }
 

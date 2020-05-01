@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <Container className="mt-4">
+        <Container className="py-4">
           <Switch>
             <Route path="/apply">
               <AdoptPage />

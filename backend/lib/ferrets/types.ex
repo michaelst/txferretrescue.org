@@ -18,8 +18,18 @@ defmodule FerretRescue.Ferret.Types do
     field :fee, non_null(:string)
     field :foster, non_null(:boolean)
     field :gender, non_null(:gender)
-    field :image_url, :string
     field :name, non_null(:string)
+
+    field :image, :string do
+      resolve(fn
+        %{id: id, image_uploaded: true, updated_at: updated_at}, _args, _resolution ->
+          timestamp = NaiveDateTime.to_iso8601(updated_at, :basic)
+          {:ok, "https://storage.googleapis.com/ferret-rescue/ferret-images/#{id}.jpg?#{timestamp}"}
+
+        _ferret, _args, _resolution ->
+          {:ok, nil}
+      end)
+    end
   end
 
   input_object :ferret_input do
@@ -30,8 +40,8 @@ defmodule FerretRescue.Ferret.Types do
     field :fee, :string
     field :foster, :boolean
     field :gender, :gender
-    field :image_url, :string
     field :name, :string
+    field :image_upload, :upload
   end
 
   object :ferret_queries do

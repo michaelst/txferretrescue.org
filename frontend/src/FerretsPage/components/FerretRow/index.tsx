@@ -14,8 +14,8 @@ function FerretRow({ ferret }: FerretRowProps) {
       <ContentBox>
         <div className="row">
           <div className="col-sm-4 col-md-3 col-lg-2 text-center">
-            {ferret.imageUrl &&
-              <img src={ferret.imageUrl} className="w-100 mb-2" alt={"Ferret - " + ferret.name} />
+            {ferret.image &&
+              <img src={ferret.image} className="w-100 mb-2" alt={"Ferret - " + ferret.name} />
             }
             <LinkContainer to="/apply">
               <Button className="btn-success">Apply to Adopt</Button>

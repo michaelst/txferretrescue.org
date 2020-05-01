@@ -9,8 +9,8 @@ import { ListFerrets } from '../FerretsPage/graphql/ListFerrets'
 import { Gender}  from 'globalTypes'
 
 export const CREATE_FERRET = gql`
-mutation CreateFerret($name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: String!, $bio: String, $gender: Gender!, $available: Boolean!, $foster: Boolean!) {
-  createFerret(input: {name: $name, ageYears: $ageYears, ageMonths: $ageMonths, fee: $fee, bio: $bio, gender: $gender, available: $available, foster: $foster}) {
+mutation CreateFerret($name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: String!, $bio: String, $gender: Gender!, $available: Boolean!, $foster: Boolean!, $imageUpload: Upload) {
+  createFerret(input: {name: $name, ageYears: $ageYears, ageMonths: $ageMonths, fee: $fee, bio: $bio, gender: $gender, available: $available, foster: $foster, imageUpload: $imageUpload}) {
     id
     ageMonths
     ageYears
@@ -19,6 +19,7 @@ mutation CreateFerret($name: String!, $ageYears: Int!, $ageMonths: Int!, $fee: S
     fee
     foster
     gender
+    image
     name
   }
 }
@@ -30,9 +31,10 @@ function FerretCreatePage() {
   const [ageMonths, setAgeMonths] = useState('')
   const [fee, setFee] = useState('')
   const [bio, setBio] = useState('')
-  const [gender, setGender] = useState<Gender>()
+  const [gender, setGender] = useState(Gender.MALE)
   const [available, setAvailable] = useState<boolean>()
   const [foster, setFoster] = useState<boolean>()
+  const [imageUpload, setImageUpload] = useState<File>()
 
   const history = useHistory()
 
@@ -45,9 +47,10 @@ function FerretCreatePage() {
       bio: bio,
       gender: gender,
       available: available,
-      foster: foster
+      foster: foster,
+      imageUpload: imageUpload
     },
-    onCompleted: data => history.push(`/ferrets/${data.createFerret.id}`),
+    onCompleted: () => history.push('/ferrets'),
     onError: () => { },
     update(cache, { data: { createFerret } }) {
       const data = cache.readQuery<ListFerrets | null>({ query: LIST_FERRETS })
@@ -71,6 +74,7 @@ function FerretCreatePage() {
           gender={gender}
           available={available}
           foster={foster}
+          imageUpload={imageUpload}
           setName={setName}
           setAgeYears={setAgeYears}
           setAgeMonths={setAgeMonths}
@@ -79,6 +83,7 @@ function FerretCreatePage() {
           setGender={setGender}
           setAvailable={setAvailable}
           setFoster={setFoster}
+          setImageUpload={setImageUpload}
         />
 
         <Button

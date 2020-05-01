@@ -3,13 +3,15 @@ defmodule FerretRescue.Ferret.Types.ListTest do
   import FerretRescue.Factory
 
   test "list all" do
-    ferret = insert(:ferret)
+    ferret = insert(:ferret, image_uploaded: true)
     foster = insert(:ferret, foster: true)
+    timestamp = NaiveDateTime.to_iso8601(ferret.updated_at, :basic)
 
     doc = """
     query {
       ferrets(all: true) {
         id
+        image
       }
     }
     """
@@ -19,11 +21,11 @@ defmodule FerretRescue.Ferret.Types.ListTest do
               data: %{
                 "ferrets" => [
                   %{
-                    "id" => "#{ferret.id}"
+                    "id" => "#{ferret.id}",
+                    "image" =>
+                      "https://storage.googleapis.com/ferret-rescue/ferret-images/#{ferret.id}.jpg?#{timestamp}"
                   },
-                  %{
-                    "id" => "#{foster.id}"
-                  }
+                  %{"id" => "#{foster.id}", "image" => nil}
                 ]
               }
             }} == Absinthe.run(doc, FerretRescue.Schema)

@@ -47,6 +47,8 @@ defmodule FerretRescue.MixProject do
       {:ex_machina, "~> 2.4"},
       {:excoveralls, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
+      {:google_api_storage, "~> 0.20"},
+      {:goth, "~> 1.2"},
       {:guardian, "~> 2.0"},
       {:hammox, "~> 0.2.2", only: :test},
       {:jason, "~> 1.2", override: true},

@@ -17,7 +17,7 @@ defmodule FerretRescue.Ferret.Types.GetTest do
             %{
               data: %{
                 "ferret" => %{
-                  "id" => "#{ferret.id}",
+                  "id" => "#{ferret.id}"
                 }
               }
             }} == Absinthe.run(doc, FerretRescue.Schema)

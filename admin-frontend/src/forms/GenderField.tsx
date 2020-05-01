@@ -4,8 +4,8 @@ import { Gender}  from 'globalTypes'
 
 type QuestionFieldProps = {
   label: string,
-  value: Gender | undefined,
-  setValue: React.Dispatch<React.SetStateAction<Gender | undefined>>
+  value: Gender,
+  setValue: React.Dispatch<React.SetStateAction<Gender>>
   testId?: string
 }
 

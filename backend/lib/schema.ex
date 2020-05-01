@@ -4,6 +4,8 @@ defmodule FerretRescue.Schema do
   """
   use Absinthe.Schema
 
+  import_types(Absinthe.Plug.Types)
+
   import_types(FerretRescue.Application.Types)
   import_types(FerretRescue.Auth.Types)
   import_types(FerretRescue.FAQ.Content.Types)

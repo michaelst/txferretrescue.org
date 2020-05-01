@@ -5,6 +5,7 @@ defmodule FerretRescue.Ferret.Resolver do
   import Ecto.Query
 
   alias FerretRescue.Ferret
+  alias FerretRescue.Ferret.Utils
   alias FerretRescue.Repo
 
   def list(%{all: true}, _resolution) do
@@ -29,12 +30,34 @@ defmodule FerretRescue.Ferret.Resolver do
     %Ferret{}
     |> Ferret.changeset(params)
     |> Repo.insert()
+    |> case do
+      {:ok, ferret} ->
+        case Utils.upload_image(ferret, params) do
+          {:ok, updated_ferret} -> {:ok, updated_ferret}
+          # if something failed we will just ignore the image upload
+          _error -> {:ok, ferret}
+        end
+
+      error ->
+        error
+    end
   end
 
   def update(%{input: params}, %{context: %{model: model}}) do
     model
     |> Ferret.changeset(params)
     |> Repo.update()
+    |> case do
+      {:ok, ferret} ->
+        case Utils.upload_image(ferret, params) do
+          {:ok, updated_ferret} -> {:ok, updated_ferret}
+          # if something failed we will just ignore the image upload
+          _error -> {:ok, ferret}
+        end
+
+      error ->
+        error
+    end
   end
 
   def delete(_args, %{context: %{model: model}}) do

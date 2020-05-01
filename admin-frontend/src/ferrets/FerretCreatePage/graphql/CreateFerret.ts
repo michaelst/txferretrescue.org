@@ -19,6 +19,7 @@ export interface CreateFerret_createFerret {
   fee: string;
   foster: boolean;
   gender: Gender;
+  image: string | null;
   name: string;
 }
 
@@ -35,4 +36,5 @@ export interface CreateFerretVariables {
   gender: Gender;
   available: boolean;
   foster: boolean;
+  imageUpload?: any | null;
 }
