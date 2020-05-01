@@ -29,36 +29,36 @@ type FerretFormProps = {
 }
 
 const processFile = (selectedFile: File, setImageUpload: React.Dispatch<React.SetStateAction<File | undefined>>) => {
-  const reader = new FileReader()
-  reader.readAsDataURL(selectedFile)
-  reader.onload = event => {
-    if (typeof event.target?.result === "string") {
-      const img = new Image()
-      img.src = event.target.result
-      img.onload = () => {
-        const elem = document.createElement('canvas')
-        elem.width = 400
-        elem.height = 400
-        const ctx = elem.getContext('2d')
+  const url = URL.createObjectURL(selectedFile)
+  const img = new Image()
+  img.src = url
 
-        if (ctx) {
-          ctx.drawImage(img, 0, 0, 400, 400)
-          ctx.canvas.toBlob((blob) => {
-            if (blob) {
-              const file = new File([blob], selectedFile.name, {
-                type: 'image/jpeg'
-              })
+  const elem = document.createElement('canvas')
+  elem.width = 400
+  elem.height = 400
+  const ctx = elem.getContext('2d')
 
-              const element = document.getElementById('uploaded-photo') as HTMLImageElement
-              if (element) element.src = URL.createObjectURL(blob)
+  const blobToFile = (blob: Blob | null): void => {
+    if (blob) {
+      const file = new File([blob], selectedFile.name, {
+        type: 'image/jpeg'
+      })
 
-              setImageUpload(file)
-            }
-          }, 'image/jpeg', 1)
-        }
-      }
+      const element = document.getElementById('uploaded-photo') as HTMLImageElement
+      if (element) element.src = URL.createObjectURL(blob)
+
+      setImageUpload(file)
     }
   }
+
+  const onImageLoad = () => {
+    if (ctx) {
+      ctx.drawImage(img, 0, 0, 400, 400)
+      ctx.canvas.toBlob(blobToFile, 'image/jpeg', 1)
+    }
+  }
+
+  img.onload = onImageLoad
 }
 
 function FerretForm({ name, ageYears, ageMonths, fee, bio, gender, available, foster, imageUpload, setName, setAgeYears, setAgeMonths, setFee, setBio, setGender, setAvailable, setFoster, setImageUpload }: FerretFormProps) {
@@ -78,7 +78,7 @@ function FerretForm({ name, ageYears, ageMonths, fee, bio, gender, available, fo
         </div>
         <div className="col">
           <Form.File
-            id="upload-photo"
+            data-testid="upload-photo"
             label={imageUpload?.name || "Upload photo"}
             className="d-flex align-items-top"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
