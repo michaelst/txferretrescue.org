@@ -1,8 +1,7 @@
 import React from 'react'
-import { render, act, waitFor } from '@testing-library/react'
+import { render, act, waitFor, fireEvent } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
 import QuestionUpdatePage, { GET_FAQ_CONTENT, UPDATE_FAQ_CONTENT } from './'
-import { DELETE_FAQ_CONTENT } from '../QuestionRow'
 import userEvent from '@testing-library/user-event'
 import { Route, MemoryRouter } from 'react-router-dom'
 import { InMemoryCache } from '@apollo/client'
@@ -67,7 +66,7 @@ test('render QuestionUpdatePage', async () => {
   await waitFor(() => getByText('Some description'))
 
   const contentField = getByTestId('topic-form-content-field')
-  userEvent.type(contentField, 'A different description')
+  fireEvent.change(contentField, { target: { value: 'A different description' } })
 
   const updateButton = getByTestId('update-question-button')
 

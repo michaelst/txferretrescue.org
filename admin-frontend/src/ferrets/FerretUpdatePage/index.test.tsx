@@ -1,10 +1,11 @@
 import React from 'react'
-import { render, act, waitFor } from '@testing-library/react'
+import { render, act, waitFor, fireEvent } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
 import FerretUpdatePage, { GET_FERRET, UPDATE_FERRET } from './'
 import userEvent from '@testing-library/user-event'
 import { Route, MemoryRouter } from 'react-router-dom'
 import { InMemoryCache } from '@apollo/client'
+import { Gender } from 'globalTypes'
 // import { fireEvent } from '@testing-library/react'
 
 const cache = new InMemoryCache()
@@ -28,7 +29,7 @@ const mocks = [
           'bio': null,
           'fee': '125.00',
           'foster': false,
-          'gender': 'FEMALE',
+          'gender': Gender.FEMALE,
           'name': 'Some name',
           'image': null,
         }
@@ -46,7 +47,7 @@ const mocks = [
         bio: '',
         fee: '125.00',
         foster: false,
-        gender: 'FEMALE',
+        gender: Gender.FEMALE,
         name: 'Lois',
       }
     },
@@ -61,7 +62,7 @@ const mocks = [
           'bio': null,
           'fee': '125.00',
           'foster': false,
-          'gender': 'FEMALE',
+          'gender': Gender.FEMALE,
           'image': null,
           'name': 'Lois',
         }
@@ -84,7 +85,7 @@ test('render FerretUpdatePage', async () => {
 
   const nameField = getByTestId('ferret-form-name-field')
   await waitFor(() => expect(nameField.value).toBe('Some name'))
-  userEvent.type(nameField, 'Lois')
+  fireEvent.change(nameField, { target: { value: 'Lois' } })
 
   // const uploadButton = getByTestId('upload-photo')
   // 

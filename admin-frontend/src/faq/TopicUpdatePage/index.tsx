@@ -55,7 +55,8 @@ function TopicUpdatePage() {
       name: name,
       rank: parseInt(rank)
     },
-    onCompleted: () => history.push("/faq")
+    onCompleted: () => history.push("/faq"),
+    onError: error => console.log(error)
   })
 
   return (

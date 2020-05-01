@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, act, waitFor } from '@testing-library/react'
+import { render, act, waitFor, fireEvent } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
 import TopicUpdatePage, { GET_FAQ_TOPIC, UPDATE_FAQ_TOPIC } from './'
 import { DELETE_FAQ_CONTENT } from '../QuestionRow'
@@ -95,10 +95,10 @@ test('render TopicUpdatePage', async () => {
   await waitFor(() => expect(row).not.toBeInTheDocument())
 
   const nameField = getByTestId('topic-form-name-field')
-  userEvent.type(nameField, 'Basic')
+  fireEvent.change(nameField, { target: { value: 'Basic' } })
 
   const rankField = getByTestId('topic-form-rank-field')
-  userEvent.type(rankField, '1')
+  fireEvent.change(rankField, { target: { value: '1' } })
 
   const updateButton = getByTestId('update-topic-button')
 
