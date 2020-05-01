@@ -87,7 +87,7 @@ function FerretForm({ name, ageYears, ageMonths, fee, bio, gender, available, fo
             custom
           />
 
-          <img id="uploaded-photo" className="mt-2" alt="uploaded" />
+          <img id="uploaded-photo" className="mt-2" alt="" />
         </div>
       </div>
     </div>
