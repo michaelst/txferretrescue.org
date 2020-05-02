@@ -7,7 +7,7 @@ defmodule FerretRescue.Repo.Migrations.Messages do
       add :message, :text, null: false
       add :to_email, :text, null: false
 
-      timestamps()
+      timestamps(inserted_at: :sent_at, updated_at: false)
     end
 
     create index(:messages, [:application_id])

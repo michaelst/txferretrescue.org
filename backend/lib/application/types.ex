@@ -39,7 +39,7 @@ defmodule FerretRescue.Application.Types do
     field :phone_secondary, :string
     field :play_info, non_null(:string)
     field :proofing_info, non_null(:string)
-    field :reviewd, non_null(:boolean)
+    field :reviewed, non_null(:boolean)
     field :smoker, non_null(:boolean)
     field :state, non_null(:string)
     field :street, non_null(:string)

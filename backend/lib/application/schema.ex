@@ -37,7 +37,7 @@ defmodule FerretRescue.Application do
     field :phone_secondary, :string
     field :play_info, :string
     field :proofing_info, :string
-    field :reviewd, :boolean, default: false
+    field :reviewed, :boolean, default: false
     field :smoker, :boolean
     field :state, :string
     field :street, :string
