@@ -25,15 +25,12 @@ defmodule FerretRescue.Application.Resolver do
     {:ok, applications}
   end
 
-  def sort(_resolution, query, _field, _direction), do: query
-
   def filter(_resolution, query, :status, :needs_review), do: where(query, [a], not a.final)
+  def filter(_resolution, query, :status, :all), do: query
 
   def filter(_resolution, query, :search, value) when byte_size(value) > 0 do
     where(query, [a], ilike(a.name, ^"%#{value}%") or ilike(a.email, ^"%#{value}%"))
   end
-
-  def filter(_resolution, query, _filter, _value), do: query
 
   def create(args, _resolution) do
     %Application{}
