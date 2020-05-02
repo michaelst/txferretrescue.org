@@ -1,4 +1,4 @@
-defmodule FerretRescue.Application.Types.CreateApplicationTest do
+defmodule FerretRescue.Application.Types.CreateTest do
   use FerretRescue.DataCase, async: true
   use Bamboo.Test
 

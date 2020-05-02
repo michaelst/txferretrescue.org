@@ -5,6 +5,7 @@ defmodule FerretRescue.Factory do
   Use in tests by doing `import FerretRescue.Factory`.
   """
   use ExMachina.Ecto, repo: FerretRescue.Repo
+  use FerretRescue.Application.Factory
   use FerretRescue.Auth.Factory
   use FerretRescue.FAQ.Content.Factory
   use FerretRescue.FAQ.Topic.Factory
