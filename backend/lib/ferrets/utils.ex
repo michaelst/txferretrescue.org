@@ -24,7 +24,10 @@ defmodule FerretRescue.Ferret.Utils do
     |> case do
       {:ok, _res} ->
         ferret
-        |> Ferret.changeset(%{image_uploaded: true})
+        |> Ferret.changeset(%{
+          image_uploaded: true,
+          updated_at: DateTime.utc_now()
+        })
         |> Repo.update()
 
       {:error, error} ->
