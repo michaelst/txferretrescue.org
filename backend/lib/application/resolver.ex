@@ -32,6 +32,8 @@ defmodule FerretRescue.Application.Resolver do
     where(query, [a], ilike(a.name, ^"%#{value}%") or ilike(a.email, ^"%#{value}%"))
   end
 
+  def filter(_resolution, query, :search, _value), do: query
+
   def create(args, _resolution) do
     %Application{}
     |> Application.changeset(args)
