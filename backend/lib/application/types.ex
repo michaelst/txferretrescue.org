@@ -52,6 +52,25 @@ defmodule FerretRescue.Application.Types do
     field :zip_code, non_null(:integer)
   end
 
+  enum :application_status do
+    value(:all)
+    value(:needs_review)
+  end
+
+  input_object :application_filters do
+    field(:status, non_null(:application_status))
+    field(:search, :string)
+  end
+
+  object :application_queries do
+    field :applications, :application |> non_null |> list_of |> non_null do
+      middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_applications)
+      arg(:page, non_null(:integer))
+      arg(:filter, :application_filters)
+      resolve(&Resolver.list/2)
+    end
+  end
+
   object :application_mutations do
     field :create_application, non_null(:application) do
       arg(:age, non_null(:integer))
