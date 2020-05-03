@@ -5,6 +5,7 @@ defmodule FerretRescue.Application.Types do
 
   use Absinthe.Schema.Notation
 
+  alias FerretRescue.Application
   alias FerretRescue.Application.Resolver
 
   object :application do
@@ -68,6 +69,13 @@ defmodule FerretRescue.Application.Types do
       arg(:page, non_null(:integer))
       arg(:filter, :application_filters)
       resolve(&Resolver.list/2)
+    end
+
+    field :application, non_null(:application) do
+      middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_applications)
+      middleware(FerretRescue.Middleware.LoadModel, module: Application)
+      arg(:id, non_null(:id))
+      resolve(&Resolver.get/2)
     end
   end
 

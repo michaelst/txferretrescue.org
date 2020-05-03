@@ -34,6 +34,8 @@ defmodule FerretRescue.Application.Resolver do
 
   def filter(_resolution, query, :search, _value), do: query
 
+  def get(_args, %{context: %{model: model}}), do: {:ok, model}
+
   def create(args, _resolution) do
     %Application{}
     |> Application.changeset(args)
