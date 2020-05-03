@@ -18,6 +18,15 @@ defmodule FerretRescue.Email do
     )
   end
 
+  def send_message(%FerretRescue.Applications.Message{message: message}, email) do
+    new_email(
+      to: email,
+      from: "notifications@txferretrescue.org",
+      subject: "Ferret Adoption Application",
+      text_body: message
+    )
+  end
+
   def set_password(%Auth{email: email} = auth) do
     {:ok, token, _claims} = Guardian.encode_and_sign(auth, %{}, ttl: {30, :minutes})
 

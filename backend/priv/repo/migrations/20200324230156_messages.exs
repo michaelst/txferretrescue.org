@@ -5,7 +5,6 @@ defmodule FerretRescue.Repo.Migrations.Messages do
     create table(:messages) do
       add :application_id, references(:applications), null: false
       add :message, :text, null: false
-      add :to_email, :text, null: false
 
       timestamps(inserted_at: :sent_at, updated_at: false)
     end

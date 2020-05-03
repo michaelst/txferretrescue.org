@@ -5,6 +5,7 @@ defmodule FerretRescue.Application.Resolver do
   import Ecto.Query
 
   alias FerretRescue.Application
+  alias FerretRescue.Applications.Message
   alias FerretRescue.Email
   alias FerretRescue.Mailer
   alias FerretRescue.Repo
@@ -47,6 +48,40 @@ defmodule FerretRescue.Application.Resolver do
         |> Mailer.deliver_now()
 
         {:ok, application}
+
+      error ->
+        error
+    end
+  end
+
+  def update(%{input: params}, %{context: %{model: model}}) do
+    model
+    |> Application.changeset(params)
+    |> Repo.update()
+  end
+
+  def decline(_args, %{context: %{model: model}}) do
+    model
+    |> Application.changeset(%{
+      approved: false,
+      reviewed: true,
+      final: true
+    })
+    |> Repo.update()
+  end
+
+  def send_message(args, %{context: %{model: model}}) do
+    %Message{}
+    |> Message.changeset(args)
+    |> Ecto.Changeset.put_assoc(:application, model)
+    |> Repo.insert()
+    |> case do
+      {:ok, message} ->
+        message
+        |> Email.send_message(model.email)
+        |> Mailer.deliver_now()
+
+        {:ok, model}
 
       error ->
         error

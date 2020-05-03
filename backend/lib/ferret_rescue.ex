@@ -4,6 +4,7 @@ defmodule FerretRescue do
   @moduledoc false
 
   use Application
+  import Ecto.Query
 
   def start(_type, _args) do
     children = [
@@ -21,6 +22,9 @@ defmodule FerretRescue do
   end
 
   def data, do: Dataloader.Ecto.new(FerretRescue.Repo, query: &query/2)
+
+  def query(FerretRescue.Applications.Message, _params),
+    do: from(FerretRescue.Applications.Message, order_by: [desc: :sent_at])
 
   def query(queryable, _params), do: queryable
 end
