@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import ApplicationsPage from 'applications/ApplicationsPage'
+import ApplicationPage from 'applications/ApplicationPage'
 import TopicCreatePage from 'faq/TopicCreatePage'
 import TopicUpdatePage from 'faq/TopicUpdatePage'
 import QuestionCreatePage from 'faq/QuestionCreatePage'
@@ -57,7 +58,7 @@ function App() {
                 <ResetPasswordPage setToken={setToken} />
               </Route>
               <Route path="/applications/:applicationId">
-                <ApplicationsPage />
+                <ApplicationPage />
               </Route>
               <Route path="/applications">
                 <ApplicationsPage />

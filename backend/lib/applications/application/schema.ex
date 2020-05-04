@@ -49,6 +49,8 @@ defmodule FerretRescue.Application do
     field :vet_info, :string
     field :zip_code, :integer
 
+    has_many :messages, FerretRescue.Applications.Message
+
     timestamps()
   end
 

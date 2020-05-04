@@ -9,8 +9,12 @@ defmodule FerretRescue.Middleware.ChangesetErrorsTest do
     query do
     end
 
+    input_object :application_create_input do
+    end
+
     mutation do
       field :create_application, :string do
+        arg(:input, non_null(:application_create_input))
         resolve(&Resolver.create/2)
       end
     end
@@ -195,7 +199,7 @@ defmodule FerretRescue.Middleware.ChangesetErrorsTest do
 
     doc = """
     mutation {
-      createApplication
+      createApplication(input: {})
     }
     """
 

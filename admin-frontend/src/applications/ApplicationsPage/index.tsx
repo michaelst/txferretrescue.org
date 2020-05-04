@@ -42,11 +42,12 @@ function ApplicationsPage() {
         </div>
 
         <div className="col p-0">
-          <ButtonGroup className="white-bg">
+          <ButtonGroup>
             <Button 
               variant="outline-success" 
               onClick={() => setStatus(ApplicationStatus.NEEDS_REVIEW)} 
               active={status === ApplicationStatus.NEEDS_REVIEW}
+              className="white-bg"
               data-testid="needs-review-status-button"
             >
               Needs Review
@@ -55,6 +56,7 @@ function ApplicationsPage() {
               variant="outline-success" 
               onClick={() => setStatus(ApplicationStatus.ALL)} 
               active={status === ApplicationStatus.ALL}
+              className="white-bg"
               data-testid="all-status-button"
             >
               All Apps

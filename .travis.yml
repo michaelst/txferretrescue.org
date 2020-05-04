@@ -16,7 +16,7 @@ jobs:
     before_install: cd backend
     before_script: mix do ecto.create, ecto.migrate
     script: mix do compile --warnings-as-errors, coveralls.json
-    after_success: bash <(curl -s https://codecov.io/bash)
+    after_script: bash <(curl -s https://codecov.io/bash)
     if: NOT branch = master
   - name: Credo
     language: elixir
@@ -41,7 +41,7 @@ jobs:
     - DEPLOY_BUCKET=txferretrescue.org
     before_install: cd frontend
     script: npm test -- --coverage
-    after_success: bash <(curl -s https://codecov.io/bash)
+    after_script: bash <(curl -s https://codecov.io/bash)
     if: NOT branch = master
   - name: Admin Frontend
     language: node_js
@@ -53,7 +53,7 @@ jobs:
     - CI=true
     before_install: cd admin-frontend
     script: npm test -- --coverage
-    after_success: bash <(curl -s https://codecov.io/bash)
+    after_script: bash <(curl -s https://codecov.io/bash)
     if: NOT branch = master
 
   - stage: Deploy

@@ -7,6 +7,7 @@ defmodule FerretRescue.Schema do
   import_types(Absinthe.Plug.Types)
 
   import_types(FerretRescue.Application.Types)
+  import_types(FerretRescue.Applications.Message.Types)
   import_types(FerretRescue.Auth.Types)
   import_types(FerretRescue.FAQ.Content.Types)
   import_types(FerretRescue.FAQ.Topic.Types)
