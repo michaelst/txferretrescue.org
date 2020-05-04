@@ -16,7 +16,7 @@ defmodule FerretRescue.Application.Resolver do
 
     applications =
       from(Application,
-        order_by: [desc: :inserted_at],
+        order_by: [desc: :inserted_at, desc: :id],
         limit: 50,
         offset: ^offset
       )
