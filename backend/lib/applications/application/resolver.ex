@@ -37,9 +37,9 @@ defmodule FerretRescue.Application.Resolver do
 
   def get(_args, %{context: %{model: model}}), do: {:ok, model}
 
-  def create(args, _resolution) do
+  def create(%{input: params}, _resolution) do
     %Application{}
-    |> Application.changeset(args)
+    |> Application.changeset(params)
     |> Repo.insert()
     |> case do
       {:ok, application} ->
@@ -58,6 +58,27 @@ defmodule FerretRescue.Application.Resolver do
     model
     |> Application.changeset(params)
     |> Repo.update()
+  end
+
+  def approve(_args, %{context: %{model: model}}) do
+    model
+    |> Application.changeset(%{
+      approved: true,
+      reviewed: true,
+      final: true
+    })
+    |> Repo.update()
+    |> case do
+      {:ok, application} ->
+        application
+        |> Email.approval()
+        |> Mailer.deliver_now()
+
+        {:ok, application}
+
+      error ->
+        error
+    end
   end
 
   def decline(_args, %{context: %{model: model}}) do

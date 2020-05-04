@@ -141,6 +141,13 @@ defmodule FerretRescue.Application.Types do
       resolve(&Resolver.update/2)
     end
 
+    field :approve_application, non_null(:application) do
+      middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_applications)
+      middleware(FerretRescue.Middleware.LoadModel, module: Application)
+      arg(:id, non_null(:id))
+      resolve(&Resolver.approve/2)
+    end
+
     field :decline_application, non_null(:application) do
       middleware(FerretRescue.Middleware.RequireAuthentication, permission: :manage_applications)
       middleware(FerretRescue.Middleware.LoadModel, module: Application)

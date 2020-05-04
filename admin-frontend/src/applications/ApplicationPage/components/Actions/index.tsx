@@ -4,6 +4,17 @@ import { Link } from "react-router-dom"
 import Button from 'react-bootstrap/Button'
 import { GetApplication_application } from 'applications/ApplicationPage/graphql/GetApplication'
 
+export const APPROVE_APPLICATION = gql`
+mutation ApproveApplication($id: ID!) {
+  approveApplication(id: $id) {
+    id
+    approved
+    reviewed
+    final
+  }
+}
+`
+
 export const DECLINE_APPLICATION = gql`
 mutation DeclineApplication($id: ID!) {
   declineApplication(id: $id) {
@@ -20,6 +31,12 @@ type StatusProps = {
 }
 
 function Status({ application }: StatusProps) {
+  const [approveApplication] = useMutation(APPROVE_APPLICATION, {
+    variables: {
+      id: application.id,
+    }
+  })
+
   const [declineApplication] = useMutation(DECLINE_APPLICATION, {
     variables: {
       id: application.id,
@@ -29,7 +46,7 @@ function Status({ application }: StatusProps) {
   return (
     <div className='Actions'>
       <Link to={'/applications'} className="btn btn-primary">Go Back</Link>
-      <Link to={'/applications'} className="btn btn-success ml-2">Approve</Link>
+      <Button onClick={() => approveApplication()} className="btn-success ml-2">Approve</Button>
       <Button onClick={() => declineApplication()} className="btn-danger ml-2">Decline</Button>
     </div>
   )

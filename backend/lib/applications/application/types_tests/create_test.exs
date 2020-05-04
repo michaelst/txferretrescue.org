@@ -9,7 +9,7 @@ defmodule FerretRescue.Application.Types.CreateTest do
   test "create application" do
     doc = """
     mutation {
-      createApplication(
+      createApplication(input: {
         age: 21
         cageInfo: "Some info"
         city: "Frisco"
@@ -48,7 +48,7 @@ defmodule FerretRescue.Application.Types.CreateTest do
         vaccinesCurrent: true
         vetInfo: "Some info"
         zipCode: 75035
-      ) {
+      }) {
         id
         age
         cageInfo
