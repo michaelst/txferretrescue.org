@@ -58,6 +58,7 @@ defmodule FerretRescue.MixProject do
       {:phoenix, "~> 1.5"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
+      {:sentry, "~> 7.0"},
       {:stripity_stripe, "~> 2.8.0"}
     ]
   end
