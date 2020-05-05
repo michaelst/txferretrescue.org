@@ -65,7 +65,7 @@ defmodule FerretRescue.Email do
   end
 
   def set_password(%Auth{email: email} = auth) do
-    {:ok, token, _claims} = Guardian.encode_and_sign(auth, %{}, ttl: {30, :minutes})
+    {:ok, token, _claims} = Guardian.encode_and_sign(auth, %{}, ttl: {120, :minutes})
 
     link = "https://admin.txferretrescue.org/auth/reset-password?token=#{token}"
 
