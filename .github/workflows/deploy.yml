@@ -45,12 +45,6 @@ jobs:
             --max-unavailable 0 \
             --max-surge 4
 
-      - name: Wait for rolling update to finish
-        run: |
-          gcloud compute instance-groups managed wait-until txferretrescue-api \
-            --version-target-reached \
-            --region=us-central1 
-
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
