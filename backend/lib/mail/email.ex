@@ -7,11 +7,11 @@ defmodule FerretRescue.Email do
   alias FerretRescue.Auth
   alias FerretRescue.Auth.Guardian
 
-  def new_application(%FerretRescue.Application{id: id, name: name, email: email}) do
+  def new_application(%FerretRescue.Application{id: id, name: name}) do
     link = "https://admin.txferretrescue.org/applications/#{id}"
 
     new_email(
-      to: email,
+      to: "txflrapplications@gmail.com",
       from: "notifications@txferretrescue.org",
       subject: "New Application Received for #{name}.",
       html_body: "You can view the application here: <a href=\"#{link}\">#{link}</a>."
