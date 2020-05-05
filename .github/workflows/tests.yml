@@ -36,7 +36,7 @@ jobs:
           otp-version: 22.3.3
           elixir-version: 1.10.3
       - run: mix do deps.get, compile --warnings-as-errors, ecto.create, ecto.migrate
-      - run: coveralls.json
+      - run: mix coveralls.json
       - uses: codecov/codecov-action@master
 
   credo:
@@ -59,7 +59,7 @@ jobs:
           otp-version: 22.3.3
           elixir-version: 1.10.3
       - run: mix do deps.get, compile --warnings-as-errors
-      - run: credo
+      - run: mix credo
 
   frontend:
     name: Frontend
