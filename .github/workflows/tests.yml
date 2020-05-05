@@ -38,3 +38,65 @@ jobs:
       - run: cd backend
       - run: mix do deps.get, compile --warnings-as-errors, ecto.create, ecto.migrate
       - run: coveralls.json
+
+  credo:
+    runs-on: ubuntu-latest
+           
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Backend Deps
+        uses: actions/cache@v1
+        with:
+          path: backend/deps
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/backend/mix.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: 22.3.3
+          elixir-version: 1.10.3
+      - run: cd backend
+      - run: mix do deps.get, compile --warnings-as-errors
+      - run: credo
+
+  frontend:
+    runs-on: ubuntu-latest
+           
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Node Modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 13.x
+      - uses: codecov/codecov-action@v1
+      - run: cd frontend
+      - run: npm install
+      - run: npm run build
+      - run: npm test -- --coverage
+
+  admin-frontend:
+    runs-on: ubuntu-latest
+           
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Node Modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 13.x
+      - uses: codecov/codecov-action@v1
+      - run: cd admin-frontend
+      - run: npm install
+      - run: npm run build
+      - run: npm test -- --coverage

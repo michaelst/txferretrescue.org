@@ -1,44 +1,5 @@
 jobs:
   include:
-  - stage: Test
-    name: Credo
-    language: elixir
-    elixir: 1.10.2
-    otp_release: 22.3
-    cache:
-      directories:
-      - backend/deps
-      - backend/_build
-    before_install: cd backend
-    before_script: mix compile
-    script: mix credo --strict
-    if: NOT branch = master
-  - name: Frontend
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - frontend/node_modules
-    env:
-    - CI=true
-    - DEPLOY_BUCKET=txferretrescue.org
-    before_install: cd frontend
-    script: npm test -- --coverage
-    after_script: bash <(curl -s https://codecov.io/bash)
-    if: NOT branch = master
-  - name: Admin Frontend
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - admin-frontend/node_modules
-    env:
-    - CI=true
-    before_install: cd admin-frontend
-    script: npm test -- --coverage
-    after_script: bash <(curl -s https://codecov.io/bash)
-    if: NOT branch = master
-
   - stage: Deploy
     if: branch = master
     name: Frontend
