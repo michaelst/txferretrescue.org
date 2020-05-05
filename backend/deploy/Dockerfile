@@ -17,7 +17,7 @@ ARG STRIPE_SECRET
 
 COPY mix.exs mix.lock ./
 COPY config config
-RUN mix deps.get
+RUN mix deps.get --only prod
 RUN mix deps.compile
 
 COPY lib lib
