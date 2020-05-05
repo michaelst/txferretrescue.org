@@ -1,7 +1,7 @@
 jobs:
   include:
   - stage: Test
-  - name: Credo
+    name: Credo
     language: elixir
     elixir: 1.10.2
     otp_release: 22.3
