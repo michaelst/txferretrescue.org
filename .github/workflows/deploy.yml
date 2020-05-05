@@ -23,7 +23,7 @@ jobs:
             ${{ runner.OS }}-node-
       - run: npm install
       - run: npm run build
-      - run: npm install -g firebase-tools
+      - run: curl -sL https://firebase.tools | bash
       - run: firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
@@ -45,7 +45,7 @@ jobs:
             ${{ runner.OS }}-node-
       - run: npm install
       - run: npm run build
-      - run: npm install -g firebase-tools
+      - run: curl -sL https://firebase.tools | bash
       - run: firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
