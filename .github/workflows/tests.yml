@@ -1,14 +1,19 @@
-name: Backend Tests
+name: Tests
 on: push
 
 jobs:
   backend:
     runs-on: ubuntu-latest
+    env: 
+      TEST_DB_PASSWORD: postgres
+      MIX_ENV: test
 
     services:
       db:
         image: postgres:11
         ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -17,10 +22,18 @@ jobs:
            
     steps:
       - uses: actions/checkout@v2
+      - name: Cache Backend Deps
+        uses: actions/cache@v1
+        with:
+          path: backend/deps
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/backend/mix.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
       - uses: actions/setup-elixir@v1
         with:
-          otp-version: 22.2
-          elixir-version: 1.10.2
+          otp-version: 22.3.3
+          elixir-version: 1.10.3
+      - uses: codecov/codecov-action@v1
       - run: cd backend
       - run: mix do deps.get, compile --warnings-as-errors, ecto.create, ecto.migrate
       - run: coveralls.json
