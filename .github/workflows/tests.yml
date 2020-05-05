@@ -5,11 +5,9 @@ jobs:
   backend:
     name: Backend
     runs-on: ubuntu-latest
-    
     env: 
       TEST_DB_PASSWORD: postgres
       MIX_ENV: test
-
     services:
       db:
         image: postgres:11
@@ -21,7 +19,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-           
     steps:
       - uses: actions/checkout@master
       - name: Cache Backend Deps
@@ -43,7 +40,6 @@ jobs:
   credo:
     name: Credo
     runs-on: ubuntu-latest
-           
     steps:
       - uses: actions/checkout@master
       - name: Cache Backend Deps
@@ -64,7 +60,6 @@ jobs:
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
-           
     steps:
       - uses: actions/checkout@master
       - name: Cache Node Modules
@@ -86,7 +81,6 @@ jobs:
   admin-frontend:
     name: Admin Frontend
     runs-on: ubuntu-latest
-           
     steps:
       - uses: actions/checkout@master
       - name: Cache Node Modules
