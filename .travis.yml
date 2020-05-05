@@ -32,6 +32,9 @@ jobs:
       --region=us-central1 
       --max-unavailable 0 
       --max-surge 4
+    - gcloud compute instance-groups managed wait-until txferretrescue-api
+      --version-target-reached
+      --region=us-central1 
     cache:
       directories:
       - "$HOME/google-cloud-sdk/"
