@@ -4,7 +4,6 @@ on: push
 jobs:
   backend:
     name: Backend
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -63,33 +62,56 @@ jobs:
   credo:
     name: Credo
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        otp: [22.3.3]
+        elixir: [1.10.3]
+
     defaults:
       run:
         working-directory: backend
+
     steps:
       - uses: actions/checkout@master
-      - name: Cache Backend Deps
-        uses: actions/cache@master
-        with:
-          path: backend/deps
-          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/backend/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
+
       - uses: actions/setup-elixir@master
         with:
-          otp-version: 22.3.3
-          elixir-version: 1.10.3
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - name: Cache Backend Deps
+        uses: actions/cache@master
+        id: deps-cache
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+
+      - name: Cache Backend Build
+        uses: actions/cache@master
+        id: build-cache
+        with:
+          path: _build
+          key: ${{ runner.os }}-build-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+
       - run: mix do deps.get, compile --warnings-as-errors
       - run: mix credo
 
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: frontend
+
     steps:
       - uses: actions/checkout@master
+
+      - uses: actions/setup-node@master
+        with:
+          node-version: 13.x
+
       - name: Cache Node Modules
         uses: actions/cache@master
         with:
@@ -97,9 +119,7 @@ jobs:
           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-node-
-      - uses: actions/setup-node@master
-        with:
-          node-version: 13.x
+
       - run: npm install
       - run: npm run build
       - run: npm test -- --coverage
@@ -108,11 +128,18 @@ jobs:
   admin-frontend:
     name: Admin Frontend
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: admin-frontend
+
     steps:
       - uses: actions/checkout@master
+
+      - uses: actions/setup-node@master
+        with:
+          node-version: 13.x
+
       - name: Cache Node Modules
         uses: actions/cache@master
         with:
@@ -120,9 +147,7 @@ jobs:
           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-node-
-      - uses: actions/setup-node@master
-        with:
-          node-version: 13.x
+
       - run: npm install
       - run: npm run build
       - run: npm test -- --coverage
