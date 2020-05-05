@@ -1,90 +1,5 @@
 jobs:
   include:
-  - stage: Test
-    name: Backend
-    language: elixir
-    elixir: 1.10.2
-    otp_release: 22.3
-    services:
-    - postgresql
-    cache:
-      directories:
-      - backend/deps
-      - backend/_build
-    env:
-    - MIX_ENV=test
-    before_install: cd backend
-    before_script: mix do ecto.create, ecto.migrate
-    script: mix do compile --warnings-as-errors, coveralls.json
-    after_script: bash <(curl -s https://codecov.io/bash)
-    if: NOT branch = master
-  - name: Credo
-    language: elixir
-    elixir: 1.10.2
-    otp_release: 22.3
-    cache:
-      directories:
-      - backend/deps
-      - backend/_build
-    before_install: cd backend
-    before_script: mix compile
-    script: mix credo --strict
-    if: NOT branch = master
-  - name: Frontend
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - frontend/node_modules
-    env:
-    - CI=true
-    - DEPLOY_BUCKET=txferretrescue.org
-    before_install: cd frontend
-    script: npm test -- --coverage
-    after_script: bash <(curl -s https://codecov.io/bash)
-    if: NOT branch = master
-  - name: Admin Frontend
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - admin-frontend/node_modules
-    env:
-    - CI=true
-    before_install: cd admin-frontend
-    script: npm test -- --coverage
-    after_script: bash <(curl -s https://codecov.io/bash)
-    if: NOT branch = master
-
-  - stage: Deploy
-    if: branch = master
-    name: Frontend
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - frontend/node_modules
-    env:
-    - DEPLOY_PROVIDER=firebase
-    before_install: cd frontend
-    script: npm run build
-    deploy:
-      provider: firebase
-      token: $FIREBASE_TOKEN
-      skip_cleanup: true
-  - name: Admin Frontend
-    if: branch = master
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - admin-frontend/node_modules
-    before_install: cd admin-frontend
-    script: npm run build
-    deploy:
-      provider: firebase
-      token: $FIREBASE_TOKEN
-      skip_cleanup: true
   - name: Backend
     if: branch = master
     language: minimal
@@ -117,6 +32,9 @@ jobs:
       --region=us-central1 
       --max-unavailable 0 
       --max-surge 4
+    - gcloud compute instance-groups managed wait-until txferretrescue-api
+      --version-target-reached
+      --region=us-central1 
     cache:
       directories:
       - "$HOME/google-cloud-sdk/"
