@@ -5,6 +5,9 @@ jobs:
   backend:
     name: Backend
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     env: 
       TEST_DB_PASSWORD: postgres
       MIX_ENV: test
@@ -32,14 +35,16 @@ jobs:
         with:
           otp-version: 22.3.3
           elixir-version: 1.10.3
-      - uses: codecov/codecov-action@master
-      - run: cd backend
       - run: mix do deps.get, compile --warnings-as-errors, ecto.create, ecto.migrate
       - run: coveralls.json
+      - uses: codecov/codecov-action@master
 
   credo:
     name: Credo
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - uses: actions/checkout@master
       - name: Cache Backend Deps
@@ -53,13 +58,15 @@ jobs:
         with:
           otp-version: 22.3.3
           elixir-version: 1.10.3
-      - run: cd backend
       - run: mix do deps.get, compile --warnings-as-errors
       - run: credo
 
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@master
       - name: Cache Node Modules
@@ -72,15 +79,17 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 13.x
-      - uses: codecov/codecov-action@master
-      - run: cd frontend
       - run: npm install
       - run: npm run build
       - run: npm test -- --coverage
+      - uses: codecov/codecov-action@master
 
   admin-frontend:
     name: Admin Frontend
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin-frontend
     steps:
       - uses: actions/checkout@master
       - name: Cache Node Modules
@@ -93,8 +102,7 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 13.x
-      - uses: codecov/codecov-action@master
-      - run: cd admin-frontend
       - run: npm install
       - run: npm run build
       - run: npm test -- --coverage
+      - uses: codecov/codecov-action@master
