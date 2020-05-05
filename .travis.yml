@@ -1,34 +1,5 @@
 jobs:
   include:
-  - stage: Deploy
-    if: branch = master
-    name: Frontend
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - frontend/node_modules
-    env:
-    - DEPLOY_PROVIDER=firebase
-    before_install: cd frontend
-    script: npm run build
-    deploy:
-      provider: firebase
-      token: $FIREBASE_TOKEN
-      skip_cleanup: true
-  - name: Admin Frontend
-    if: branch = master
-    language: node_js
-    node_js: stable
-    cache:
-      directories:
-      - admin-frontend/node_modules
-    before_install: cd admin-frontend
-    script: npm run build
-    deploy:
-      provider: firebase
-      token: $FIREBASE_TOKEN
-      skip_cleanup: true
   - name: Backend
     if: branch = master
     language: minimal
