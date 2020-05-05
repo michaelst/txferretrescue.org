@@ -39,7 +39,7 @@ jobs:
         id: deps-cache
         with:
           path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, 'mix.lock')) }}
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/backend/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-mix-
 
@@ -48,7 +48,7 @@ jobs:
         id: build-cache
         with:
           path: _build
-          key: ${{ runner.os }}-build-22.3.3-1.10.3-${{ hashFiles(format('{0}{1}', github.workspace, 'mix.lock')) }}
+          key: ${{ runner.os }}-build-22.3.3-1.10.3-${{ hashFiles(format('{0}{1}', github.workspace, '/backend/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-build-22.3.3-1.10.3-
 
@@ -79,7 +79,7 @@ jobs:
         id: deps-cache
         with:
           path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, 'mix.lock')) }}
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/backend/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-mix-
 
@@ -88,7 +88,7 @@ jobs:
         id: build-cache
         with:
           path: _build
-          key: ${{ runner.os }}-build-22.3.3-1.10.3-${{ hashFiles(format('{0}{1}', github.workspace, 'mix.lock')) }}
+          key: ${{ runner.os }}-build-22.3.3-1.10.3-${{ hashFiles(format('{0}{1}', github.workspace, '/backend/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-build-22.3.3-1.10.3-
 
