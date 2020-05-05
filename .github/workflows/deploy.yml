@@ -27,11 +27,11 @@ jobs:
       - name: Build
         run: |        
           docker build \
-            --build-arg ${{ secrets.DB_PASSWORD }} \
-            --build-arg ${{ secrets.GUARDIAN_SECRET }} \
-            --build-arg ${{ secrets.SECRET_KEY_BASE }} \
-            --build-arg ${{ secrets.SENDGRID_API_KEY }} \
-            --build-arg ${{ secrets.STRIPE_SECRET }} \
+            --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            --build-arg GUARDIAN_SECRET=${{ secrets.GUARDIAN_SECRET }} \
+            --build-arg SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
+            --build-arg SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} \
+            --build-arg STRIPE_SECRET=${{ secrets.STRIPE_SECRET }} \
             -f deploy/Dockerfile \
             -t us.gcr.io/cloud-57/txferretrescue-api:latest .
 
