@@ -6,11 +6,6 @@ jobs:
     name: Backend
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        otp: [22.3.3]
-        elixir: [1.10.3]
-
     defaults:
       run:
         working-directory: backend
@@ -36,8 +31,8 @@ jobs:
 
       - uses: actions/setup-elixir@master
         with:
-          otp-version: ${{ matrix.otp }}
-          elixir-version: ${{ matrix.elixir }}
+          otp-version: 22.3.3
+          elixir-version: 1.10.3
 
       - name: Cache Backend Deps
         uses: actions/cache@master
@@ -51,7 +46,7 @@ jobs:
         id: build-cache
         with:
           path: _build
-          key: ${{ runner.os }}-build-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          key: ${{ runner.os }}-build-22.3.3-1.10.3-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
 
       - run: mix do deps.get, compile --warnings-as-errors, ecto.create, ecto.migrate
 
@@ -63,11 +58,6 @@ jobs:
     name: Credo
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        otp: [22.3.3]
-        elixir: [1.10.3]
-
     defaults:
       run:
         working-directory: backend
@@ -77,8 +67,8 @@ jobs:
 
       - uses: actions/setup-elixir@master
         with:
-          otp-version: ${{ matrix.otp }}
-          elixir-version: ${{ matrix.elixir }}
+          otp-version: 22.3.3
+          elixir-version: 1.10.3
 
       - name: Cache Backend Deps
         uses: actions/cache@master
@@ -92,7 +82,7 @@ jobs:
         id: build-cache
         with:
           path: _build
-          key: ${{ runner.os }}-build-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          key: ${{ runner.os }}-build-22.3.3-1.10.3-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
 
       - run: mix do deps.get, compile --warnings-as-errors
       - run: mix credo
