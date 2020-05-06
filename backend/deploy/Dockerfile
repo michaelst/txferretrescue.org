@@ -9,10 +9,12 @@ RUN mix local.hex --force && \
     mix local.rebar --force
 
 ENV MIX_ENV=prod
+
 ARG DB_PASSWORD
 ARG GUARDIAN_SECRET
 ARG SECRET_KEY_BASE
 ARG SENDGRID_API_KEY
+ARG SENTRY_DSN
 ARG STRIPE_SECRET
 
 COPY mix.exs mix.lock ./
