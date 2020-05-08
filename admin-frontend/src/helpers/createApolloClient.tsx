@@ -7,7 +7,6 @@ const createApolloClient = (token: string | null) => {
   const httpLink = createLink({ uri: uri })
 
   const authMiddleware = new ApolloLink((operation, forward) => {
-    console.log(token)
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : null,
