@@ -22,6 +22,8 @@ import UsersPage from 'users/UsersPage'
 import VetCreatePage from 'vets/VetCreatePage'
 import VetsPage from 'vets/VetsPage'
 import VetUpdatePage from 'vets/VetUpdatePage'
+import { ApolloProvider } from '@apollo/client'
+import createApolloClient from 'helpers/createApolloClient'
 import './App.scss'
 
 function App() {
@@ -36,89 +38,91 @@ function App() {
   }, [token])
 
   return (
-    <div className="App h-100">
-      <BrowserRouter>
-        {!token && (
-          <Switch>
-            <Route path="/auth/reset-password">
-              <ResetPasswordPage setToken={setToken} />
-            </Route>
-            <Route path="/">
-              <LoginPage setToken={setToken} />
-            </Route>
-          </Switch>
-        )}
-
-        {token && <Navbar setToken={setToken} />}
-
-        {token && (
-          <Container className="py-4">
+    <ApolloProvider client={createApolloClient(token)}>
+      <div className="App h-100">
+        <BrowserRouter>
+          {!token && (
             <Switch>
               <Route path="/auth/reset-password">
                 <ResetPasswordPage setToken={setToken} />
               </Route>
-              <Route path="/applications/:applicationId">
-                <ApplicationPage />
-              </Route>
-              <Route path="/applications">
-                <ApplicationsPage />
-              </Route>
-              <Route path="/ferrets/create">
-                <FerretCreatePage />
-              </Route>
-              <Route path="/ferrets/:ferretId">
-                <FerretUpdatePage />
-              </Route>
-              <Route path="/ferrets">
-                <FerretsPage />
-              </Route>
-              <Route path="/users/create">
-                <UserCreatePage />
-              </Route>
-              <Route path="/users">
-                <UsersPage />
-              </Route>
-              <Route path="/sitters/create">
-                <SitterCreatePage />
-              </Route>
-              <Route path="/sitters/:sitterId">
-                <SitterUpdatePage />
-              </Route>
-              <Route path="/sitters">
-                <SittersPage />
-              </Route>
-              <Route path="/vets/create">
-                <VetCreatePage />
-              </Route>
-              <Route path="/vets/:vetId">
-                <VetUpdatePage />
-              </Route>
-              <Route path="/vets">
-                <VetsPage />
-              </Route>
-              <Route path="/faq/create">
-                <TopicCreatePage />
-              </Route>
-              <Route path="/faq/:topicId/create">
-                <QuestionCreatePage />
-              </Route>
-              <Route path="/faq/:topicId/:questionId">
-                <QuestionUpdatePage />
-              </Route>
-              <Route path="/faq/:topicId">
-                <TopicUpdatePage />
-              </Route>
-              <Route path="/faq">
-                <FAQPage />
-              </Route>
               <Route path="/">
-                <ApplicationsPage />
+                <LoginPage setToken={setToken} />
               </Route>
             </Switch>
-          </Container>)}
+          )}
 
-      </BrowserRouter>
-    </div>
+          {token && <Navbar setToken={setToken} />}
+
+          {token && (
+            <Container className="py-4">
+              <Switch>
+                <Route path="/auth/reset-password">
+                  <ResetPasswordPage setToken={setToken} />
+                </Route>
+                <Route path="/applications/:applicationId">
+                  <ApplicationPage />
+                </Route>
+                <Route path="/applications">
+                  <ApplicationsPage />
+                </Route>
+                <Route path="/ferrets/create">
+                  <FerretCreatePage />
+                </Route>
+                <Route path="/ferrets/:ferretId">
+                  <FerretUpdatePage />
+                </Route>
+                <Route path="/ferrets">
+                  <FerretsPage />
+                </Route>
+                <Route path="/users/create">
+                  <UserCreatePage />
+                </Route>
+                <Route path="/users">
+                  <UsersPage />
+                </Route>
+                <Route path="/sitters/create">
+                  <SitterCreatePage />
+                </Route>
+                <Route path="/sitters/:sitterId">
+                  <SitterUpdatePage />
+                </Route>
+                <Route path="/sitters">
+                  <SittersPage />
+                </Route>
+                <Route path="/vets/create">
+                  <VetCreatePage />
+                </Route>
+                <Route path="/vets/:vetId">
+                  <VetUpdatePage />
+                </Route>
+                <Route path="/vets">
+                  <VetsPage />
+                </Route>
+                <Route path="/faq/create">
+                  <TopicCreatePage />
+                </Route>
+                <Route path="/faq/:topicId/create">
+                  <QuestionCreatePage />
+                </Route>
+                <Route path="/faq/:topicId/:questionId">
+                  <QuestionUpdatePage />
+                </Route>
+                <Route path="/faq/:topicId">
+                  <TopicUpdatePage />
+                </Route>
+                <Route path="/faq">
+                  <FAQPage />
+                </Route>
+                <Route path="/">
+                  <ApplicationsPage />
+                </Route>
+              </Switch>
+            </Container>)}
+
+        </BrowserRouter>
+      </div>
+    </ApolloProvider>
   )
 }
 
