@@ -8,8 +8,8 @@ defmodule FerretRescue.Stripe.Resolver do
 
   def stripe_checkout_session(%{amount: amount}, _resolution) do
     session_module().create(%{
-      cancel_url: "http://localhost:3000",
-      success_url: "http://localhost:3000",
+      cancel_url: "https://txferretrescue.org",
+      success_url: "https://txferretrescue.org",
       payment_method_types: ["card"],
       mode: "payment",
       submit_type: "donate",
