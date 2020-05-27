@@ -45,7 +45,7 @@ defmodule FerretRescue.MixProject do
       {:ecto_enum, "~> 1.4"},
       {:ecto_sql, "~> 3.4"},
       {:ex_machina, "~> 2.4"},
-      {:excoveralls, "~> 0.12.0"},
+      {:excoveralls, "~> 0.13.0"},
       {:gettext, "~> 0.11"},
       {:google_api_storage, "~> 0.20"},
       {:goth, "~> 1.2"},
