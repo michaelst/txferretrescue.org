@@ -27,7 +27,7 @@ COPY priv priv
 RUN mix compile
 RUN mix release
 
-FROM alpine:3.11
+FROM alpine:3.12.0
 RUN apk add --update bash openssl ncurses-libs
 
 RUN mkdir /app
