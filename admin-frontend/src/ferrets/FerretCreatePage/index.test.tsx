@@ -21,6 +21,7 @@ const mocks = [
         foster: false,
         gender: 'FEMALE',
         name: 'Lois',
+        imageUpload: null
       }
     },
     result: {
@@ -74,11 +75,12 @@ test('render FerretCreatePage', async () => {
 
   const createButton = getByTestId('create-ferret-button')
 
-  await act(async () => await userEvent.click(createButton))
+  await act(async () => {
+    await userEvent.click(createButton)
 
-  await waitFor(() => {
-    const updatedCache = cache.extract()
-    expect(updatedCache['Ferret:1'].name).toBe('Lois')
+    await waitFor(() => {
+      const updatedCache = cache.extract()
+      expect(updatedCache['Ferret:1']?.name).toBe('Lois')
+    })
   })
-
 })

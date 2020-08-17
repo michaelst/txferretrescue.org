@@ -48,7 +48,7 @@ function FerretCreatePage() {
       gender: gender,
       available: available,
       foster: foster,
-      imageUpload: imageUpload
+      imageUpload: imageUpload || null
     },
     onCompleted: () => history.push('/ferrets'),
     onError: () => { },

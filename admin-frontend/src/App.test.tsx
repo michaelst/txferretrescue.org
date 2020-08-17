@@ -1,7 +1,6 @@
 import React from 'react'
 import { render, act, waitFor } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
-import App from './App'
 import Routes from 'Routes'
 import { LOGIN } from 'LoginPage'
 import { CURRENT_USER } from 'Navbar'
@@ -64,9 +63,10 @@ test('invalid login', async () => {
   const passwordField = getByTestId('password-field')
   const loginButton = getByTestId('login-button')
 
+  userEvent.type(emailField, "admin")
+  userEvent.type(passwordField, "invalid")
+
   await act(async () => {
-    await userEvent.type(emailField, "admin")
-    await userEvent.type(passwordField, "invalid")
     userEvent.click(loginButton)
 
     await waitFor(() => {
@@ -87,33 +87,14 @@ test('login', async () => {
   const passwordField = getByTestId('password-field')
   const loginButton = getByTestId('login-button')
 
+  userEvent.type(emailField, "admin")
+  userEvent.type(passwordField, "password")
+
   await act(async () => {
-    await userEvent.type(emailField, "admin")
-    await userEvent.type(passwordField, "password")
     userEvent.click(loginButton)
 
     await waitFor(() => {
       expect(localStorage.getItem('token')).toBe('test-token')
-    })
-  })
-})
-
-test('logout', async () => {
-  localStorage.setItem('token', 'test-token')
-
-  const { getByTestId } = render(
-    <MockedProvider>
-      <Routes isLoggedIn={true} setToken={() => localStorage.removeItem('token')} />
-    </MockedProvider>
-  )
-
-  const logoutButton = getByTestId('logout-button')
-
-  await act(async () => {
-    userEvent.click(logoutButton)
-
-    await waitFor(() => {
-      expect(localStorage.getItem('token')).toBe(null)
     })
   })
 })
