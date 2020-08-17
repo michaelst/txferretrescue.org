@@ -32,10 +32,9 @@ test('interact with DonateForm', async () => {
 
   const button = getByTestId('donate-button')
   const input = getByTestId('donate-amount-input')
+  userEvent.type(input, '15.00')
 
   await act(async () => {
-    await userEvent.type(input, "15.00")
-    expect(input).toHaveAttribute('value', '15.00')
     userEvent.click(button)
 
     await waitFor(() => {
