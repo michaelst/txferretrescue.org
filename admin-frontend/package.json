@@ -16,7 +16,7 @@
     "@types/react-router-bootstrap": "^0.24.5",
     "@types/react-router-dom": "^5.1.5",
     "apollo-absinthe-upload-link": "^1.5.0",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^4.5.2",
     "global": "^4.4.0",
     "graphql": "^14.5.4",
     "jest-environment-jsdom-sixteen": "^1.0.3",
