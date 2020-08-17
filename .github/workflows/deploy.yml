@@ -36,7 +36,7 @@ jobs:
             --build-arg SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} \
             --build-arg SENTRY_DSN=${{ secrets.SENTRY_DSN }} \
             --build-arg STRIPE_SECRET=${{ secrets.STRIPE_SECRET }} \
-            -f deploy/Dockerfile \
+            -f .devops/Dockerfile \
             -t us.gcr.io/cloud-57/txferretrescue-api:${GITHUB_SHA} \
             -t us.gcr.io/cloud-57/txferretrescue-api:latest \
             .
