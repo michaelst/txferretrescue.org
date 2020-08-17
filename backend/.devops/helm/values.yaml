@@ -36,7 +36,7 @@ ingressroute:
 resources:
   requests:
     cpu: 10m
-    memory: 800Mi
+    memory: 400Mi
 
 envVars:
 
