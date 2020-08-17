@@ -1,12 +1,11 @@
 import React from 'react'
-import { render, act, waitFor, fireEvent } from '@testing-library/react'
+import { render, act, waitFor } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
 import FerretUpdatePage, { GET_FERRET, UPDATE_FERRET } from './'
 import userEvent from '@testing-library/user-event'
 import { Route, MemoryRouter } from 'react-router-dom'
 import { InMemoryCache } from '@apollo/client'
 import { Gender } from 'globalTypes'
-// import { fireEvent } from '@testing-library/react'
 
 const cache = new InMemoryCache()
 
@@ -49,6 +48,7 @@ const mocks = [
         foster: false,
         gender: Gender.FEMALE,
         name: 'Lois',
+        imageUpload: null
       }
     },
     result: {
@@ -59,20 +59,19 @@ const mocks = [
           'ageMonths': 1,
           'ageYears': 1,
           'available': true,
-          'bio': null,
+          'bio': '',
           'fee': '125.00',
           'foster': false,
           'gender': Gender.FEMALE,
-          'image': null,
           'name': 'Lois',
         }
       }
-    },
+    }
   }
 ]
 
 test('render FerretUpdatePage', async () => {
-  const { queryByText, getByTestId } = render(
+  const { getByTestId } = render(
     <MockedProvider cache={cache} mocks={mocks}>
       <MemoryRouter initialEntries={['/ferrets/1']}>
         <Route path="/ferrets/:ferretId">
@@ -85,7 +84,8 @@ test('render FerretUpdatePage', async () => {
 
   const nameField = getByTestId('ferret-form-name-field')
   await waitFor(() => expect(nameField.value).toBe('Some name'))
-  fireEvent.change(nameField, { target: { value: 'Lois' } })
+  nameField.setSelectionRange(0, 9)
+  userEvent.type(nameField, "Lois")
 
   // const uploadButton = getByTestId('upload-photo')
   // 
@@ -102,11 +102,12 @@ test('render FerretUpdatePage', async () => {
 
   const updateButton = getByTestId('update-ferret-button')
 
-  await act(async () => await userEvent.click(updateButton))
+  await act(async () => {
+    userEvent.click(updateButton)
 
-  await waitFor(() => {
-    const updatedCache = cache.extract()
-    expect(updatedCache['Ferret:1'].name).toBe('Lois')
+    await waitFor(() => {
+      const updatedCache = cache.extract()
+      expect(updatedCache['Ferret:1']?.name).toBe('Lois')
+    })
   })
-
 })

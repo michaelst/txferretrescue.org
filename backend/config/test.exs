@@ -2,7 +2,7 @@ use Mix.Config
 
 config :ferret_rescue, FerretRescue.Repo,
   username: "postgres",
-  password: System.get_env("TEST_DB_PASSWORD"),
+  password: System.get_env("TEST_DB_PASSWORD", "postgres"),
   database: "ferret_rescue_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,

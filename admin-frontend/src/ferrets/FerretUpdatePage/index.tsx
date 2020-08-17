@@ -84,7 +84,7 @@ function FerretUpdatePage() {
     gender: gender,
     available: available || false,
     foster: foster || false,
-    imageUpload: imageUpload
+    imageUpload: imageUpload || null
   }
 
   const [updateFerret] = useMutation(UPDATE_FERRET, {
