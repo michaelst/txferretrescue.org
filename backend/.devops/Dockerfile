@@ -28,7 +28,7 @@ COPY priv priv
 RUN mix compile
 RUN mix release
 
-FROM alpine:3.11
+FROM alpine:3.12
 
 ENV LANG=C.UTF-8
 
