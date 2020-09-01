@@ -42,7 +42,7 @@ defmodule FerretRescue.Application.Factory do
           toy_info: "some info",
           vaccines_current: true,
           vet_info: "some info",
-          zip_code: "75024",
+          zip_code: "75024"
         }
       end
     end
