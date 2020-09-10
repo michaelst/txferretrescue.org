@@ -46,7 +46,7 @@ jobs:
 
       - name: GCP Authentication
         run: |
-          gcloud auth configure-docker us.gcr.io
+          gcloud auth configure-docker us.gcr.io --quiet
 
       - name: Build
         run: |    
