@@ -21,6 +21,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@main
+          
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: cloud-57
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: GCP Authentication
+        run: |
+          gcloud auth configure-docker us.gcr.io
 
       - name: Setup Files
         run: |
@@ -37,16 +47,6 @@ jobs:
           echo "$WIREGUARD_CONF" | sudo tee -a /etc/wireguard/wg0.conf
           wg-quick up wg0
           ssh-keyscan -H 192.168.5.181 >> $HOME/.ssh/known_hosts
-          
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          project_id: cloud-57
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
-
-      - name: GCP Authentication
-        run: |
-          gcloud auth configure-docker us.gcr.io --quiet
 
       - name: Build
         run: |    
