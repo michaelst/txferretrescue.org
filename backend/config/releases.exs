@@ -14,3 +14,5 @@ config :ferret_rescue, FerretRescue.Auth.Guardian, secret_key: File.read!("/etc/
 config :stripity_stripe, api_key: File.read!("/etc/secrets/STRIPE_SECRET")
 
 config :sentry, dsn: File.read!("/etc/secrets/SENTRY_DSN")
+
+config :goth, json: File.read!("/etc/secrets/GCP_SA_KEY")

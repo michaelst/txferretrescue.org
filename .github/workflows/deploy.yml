@@ -13,9 +13,31 @@ jobs:
       run:
         working-directory: backend
 
+    env:
+      DOCKER_HOST: ssh://build@192.168.5.181
+      KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      WIREGUARD_CONF: ${{ secrets.WIREGUARD_CONF }}
+
     steps:
       - uses: actions/checkout@main
 
+      - name: Setup Files
+        run: |
+          mkdir $HOME/.ssh
+          echo "$SSH_KEY" > $HOME/.ssh/id_rsa
+          chmod 600 $HOME/.ssh/id_rsa
+          mkdir $HOME/.kube
+          echo "$KUBE_CONFIG" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Connect to Private Network
+        run: |
+          sudo apt-get -y install wireguard resolvconf
+          echo "$WIREGUARD_CONF" | sudo tee -a /etc/wireguard/wg0.conf
+          wg-quick up wg0
+          ssh-keyscan -H 192.168.5.181 >> $HOME/.ssh/known_hosts
+          
       - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           project_id: cloud-57
@@ -25,24 +47,11 @@ jobs:
       - name: GCP Authentication
         run: |
           gcloud auth configure-docker us.gcr.io
-          gcloud container clusters get-credentials default-cluster --zone us-central1-a
 
       - name: Build
         run: |    
-          docker pull us.gcr.io/cloud-57/txferretrescue-api:build || true
-          docker pull us.gcr.io/cloud-57/txferretrescue-api:latest || true
-          docker build \
-            --target build \
-            --cache-from us.gcr.io/cloud-57/txferretrescue-api:build \
-            -t us.gcr.io/cloud-57/txferretrescue-api:build \
-            -f .devops/Dockerfile .
-          docker build \
-            --cache-from us.gcr.io/cloud-57/txferretrescue-api:build \
-            --cache-from us.gcr.io/cloud-57/txferretrescue-api:latest \
-            -t us.gcr.io/cloud-57/txferretrescue-api:${GITHUB_SHA} \
-            -t us.gcr.io/cloud-57/txferretrescue-api:latest \
-            -f .devops/Dockerfile .
-          docker push us.gcr.io/cloud-57/txferretrescue-api    
+          docker buildx build -t us.gcr.io/cloud-57/txferretrescue-api:${GITHUB_SHA} -f .devops/Dockerfile .
+          docker push us.gcr.io/cloud-57/txferretrescue-api:${GITHUB_SHA}
 
       - name: Setup Helm
         run: |
@@ -54,7 +63,7 @@ jobs:
         run: |
           helm upgrade --install txferretrescue cloud-57/cloud-57 \
           -f .devops/helm/values.yaml \
-          --version v1.0.1 \
+          --version v1.0.2 \
           --set image.repository=us.gcr.io/cloud-57/txferretrescue-api \
           --set image.tag=${GITHUB_SHA} \
           -n backend
