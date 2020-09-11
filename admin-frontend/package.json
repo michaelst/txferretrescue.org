@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^12.1.1",
     "@types/jest": "^26.0.10",
     "@types/jquery": "^3.3.38",
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.10.0",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-router-bootstrap": "^0.24.5",
