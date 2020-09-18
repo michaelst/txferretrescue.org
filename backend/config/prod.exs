@@ -6,7 +6,9 @@ config :ferret_rescue, FerretRescue.Endpoint,
   debug_errors: false,
   server: true
 
-config :logger, level: :info
+config :logger,
+  backends: [LoggerJSON],
+  level: :info
 
 config :ferret_rescue, FerretRescue.Repo,
   database: "ferret_rescue",

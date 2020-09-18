@@ -52,6 +52,7 @@ defmodule FerretRescue.MixProject do
       {:guardian, "~> 2.0"},
       {:hammox, "~> 0.2.2", only: :test},
       {:jason, "~> 1.2", override: true},
+      {:logger_json, "~> 4.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
