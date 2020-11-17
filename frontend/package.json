@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.0.0-rc.12",
+    "@apollo/client": "^3.2.6",
     "@stripe/stripe-js": "^1.5.0",
     "@testing-library/jest-dom": "^5.10.0",
     "@testing-library/react": "^10.0.4",
