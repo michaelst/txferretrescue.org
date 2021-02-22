@@ -37,7 +37,7 @@ defmodule FerretRescue.MixProject do
     [
       {:absinthe_plug, "~> 1.5.0-rc.2"},
       {:absinthe, "~> 1.5.0-rc.5"},
-      {:bamboo, "~> 1.4"},
+      {:bamboo, "~> 2.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
