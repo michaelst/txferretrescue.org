@@ -35,9 +35,9 @@ defmodule FerretRescue.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:absinthe_plug, "~> 1.5.0-rc.2"},
-      {:absinthe, "~> 1.5.0-rc.5"},
-      {:bamboo, "~> 1.4"},
+      {:absinthe_plug, "~> 1.5.0"},
+      {:absinthe, "~> 1.6.0"},
+      {:bamboo, "~> 2.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
@@ -45,12 +45,12 @@ defmodule FerretRescue.MixProject do
       {:ecto_enum, "~> 1.4"},
       {:ecto_sql, "~> 3.4"},
       {:ex_machina, "~> 2.4"},
-      {:excoveralls, "~> 0.13.0"},
+      {:excoveralls, "> 0.0.0"},
       {:gettext, "~> 0.11"},
       {:google_api_storage, "~> 0.20"},
       {:goth, "~> 1.2"},
       {:guardian, "~> 2.0"},
-      {:hammox, "~> 0.2.2", only: :test},
+      {:hammox, "> 0.0.0", only: :test},
       {:jason, "~> 1.2", override: true},
       {:logger_json, "~> 4.0"},
       {:phoenix_ecto, "~> 4.0"},
