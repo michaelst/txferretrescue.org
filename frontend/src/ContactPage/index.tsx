@@ -14,7 +14,7 @@ function ContactPage() {
                 <br /><br />
 
         <h4>You can also email us at:</h4>
-        <a href="mailto:milliesanders43@gmail.com">milliesanders43@gmail.com</a>
+        <a href="mailto:txflroffice@gmail.com">txflroffice@gmail.com</a>
 
         <br /><br />
 

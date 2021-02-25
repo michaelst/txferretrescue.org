@@ -26,22 +26,28 @@ defmodule FerretRescue.Email do
     text_body = """
     Dear #{String.trim(application.name)},
 
-    We have approved your adoption application. Please review the informational comments on the attached files, they are listed below.
+    We have approved your adoption application. Please review the informational comments on the attached files.
 
-    When you are ready, please contact Millie Sanders at 972-286-5778 to schedule an appointment so your ferret in waiting can pick you out.
-
-    The rescue also sells cages, accessories, and food at a reduced cost so if you are in need of these items, please feel free to check with Millie.
-
-    We recommend you have your cage and accessories all set to go so  when you return home with your new ferret, you are ready. However, it can all be done in one trip if you so desire. You will also need a small carrier of some type to transport him/her with. We do have carriers at $10 and $15.
-
+    Due to COVID-19 protocols, you will be required to wear a mask during your appointment.
+     
+    Please be sure to bring a copy of this approval email.
+     
+    When you are ready, please contact Holly Balentine at 972-286-5778 to schedule an appointment to visit the rescue.
+     
+    The rescue also sells cages, accessories, and food at a reduced cost so if you are in need of these items, please feel free to check with Holly.
+     
+    We recommend you have your cage and accessories all set to go so when you return home with your new ferret. However, it can all be done in one trip if you so desire. You will also need a small carrier of some type to transport him/her with. We do have carriers at $10 and $15.
+     
     Congratulations and we hope you find as much love and joy in these little animals as we all do.
-
-    Thank you again for choosing to adopt.
-
+       
     We also recommend that you get a book “Ferrets For Dummies” ed 2. It is a great resource book on the health and care of ferrets.
 
+    Please be sure to bring a copy of this approval email with you when you come to adopt. This is very important that you may not be able to adopt without this information on paper. NO E-MAILS ON PHONES.
+
+    Thank you again for choosing to adopt.
+    Applications Team
+    Texas Ferret Lover's Rescue
     txflrapplications@gmail.com
-    Texas Ferret Lovers Rescue Volunteer
     """
 
     new_email(

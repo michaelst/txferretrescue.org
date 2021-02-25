@@ -31,15 +31,14 @@ export function VetsPage() {
       <ContentBox className="col-md-6 offset-md-3">
         <div className="row">
           <span className="col-6 text-left">
-            <h4>Emergency Hospital</h4>
+            <h4>Veterinary Emergency Group</h4>
           </span>
-          <span className="col-6 text-right"><a href="tel:8174102273">(817) 410-2273</a></span>
+          <span className="col-6 text-right"><a href="tel:8174102273">(972) 544-7311</a></span>
         </div>
         <span className="text-center">
-          2340 W Southlake Blvd<br />
-          Southlake, TX 76092<br />
-          Monday - Thursday 6pm - 8am<br />
-          Friday 6PM - Monday 8AM
+          4500 North Central Expwy<br />
+          Dallas, TX 75206<br />
+          Open 24/7
         </span>
       </ContentBox>
 
@@ -48,7 +47,7 @@ export function VetsPage() {
       <div className="row">
         {data?.vets.map(vet => (
           <div key={vet.id} className="col-md-6">
-            <VetBox  vet={vet} />
+            <VetBox vet={vet} />
           </div>
         ))}
       </div>
