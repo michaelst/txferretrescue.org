@@ -1,4 +1,4 @@
-FROM elixir:1.10-alpine AS build
+FROM elixir:1.11-alpine AS build
 
 RUN apk add --update --no-cache build-base
 
@@ -6,10 +6,10 @@ RUN mkdir /app
 WORKDIR /app
 
 RUN mix local.hex --force && \
-    mix local.rebar --force
+  mix local.rebar --force
 
 ENV MIX_ENV=prod \
-    LANG=C.UTF-8
+  LANG=C.UTF-8
 
 COPY mix.exs mix.lock ./
 COPY config/config.exs config/prod.exs ./config/
