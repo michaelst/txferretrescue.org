@@ -1,0 +1,237 @@
+version: 2
+updates:
+- package-ecosystem: mix
+  directory: "/backend"
+  schedule:
+    interval: daily
+    time: "12:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: absinthe_plug
+    versions:
+    - 1.5.6
+    - 1.5.7
+  - dependency-name: ecto_sql
+    versions:
+    - 3.5.4
+    - 3.6.0
+  - dependency-name: bamboo
+    versions:
+    - 1.6.0
+    - 1.7.0
+    - 1.7.1
+    - 2.0.0
+    - 2.0.1
+    - 2.0.2
+  - dependency-name: phoenix
+    versions:
+    - 1.5.7
+    - 1.5.8
+  - dependency-name: excoveralls
+    versions:
+    - 0.13.4
+    - 0.14.0
+  - dependency-name: credo
+    versions:
+    - 1.5.4
+    - 1.5.5
+  - dependency-name: google_api_storage
+    versions:
+    - 0.27.0
+    - 0.28.0
+  - dependency-name: postgrex
+    versions:
+    - 0.15.8
+  - dependency-name: plug_cowboy
+    versions:
+    - 2.4.1
+  - dependency-name: gettext
+    versions:
+    - 0.18.2
+  - dependency-name: phoenix_ecto
+    versions:
+    - 4.2.1
+- package-ecosystem: npm
+  directory: "/admin-frontend"
+  schedule:
+    interval: daily
+    time: "12:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@testing-library/user-event"
+    versions:
+    - 12.6.2
+    - 12.6.3
+    - 12.7.0
+    - 12.7.1
+    - 12.7.2
+    - 12.7.3
+    - 12.8.0
+    - 12.8.1
+    - 12.8.3
+    - 13.0.0
+    - 13.0.1
+    - 13.0.10
+    - 13.0.14
+    - 13.0.16
+    - 13.0.3
+    - 13.0.7
+    - 13.0.8
+    - 13.1.1
+    - 13.1.2
+    - 13.1.3
+    - 13.1.5
+  - dependency-name: "@stripe/stripe-js"
+    versions:
+    - 1.13.1
+    - 1.13.2
+  - dependency-name: "@types/react"
+    versions:
+    - 17.0.0
+    - 17.0.1
+    - 17.0.2
+    - 17.0.3
+  - dependency-name: typescript
+    versions:
+    - 4.1.3
+    - 4.1.4
+    - 4.1.5
+    - 4.2.2
+    - 4.2.3
+  - dependency-name: "@types/react-dom"
+    versions:
+    - 17.0.1
+    - 17.0.2
+  - dependency-name: "@testing-library/react"
+    versions:
+    - 11.2.3
+    - 11.2.4
+    - 11.2.5
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.22
+    - 14.14.25
+    - 14.14.27
+    - 14.14.28
+    - 14.14.30
+    - 14.14.31
+  - dependency-name: "@apollo/client"
+    versions:
+    - 3.3.10
+    - 3.3.11
+    - 3.3.7
+    - 3.3.8
+    - 3.3.9
+  - dependency-name: apollo-absinthe-upload-link
+    versions:
+    - 1.7.0
+  - dependency-name: "@testing-library/jest-dom"
+    versions:
+    - 5.11.9
+  - dependency-name: "@types/jest"
+    versions:
+    - 26.0.20
+  - dependency-name: ini
+    versions:
+    - 1.3.8
+  - dependency-name: moment
+    versions:
+    - 2.29.1
+- package-ecosystem: npm
+  directory: "/frontend"
+  schedule:
+    interval: daily
+    time: "12:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@testing-library/user-event"
+    versions:
+    - 12.6.2
+    - 12.6.3
+    - 12.7.0
+    - 12.7.1
+    - 12.7.2
+    - 12.7.3
+    - 12.8.0
+    - 12.8.1
+    - 12.8.3
+    - 13.0.0
+    - 13.0.1
+    - 13.0.10
+    - 13.0.14
+    - 13.0.16
+    - 13.0.3
+    - 13.0.7
+    - 13.0.8
+    - 13.1.1
+    - 13.1.2
+    - 13.1.3
+    - 13.1.5
+  - dependency-name: "@stripe/stripe-js"
+    versions:
+    - 1.13.1
+    - 1.13.2
+  - dependency-name: "@types/react-dom"
+    versions:
+    - 17.0.1
+    - 17.0.2
+  - dependency-name: "@types/react"
+    versions:
+    - 17.0.0
+    - 17.0.1
+    - 17.0.2
+    - 17.0.3
+  - dependency-name: typescript
+    versions:
+    - 4.1.3
+    - 4.1.4
+    - 4.1.5
+    - 4.2.2
+    - 4.2.3
+  - dependency-name: "@testing-library/react"
+    versions:
+    - 11.2.3
+    - 11.2.4
+    - 11.2.5
+  - dependency-name: react
+    versions:
+    - 17.0.1
+  - dependency-name: react-bootstrap
+    versions:
+    - 1.5.1
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.22
+    - 14.14.25
+    - 14.14.27
+    - 14.14.28
+    - 14.14.30
+    - 14.14.31
+  - dependency-name: "@apollo/client"
+    versions:
+    - 3.3.10
+    - 3.3.11
+    - 3.3.7
+    - 3.3.8
+    - 3.3.9
+  - dependency-name: "@testing-library/jest-dom"
+    versions:
+    - 5.11.9
+  - dependency-name: "@types/jest"
+    versions:
+    - 26.0.20
+  - dependency-name: "@types/react-router-dom"
+    versions:
+    - 5.1.7
+  - dependency-name: ini
+    versions:
+    - 1.3.8
+  - dependency-name: "@types/jquery"
+    versions:
+    - 3.5.5
+- package-ecosystem: docker
+  directory: "/backend/deploy"
+  schedule:
+    interval: daily
+    time: "12:00"
+  open-pull-requests-limit: 10
