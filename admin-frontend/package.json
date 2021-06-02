@@ -12,7 +12,7 @@
     "@types/jquery": "^3.3.38",
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.7",
+    "@types/react-dom": "^17.0.6",
     "@types/react-router-bootstrap": "^0.24.5",
     "@types/react-router-dom": "^5.1.5",
     "apollo-absinthe-upload-link": "^1.5.0",
