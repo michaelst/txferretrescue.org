@@ -122,7 +122,9 @@ export function AdoptPage() {
       <h3>Apply for Adoption</h3>
 
       <ContentBox>
-        <b>Adoptions are done by appointment only.</b>
+        <p>
+          <b>Adoptions are done by appointment only.</b>
+        </p>
 
         <p>
           Thank you for your interest in adopting from the Texas Ferret Lover’s Rescue. By filling out this application 
