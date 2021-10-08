@@ -11,7 +11,9 @@ config :ferret_rescue, FerretRescue.Mailer, api_key: File.read!("/etc/secrets/SE
 
 config :ferret_rescue, FerretRescue.Auth.Guardian, secret_key: File.read!("/etc/secrets/GUARDIAN_SECRET")
 
-config :stripity_stripe, api_key: File.read!("/etc/secrets/STRIPE_SECRET")
+config :stripity_stripe,
+  api_key: File.read!("/etc/secrets/STRIPE_SECRET"),
+  hackney_opts: [ssl: [{:versions, [:"tlsv1.2"]}]]
 
 config :sentry, dsn: File.read!("/etc/secrets/SENTRY_DSN")
 

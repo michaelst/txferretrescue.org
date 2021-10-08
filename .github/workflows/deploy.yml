@@ -34,8 +34,8 @@ jobs:
 
       - name: Build
         run: |    
-          docker buildx build -t us.gcr.io/cloud-57/txferretrescue-api:${GITHUB_SHA} -f .devops/Dockerfile .
-          docker push us.gcr.io/cloud-57/txferretrescue-api:${GITHUB_SHA}
+          docker buildx build -t us.gcr.io/txferretrescue-api:${GITHUB_SHA} -f .devops/Dockerfile .
+          docker push us.gcr.io/txferretrescue-api:${GITHUB_SHA}
 
       #- name: Setup Helm
       #  run: |
@@ -45,7 +45,7 @@ jobs:
 
       #- name: Rollout Deploy
       #  run: |
-      #    helm upgrade --install txferretrescue cloud-57/cloud-57 \
+      #    helm upgrade txferretrescue cloud-57/cloud-57 \
       #    -f .devops/helm/values.yaml \
       #    --version v1.0.2 \
       #    --set image.repository=us.gcr.io/cloud-57/txferretrescue-api \
