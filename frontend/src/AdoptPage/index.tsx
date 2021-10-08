@@ -122,15 +122,21 @@ export function AdoptPage() {
       <h3>Apply for Adoption</h3>
 
       <ContentBox>
+        <b>Adoptions are done by appointment only.</b>
+
         <p>
-          Thank you for your interest in adopting from the Texas Ferret Lovers Rescue. By filling out this application
-          you are not committing to adopt a pet, but supplying information the Texas Ferret Lovers Rescue needs to
-          evaluate you as a prospective adoptor and to help find your perfect pet. You will be contacted by one of our
-          volunteers to discuss your application and to tell you more about the adoption process.
+          Thank you for your interest in adopting from the Texas Ferret Lover’s Rescue. By filling out this application 
+          you are not committing to adopt a pet, but you are supplying the information that Texas Ferret Lover’s Rescue 
+          needs to evaluate you as a prospective adopter. You will be contacted by one of our volunteers by email. 
+          Please be sure to check your spam/junk folder.
         </p>
 
         <p>
-          We are a volunteer organization. Your application should take a few days to process but may take several days 
+          Applications are NOT ferret specific. We cannot guarantee availability of ferrets that are on our website.
+        </p>
+
+        <p>
+          We are a volunteer organization. Your application should only take a few days to process but may take several days
           depending on how quickly your references return our calls and on the volunteer's schedules. If you have any 
           questions or wish to check on the status of your application please 
           email <a href={`mailto:txflrapplications@gmail.com`}>txflrapplications@gmail.com</a>.

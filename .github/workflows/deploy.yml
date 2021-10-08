@@ -5,54 +5,6 @@ on:
       - master
 
 jobs:
-  backend:
-    name: Backend
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: backend
-
-    env:
-      DOCKER_HOST: ssh://build@192.168.5.181
-      KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-      SSH_KEY: ${{ secrets.SSH_KEY }}
-      WIREGUARD_CONF: ${{ secrets.WIREGUARD_CONF }}
-
-    steps:
-      - uses: actions/checkout@main
-          
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          project_id: cloud-57
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
-
-      - name: GCP Authentication
-        run: |
-          gcloud auth configure-docker us.gcr.io
-
-      - name: Build
-        run: |    
-          docker buildx build -t us.gcr.io/txferretrescue-api:${GITHUB_SHA} -f .devops/Dockerfile .
-          docker push us.gcr.io/txferretrescue-api:${GITHUB_SHA}
-
-      #- name: Setup Helm
-      #  run: |
-      #    helm plugin install https://github.com/hayorov/helm-gcs.git
-      #    helm repo add cloud-57 gs://cloud-57-helm
-      #    helm repo update
-
-      #- name: Rollout Deploy
-      #  run: |
-      #    helm upgrade txferretrescue cloud-57/cloud-57 \
-      #    -f .devops/helm/values.yaml \
-      #    --version v1.0.2 \
-      #    --set image.repository=us.gcr.io/cloud-57/txferretrescue-api \
-      #    --set image.tag=${GITHUB_SHA} \
-      #    -n backend
-      #    kubectl rollout status --watch deployment txferretrescue -n backend
-
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
