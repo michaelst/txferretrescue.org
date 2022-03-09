@@ -8,8 +8,8 @@ function ContactPage() {
       <ContentBox>
         <h4>You may write to us at the following address:</h4>
                 Texas Ferret Lover's Rescue<br />
-                P.O. Box 800503<br />
-                Balch Springs, TX 75180
+                P.O. Box 171<br />
+                Fate, TX 75132
 
                 <br /><br />
 
