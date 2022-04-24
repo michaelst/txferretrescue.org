@@ -1,4 +1,4 @@
-FROM elixir:1.11-alpine AS build
+FROM elixir:1.13-alpine AS build
 
 RUN apk add --update --no-cache build-base
 
