@@ -1,5 +1,5 @@
-nameOverride: txferretrescue
-replicaCount: 1
+nameOverride: txferretrescue-api
+replicaCount: 3
 
 service:
   port: 80
@@ -30,9 +30,6 @@ ingressroute:
   domain: api.txferretrescue.org
   path: "/"
 
-imagePullSecrets:
-  - name: "gcr-json-key"
-
 resources:
   requests:
     cpu: 50m
@@ -42,6 +39,6 @@ resources:
     memory: 256M
 
 envVars:
-  DB_HOSTNAME: 10.122.112.3
+  DB_HOSTNAME: postgres-postgresql.postgres.svc.cluster.local
   DB_USERNAME: postgres
 
