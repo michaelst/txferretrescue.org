@@ -1,11 +1,15 @@
-COMMIT_SHA=$(git rev-parse HEAD)
-docker build -t ghcr.io/michaelst/txferretrescue-api:$COMMIT_SHA .
-docker push ghcr.io/michaelst/txferretrescue-api:$COMMIT_SHA
+#!/bin/sh
 
-helm upgrade --install txferretrescue-api ../../server-config/helm-app \
+set -e
+
+cd "`dirname $0`"/..
+
+COMMIT_SHA=$(git rev-parse HEAD)
+
+helm upgrade --install txferretrescue-api oci://ghcr.io/michaelst/helm/cloud-57 \
   -f .devops/helm/values.yaml \
   --set image.repository=ghcr.io/michaelst/txferretrescue-api \
   --set image.tag=$COMMIT_SHA \
+  --version 1.0.5 \
   --atomic \
-  --debug \
-  -n backend
+  -n ferret-rescue
