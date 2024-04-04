@@ -12,19 +12,18 @@ WORKDIR /app
 RUN mix local.hex --force && \
     mix local.rebar --force
 
-ENV MIX_ENV=prod \
-    LANG=C.UTF-8
+ENV MIX_ENV="prod"
 
 COPY mix.exs mix.lock ./
-COPY config/config.exs config/prod.exs config/runtime.exs ./config/
+COPY config/config.exs config/prod.exs config/runtime.exs config/
 COPY lib lib
 COPY priv priv
 COPY rel rel
 
 RUN --mount=type=cache,target=/app/deps \
-    --mount=type=cache,target=/app/_build/prod \
+    --mount=type=cache,target=/app/_build \
       rm -rf /app/_build/prod/rel && \
-      mix do deps.get --only prod, release && \
+      mix do deps.get --only prod, clean, release && \
       # copy out of the cache so it is available
       cp -r /app/_build/prod/rel/ferret_rescue ./release
 
