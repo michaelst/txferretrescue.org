@@ -20,5 +20,3 @@ config :stripity_stripe,
   hackney_opts: [ssl: [{:versions, [:"tlsv1.2"]}]]
 
 config :sentry, dsn: File.read!("/etc/secrets/SENTRY_DSN")
-
-config :goth, json: File.read!("/etc/secrets/GCP_SA_KEY")

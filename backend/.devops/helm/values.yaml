@@ -1,4 +1,4 @@
-nameOverride: txferretrescue-api
+nameOverride: ferret-rescue-api
 replicaCount: 2
 
 imagePullSecrets:
