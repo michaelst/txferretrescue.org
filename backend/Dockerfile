@@ -1,11 +1,7 @@
-# syntax=docker/dockerfile:1.4
+FROM hexpm/elixir:1.16.1-erlang-26.2.2-ubuntu-focal-20240123 AS build
 
-# build app
-FROM elixir:1.16-slim AS builder
-
-RUN apt-get update -y && \
-    apt-get install -y build-essential git ca-certificates; \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && apt-get install -y build-essential git \
+    && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 WORKDIR /app
 
@@ -15,39 +11,33 @@ RUN mix local.hex --force && \
 ENV MIX_ENV="prod"
 
 COPY mix.exs mix.lock ./
-COPY config/config.exs config/prod.exs config/runtime.exs config/
+COPY config/config.exs config/prod.exs config/runtime.exs ./config/
+
 COPY lib lib
 COPY priv priv
 COPY rel rel
 
 RUN --mount=type=cache,target=/app/deps \
-    --mount=type=cache,target=/app/_build \
+    --mount=type=cache,target=/app/_build/prod \
       rm -rf /app/_build/prod/rel && \
       mix do deps.get --only prod, clean, release && \
       # copy out of the cache so it is available
       cp -r /app/_build/prod/rel/ferret_rescue ./release
 
-# Build release image
-FROM ubuntu:20.04
+FROM ubuntu:20.04 AS app
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
-  && apt-get clean \
-  && rm -f /var/lib/apt/lists/*_*
+ENV LANG=C.UTF-8
 
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+RUN set -xe \
+  && apt-get update \
+  && apt-get -y upgrade \
+  && apt-get install -y --no-install-recommends openssl \
+  && useradd --create-home -u 1000 app \
+  && rm -rf /var/lib/apt/lists/*
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+USER app
+WORKDIR /home/app
 
-WORKDIR "/app"
-RUN chown nobody /app
+COPY --from=build --chown=app:app /app/release ./
 
-ENV MIX_ENV="prod"
-
-COPY --from=builder --chown=nobody:root /app/release ./
-COPY --chown=nobody:root .devops/entrypoint.sh .
-
-USER nobody
-
-CMD ["./entrypoint.sh"]
+CMD ["./bin/ferret_rescue", "start"]

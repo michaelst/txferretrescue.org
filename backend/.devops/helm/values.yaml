@@ -4,6 +4,10 @@ replicaCount: 2
 imagePullSecrets:
   - name: github-docker-auth
 
+migrations:
+  run: true
+  command: [./bin/ferret_rescue, eval, FerretRescue.Release.migrate()]
+
 service:
   targetPort: 4000
   routes:
