@@ -7,7 +7,15 @@ defmodule FerretRescue do
   import Ecto.Query
 
   def start(_type, _args) do
+    credentials =
+      "/etc/secrets/GCP_SA_KEY"
+      |> File.read!()
+      |> Jason.decode!()
+
+    source = {:service_account, credentials}
+
     children = [
+      {Goth, name: FerretRescue.Goth, source: source},
       FerretRescue.Repo,
       FerretRescue.Endpoint
     ]
