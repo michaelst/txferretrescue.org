@@ -1,0 +1,24 @@
+import Config
+
+if config_env() == :prod do
+  config :ferret_rescue, FerretRescue.Endpoint, secret_key_base: File.read!("/etc/secrets/SECRET_KEY_BASE")
+
+  config :ferret_rescue, FerretRescue.Repo,
+    hostname: System.fetch_env!("DB_HOSTNAME"),
+    username: System.fetch_env!("DB_USERNAME"),
+    password: File.read!("/etc/secrets/DB_PASSWORD"),
+    ssl: true,
+    ssl_opts: [
+      verify: :verify_none
+    ]
+
+  config :ferret_rescue, FerretRescue.Mailer, api_key: File.read!("/etc/secrets/SENDGRID_API_KEY")
+
+  config :ferret_rescue, FerretRescue.Auth.Guardian, secret_key: File.read!("/etc/secrets/GUARDIAN_SECRET")
+
+  config :stripity_stripe,
+    api_key: File.read!("/etc/secrets/STRIPE_SECRET"),
+    hackney_opts: [ssl: [{:versions, [:"tlsv1.2"]}]]
+
+  config :sentry, dsn: File.read!("/etc/secrets/SENTRY_DSN")
+end

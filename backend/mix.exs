@@ -5,7 +5,7 @@ defmodule FerretRescue.MixProject do
     [
       aliases: aliases(),
       app: :ferret_rescue,
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:gettext] ++ Mix.compilers(),
       deps: deps(),
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),

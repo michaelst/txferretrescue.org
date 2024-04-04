@@ -1,4 +1,4 @@
-FROM elixir:1.13-slim AS build
+FROM elixir:1.16-slim AS build
 
 ENV MIX_ENV=prod \
     LANG=C.UTF-8
@@ -12,7 +12,7 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY mix.exs mix.lock ./
-COPY config/config.exs config/prod.exs config/releases.exs ./config/
+COPY config/config.exs config/prod.exs config/runtime.exs ./config/
 
 COPY lib lib
 COPY priv priv
