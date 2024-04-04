@@ -8,6 +8,9 @@ migrations:
   run: true
   command: [./bin/ferret_rescue, eval, FerretRescue.Release.migrate()]
 
+workloadIdentity:
+  enabled: true
+
 service:
   targetPort: 4000
   routes:
