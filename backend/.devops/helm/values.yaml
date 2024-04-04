@@ -17,7 +17,7 @@ resources:
   requests:
     cpu: 50m
   limits:
-    memory: 256M
+    memory: 500M
 
 envVars:
   DB_HOSTNAME: aero.blue

@@ -8,6 +8,7 @@ defmodule FerretRescue do
 
   def start(_type, _args) do
     children = [
+      {Goth, name: FerretRescue.Goth},
       FerretRescue.Repo,
       FerretRescue.Endpoint
     ]
