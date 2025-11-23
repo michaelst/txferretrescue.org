@@ -1,7 +1,6 @@
 import React from 'react'
 import ContentBox from 'ContentBox'
 import { Button } from 'react-bootstrap'
-import LinkContainer from 'react-router-bootstrap/lib/LinkContainer'
 
 export function AdoptPage() {
   return (
@@ -33,9 +32,9 @@ export function AdoptPage() {
           this form and be the responsible party.
         </p>
 
-        <LinkContainer to="https://tinyurl.com/TXFLRApplication">
+        <a href="https://tinyurl.com/TXFLRApplication">
           <Button className="btn-success">Start Application</Button>
-        </LinkContainer>
+        </a>
       </ContentBox>
     </div>
   )
