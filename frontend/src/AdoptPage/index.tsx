@@ -1,6 +1,5 @@
 import React from 'react'
 import ContentBox from 'ContentBox'
-import { Button } from 'react-bootstrap'
 
 export function AdoptPage() {
   return (
