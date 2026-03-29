@@ -1,7 +1,7 @@
-use Mix.Config
+import Config
 
 config :ferret_rescue,
-  env: Mix.env(),
+  env: config_env(),
   ecto_repos: [FerretRescue.Repo]
 
 config :ferret_rescue, FerretRescue.Endpoint,
@@ -24,12 +24,12 @@ config :goth, project_id: "cloud-57"
 
 config :sentry,
   dsn: System.get_env("SENTRY_DSN"),
-  environment_name: Mix.env(),
+  environment_name: config_env(),
   enable_source_code_context: true,
   root_source_code_path: File.cwd!(),
   tags: %{
-    env: Mix.env()
+    env: config_env()
   },
   included_environments: [:prod]
 
-import_config "#{Mix.env()}.exs"
+import_config "#{config_env()}.exs"

@@ -8,10 +8,9 @@ defmodule FerretRescue.Ferret.Utils do
   alias GoogleApi.Storage.V1.Api.Objects
   alias GoogleApi.Storage.V1.Connection
   alias GoogleApi.Storage.V1.Model.Object
-  alias Goth.Token
 
   def upload_image(ferret, %{image_upload: %Plug.Upload{} = file}) do
-    {:ok, %{token: token}} = Token.for_scope("https://www.googleapis.com/auth/devstorage.full_control")
+    %Goth.Token{token: token} = Goth.fetch!(FerretRescue.Goth)
 
     token
     |> Connection.new()

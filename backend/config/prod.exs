@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :ferret_rescue, FerretRescue.Endpoint,
   url: [host: "api.txferretrescue.org", port: 443],

@@ -15,6 +15,7 @@ defmodule FerretRescue.Release do
 
   defp repos do
     Application.load(:ferret_rescue)
+    {:ok, _application} = Application.ensure_all_started(:ssl)
     Application.fetch_env!(:ferret_rescue, :ecto_repos)
   end
 end

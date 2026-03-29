@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :ferret_rescue, FerretRescue.Repo,
   username: "postgres",
